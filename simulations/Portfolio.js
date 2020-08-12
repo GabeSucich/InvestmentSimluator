@@ -15,32 +15,49 @@ class Portfolio {
         return this.cash + this.invested
     }
 
-    addCash(amount) {
+    get cash() {
+        return this.cash
+    }
+
+    get invested() {
+        return this.invested
+    }
+
+    set cash(amount) {
+        this.cash = parseFloat(amount)
+    }
+
+    set invested(amount) {
+        this.invested = parseFloat(amount)
+    }
+
+    increaseCash(amount) {
         this.cash = parseFloat(this.cash) + parseFloat(amount)
     }
 
-    removeCash(amount) {
+    decreaseCash(amount) {
         this.cash = parseFloat(this.cash) - parseFloat(amount)
     }
 
-    addInvested(amount) {
+    increaseInvested(amount) {
         this.invested = parseFloat(this.invested) + parseFloat(amount)
     }
 
-    removeInvested(amount) {
+    decreaseInvested(amount) {
         this.invested = parseFloat(this.invested) + parseFloat(amount)
     }
+
 
     // Refreshes the porfolio with a new date
     newDate(date) {
         this.date = date
         this.updateHoldings(date)
         this.saveHistory()
-    } 
-    
+    }
+
     // This function saves a snapshot of the portfolio in time to the portfolio history
     saveHistory() {
-        this.history.push({date: this.date, totalValue: this.totalValue})
+        this.history.push({ date: this.date, totalValue: this.totalValue })
     }
 
     // This function updates the value of each stock in the portfolio for a given day.
@@ -48,13 +65,13 @@ class Portfolio {
         this.invested = 0
         for (const stock of this.holdings) {
             stock.updateData(date)
-            this.addInvested(stock.markPrice)
+            this.increaseInvested(stock.markPrice)
         }
     }
 
     // This function takes in a stock object in the portfolio.holdings and sells it
     sellStock(stock) {
-        this.removeInvested(stock.markPrice)
+        this.decreaseInvested(stock.markPrice)
         this.holdings.filter(holding => holding !== stock)
         this.addCash(stock.markPrice)
     }
@@ -62,8 +79,8 @@ class Portfolio {
     // This function takes in a newly instantiated stock object and "buys" it
     buyStock(stock) {
         this.holdings.push(stock)
-        this.addInvested(stock.markPrice)
-        this.removeCash(stock.markPrice)
+        this.increaseInvested(stock.markPrice)
+        this.decreaseCash(stock.markPrice)
     }
 
     // This function sells all holdings in the portfolio
