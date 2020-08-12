@@ -1,3 +1,5 @@
+const Suggestion = require("./utils/Suggestion")
+
 function incrementer(symbol, portfolio, stockData, currentDate) {
     portfolio.increaseCash(1)
     console.log(portfolio.totalValue)
