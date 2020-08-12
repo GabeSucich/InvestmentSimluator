@@ -1,5 +1,5 @@
-function incrementer(portfolio, stockData, currentDate) {
-    portfolio.addCash(1)
+function incrementer(symbol, portfolio, stockData, currentDate) {
+    portfolio.increaseCash(1)
     console.log(portfolio.totalValue)
     return []
 }

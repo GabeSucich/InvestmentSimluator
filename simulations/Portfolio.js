@@ -15,36 +15,20 @@ class Portfolio {
         return this.cash + this.invested
     }
 
-    get cash() {
-        return this.cash
-    }
-
-    get invested() {
-        return this.invested
-    }
-
-    set cash(amount) {
-        this.cash = parseFloat(amount)
-    }
-
-    set invested(amount) {
-        this.invested = parseFloat(amount)
-    }
-
     increaseCash(amount) {
-        this.cash = parseFloat(this.cash) + parseFloat(amount)
+        this.cash = eval(this.cash) + eval(amount)
     }
 
     decreaseCash(amount) {
-        this.cash = parseFloat(this.cash) - parseFloat(amount)
+        this.cash = eval(this.cash) - eval(amount)
     }
 
     increaseInvested(amount) {
-        this.invested = parseFloat(this.invested) + parseFloat(amount)
+        this.invested = eval(this.invested) + eval(amount)
     }
 
     decreaseInvested(amount) {
-        this.invested = parseFloat(this.invested) + parseFloat(amount)
+        this.invested = eval(this.invested) - eval(amount)
     }
 
 
@@ -52,7 +36,6 @@ class Portfolio {
     newDate(date) {
         this.date = date
         this.updateHoldings(date)
-        this.saveHistory()
     }
 
     // This function saves a snapshot of the portfolio in time to the portfolio history
@@ -71,13 +54,23 @@ class Portfolio {
 
     // This function takes in a stock object in the portfolio.holdings and sells it
     sellStock(stock) {
+
+        if (!this.holdings.includes(stock)) {
+            console.log("Stock cannot be sold if it is not owned")
+            return 
+        }
+
         this.decreaseInvested(stock.markPrice)
-        this.holdings.filter(holding => holding !== stock)
-        this.addCash(stock.markPrice)
+        this.holdings = this.holdings.filter(holding => holding !== stock)
+        this.increaseCash(stock.markPrice)
     }
 
     // This function takes in a newly instantiated stock object and "buys" it
     buyStock(stock) {
+        if (this.cash <= this.markPrice) {
+            console.log("Not enough cash to buy this stock")
+            return
+        }
         this.holdings.push(stock)
         this.increaseInvested(stock.markPrice)
         this.decreaseCash(stock.markPrice)

@@ -121,7 +121,7 @@ class Simulation {
         // Otherwise,the portfolio is updated, and strategy function is called on the simulation
         else {
             this.updatePortfolio()
-            var strategySuggestions = this.strategyFunc(...this.strategyParams, this.portfolio, this.stockData, this.currentDate)
+            var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
             // The strategy function returns specially-formatted suggestions which the simulation can process
             this.processSuggestions(strategySuggestions)
         }
@@ -143,25 +143,18 @@ class Simulation {
             }
         }
 
+        this.portfolio.saveHistory()
         this.simulateNextDay()
     }
 
     // Instantiate a new stock to buy for each suggestion
     handleBuy(suggestion) {
-        symbol = suggestion.symbol;
-        quantity = suggestion.quantity;
-        date = suggestion.date;
-        history = this.stockData
-        for (i=0; i<quantity; i++) {
-            const stock = new Stock(symbol, history, date)
-        this.portfolio.buyStock(stock)
-        }
-        
+        this.portfolio.buyStock(suggestion.stock)
     }
 
     // Sell a stock if suggested
     handleSell(suggestion) {
-        portfolio.sellStock(suggestion.stock)
+        this.portfolio.sellStock(suggestion.stock)
     }
 
 }
