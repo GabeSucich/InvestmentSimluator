@@ -1,4 +1,4 @@
-var SimControl = require("./simulations/SimControl")
+var SimControl = require("../simulations/SimControl")
 var path = require("path")
 
 module.exports = function(app) {
