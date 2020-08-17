@@ -1,19 +1,21 @@
 const Suggestion = require("./utils/Suggestion")
 
-function example(a, b, c, symbol, portfolio, stockData, currentDate) {
+function example(tax, symbol, portfolio, stockData, currentDate) {
 
-    const suggestions = []
+    var suggestionsArr = []
+
+    console.log("Tax is " + tax + "%")
     console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
 
     if (currentDate === "2020-04-29") {
-        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
+        suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
     }
 
     if (currentDate === "2020-05-29") {
-        suggestions.push(Suggestion.createSellSuggestion(portfolio.holdings[0]))
+        suggestionsArr.push(Suggestion.createSellSuggestion(portfolio.holdings[0]))
     }
 
-    return suggestions
+    return suggestionsArr
 
 }
 
