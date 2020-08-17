@@ -27,13 +27,13 @@ function dollarCostAverage(
     // 1) Time Frame (start & end date)
     // 2) Frequency of purchase (i.e. bi-weekly; monthly; quarterly)
     // 3) Total amount to be invested (i.e. $12,000)
-    // 4) What stock / mutual fund to purchase
+    // 4) What stock to purchase 
 
     // Amount per purchase = Total Amount / Total Frequencies 
     // -------------------------
 
 
-    // -- Switch Case to call specific frequency evaluation -- // 
+    // -- Switch Case to call specific frequency evaluation --  
     switch (userFrequency) {
         case "bi-weekly":
             allBiWeekDates(startDate, endDate);
@@ -44,7 +44,7 @@ function dollarCostAverage(
         case "monthly":
             allQuarterDates(startDate, endDate);
     }
-    // --------------------------------------------------------// 
+    // -------------------------------------------------------- 
 
 
     // ---- Finding the Frequencies ------------------
