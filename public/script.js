@@ -10,8 +10,8 @@ $.ajax({
         startDate: "2020-01-01",
         endDate: "2020-06-01",
         investment: 1000,
-        strategyFuncName: "example",
-        strategyParams: [1, 2, 3]
+        strategyFuncName: "buyAndWait",
+        strategyParams: []
     }
 }).then(result => {
     console.log(result)
