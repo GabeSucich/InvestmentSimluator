@@ -7,8 +7,10 @@ function example(tax, symbol, portfolio, stockData, currentDate) {
     console.log("Tax is " + tax + "%")
     console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
 
+
     if (currentDate === "2020-04-29") {
         suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
+        console.log(stockData)
     }
 
     if (currentDate === "2020-05-29") {

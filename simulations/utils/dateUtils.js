@@ -40,6 +40,8 @@ processHistoricals(historicals) {
             data[newKey] = value
             delete data[key]
         }
+        console.log(((eval(data.open) + eval(data.close))/2).toFixed(2))
+        data["markPrice"] = ((eval(data.open) + eval(data.close))/2).toFixed(2)
     }
 }
 
