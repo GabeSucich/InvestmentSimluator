@@ -34,13 +34,13 @@ isInRange(startDate, endDate, queryDate) {
 // The historicals come from the API with keys that are strangely formatted as, for example: "1. open", "2. close"
 // MongoDB does not like keys containt ".", so this function removes the periods from the object keys for storage in the databse.
 processHistoricals(historicals) {
+    console.log(historicals)
     for (const [date, data] of Object.entries(historicals)) {
         for (const [key, value] of Object.entries(data)) {
             var newKey = key.slice(3)
             data[newKey] = value
             delete data[key]
         }
-        console.log(((eval(data.open) + eval(data.close))/2).toFixed(2))
         data["markPrice"] = ((eval(data.open) + eval(data.close))/2).toFixed(2)
     }
 }
