@@ -3,6 +3,13 @@
 
 const datesOfPurchase = [];
 dt = new Date(); 
+let firstDate = new Date('August 11, 1996');
+let secondDate = new Date('September 11, 2000');
+
+let startYear;
+let endYear;
+let startMonth;
+let endMonth;
 
 const rangeUtils = {
 
@@ -37,10 +44,38 @@ const rangeUtils = {
     startOfMonth(date){
        
         console.log(new Date(date.getFullYear(), date.getMonth(), 1).toLocaleDateString());
-   
-    }
+        firstDate = firstDate.toLocaleDateString().split('/');
+        secondDate = secondDate.toLocaleDateString().split("/");
+       
+        startYear = firstDate[2];
+        endYear = secondDate[2];
+        startMonth = firstDate[0];
+        endMonth = secondDate[0];
+
+        console.log("startYear = " + startYear);
+        console.log("endYear = " + endYear);
+        console.log("startMonth = " + startMonth);
+        console.log("endMonth = " + endMonth);
+
+
+
+        calcMonths(startYear, endYear, startMonth, endMonth);
+    },
+
 
 }
+
+function calcMonths(startYear, endYear, startMonth, endMonth) {
+    yearDifference = endYear - startYear;
+    monthDifference = endMonth - startMonth;
+
+    console.log('year diff = ' + yearDifference);
+    console.log('monthDiff = ' + monthDifference);
+
+    
+}
+
+
 
 module.exports = rangeUtils; 
 
