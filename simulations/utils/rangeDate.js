@@ -72,6 +72,8 @@ function calcMonths(startYear, endYear, startMonth, endMonth) {
     console.log('year diff = ' + yearDifference);
     console.log('monthDiff = ' + monthDifference);
 
+
+
     
 }
 
