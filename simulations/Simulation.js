@@ -1,8 +1,4 @@
-const mongoose = require("mongoose")
-
-mongoose.connect(process.MONGODB_URI || "mongodb://localhost/stockhistorydb", { useNewUrlParser: true })
-
-const StockHistory = require("../models/StockHistory")
+const Historicals = require("../controllers/stockcontroller")
 const Portfolio = require("./Portfolio")
 const API = require("./utils/API")
 const Utils = require("./utils/dateUtils")
@@ -30,7 +26,7 @@ class Simulation {
     // If it does, we will retrieve it. Otherwise, we will create a new document with our API call.
     gatherAsyncData() {
 
-        return StockHistory.findOne({ symbol: this.symbol }).exec().then(databaseData => {
+        return Historicals.findHistory(this.symbol).then(databaseData => {
 
             if (!databaseData) {
                 return API.getStockData(this.symbol).then(response => {
@@ -38,7 +34,7 @@ class Simulation {
                     var historicals = response.data["Time Series (Daily)"]
                     // Remove the periods from the keys of the historical data. Mongo doesnt like the character "." in object keys.
                     Utils.processHistoricals(historicals)
-                    return StockHistory.create({ symbol: this.symbol, historicals: historicals }).then(result => {
+                    return StockHistory.create(this.symbol, historicals).then(result => {
                         // Add this stock data to our database for the future, and then move on with object construction
                         return this.setBoundedHistory(result.historicals)
                     })
@@ -108,7 +104,7 @@ class Simulation {
 
     // Starts the simulation by calling to simulation the first day
     runSimulation() {
-        return new Promise( (resolve, reject) => { resolve(this.simulateNextDay()) })
+        this.simulateNextDay()
     }
 
     // Sets the current date to the next date in the timeline interator

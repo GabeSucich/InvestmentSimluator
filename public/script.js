@@ -27,4 +27,4 @@ function runStrategy(symbol, startDate, endDate, interval) {
         })
 }
 
-runStrategy("TWTR", "2018-08-01", "2020-08-01", 10)
+runStrategy("ACB", "2018-08-01", "2020-08-01", 10)

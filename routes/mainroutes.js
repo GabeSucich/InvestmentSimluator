@@ -2,11 +2,7 @@ var SimControl = require("../simulations/SimControl")
 var path = require("path")
 const API = require("../simulations/utils/API")
 const Utils = require("../simulations/utils/dateUtils")
-
-const mongoose = require("mongoose")
-const StockHistory = require("../models/StockHistory")
-
-mongoose.connect(process.MONGODB_URI || "mongodb://localhost/stockhistorydb", { useNewUrlParser: true })
+const Historicals = require("../controllers/stockcontroller")
 
 module.exports = function (app) {
 
@@ -31,13 +27,17 @@ module.exports = function (app) {
     app.post("/api/simulation/getIntervalDates", (req, res) => {
         const { symbol, startDate, endDate, interval } = req.body
 
-        StockHistory.findOne({ symbol: symbol }).exec().then(databaseData => {
+        Historicals.findHistory(symbol).then(databaseData => {
             if (!databaseData) {
                 API.getStockData(symbol)
                     .then(response => {
                         const historicals = response.data["Time Series (Daily)"]
                         const resultDates = Utils.findIntervalDates(historicals, startDate, endDate, interval)
-                        res.json(resultDates);
+                        Utils.processHistoricals(historicals)
+                        Historicals.createHistory(symbol, historicals).then(data => {
+                            res.json(resultDates);
+                        })
+                        
                     })
             }
             else {
