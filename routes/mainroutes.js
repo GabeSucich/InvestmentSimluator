@@ -1,5 +1,7 @@
 var SimControl = require("../simulations/SimControl")
 var path = require("path")
+const API = require("../simulations/utils/API")
+const Utils = require("../simulations/utils/dateUtils")
 
 module.exports = function(app) {
 
@@ -18,6 +20,16 @@ module.exports = function(app) {
             }, 2000)
             
             
+        })
+    })
+
+    app.post("/api/simulation/getIntervalDates", (req, res) => {
+        const {symbol, startDate, endDate, interval} = req.body
+        API.getStockData(symbol)
+        .then(response => {
+            const historicals = response.data["Time Series (Daily)"]
+            const resultDates = Utils.findIntervalDates(historicals, startDate, endDate, interval)
+            res.json(resultDates);
         })
     })
 
