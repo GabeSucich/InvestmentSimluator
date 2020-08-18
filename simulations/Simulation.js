@@ -11,7 +11,7 @@ const Stock = require("./Stock")
 
 class Simulation {
 
-    constructor(symbol, startDate, endDate, investment, strategyFunc, strategyParams=[]) {
+    constructor(symbol, startDate, endDate, investment, strategyFunc, strategyParams = []) {
         this.symbol = symbol;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -64,7 +64,7 @@ class Simulation {
         // We are going to iterate through each date in the historical data. If it is within the date interval, we will add it.
         for (const [date, stockData] of Object.entries(historicalData)) {
             if (Utils.isInRange(this.startDate, this.endDate, date)) {
-                boundedHistoryArr.push({date: date, data: stockData})
+                boundedHistoryArr.push({ date: date, data: stockData })
                 foundTimeInterval = true
             }
 
@@ -78,7 +78,7 @@ class Simulation {
         const boundedHistory = {}
 
         // We read the data from the API call in reverse chronological order. Here, we reverse this order
-        for (var i=boundedHistoryArr.length-1; i>=0; i--) {
+        for (var i = boundedHistoryArr.length - 1; i >= 0; i--) {
             var dataPoint = boundedHistoryArr[i]
             boundedHistory[dataPoint.date] = dataPoint.data
         }
@@ -86,6 +86,8 @@ class Simulation {
 
         // The bounded historical data is an attribute on our simulation object
         this.stockData = boundedHistory
+        this.breakDate = Utils.findBreakDate(this.stockData, this.startDate)
+        console.log(this.breakDate)
         // We create a new Portfolio object to keep track of our holdings over time. This portfolio object belongs to the simulation.
         this.portfolio = new Portfolio(this.symbol, this.investment, this.startDate)
         // This calendar object will help us to run through all the relevant dates. It also belongs to the simulation.
@@ -118,6 +120,14 @@ class Simulation {
             console.log("Simulation completed")
             return
         }
+
+        else if (this.currentDate === this.breakDate) {
+            setTimeout(() => {
+                this.updatePortfolio()
+                var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
+                this.processSuggestions(strategySuggestions)
+            }, 20)
+        }
         // Otherwise,the portfolio is updated, and strategy function is called on the simulation
         else {
             this.updatePortfolio()
@@ -146,6 +156,7 @@ class Simulation {
         this.portfolio.saveHistory()
         this.simulateNextDay()
     }
+
 
     // Instantiate a new stock to buy for each suggestion
     handleBuy(suggestion) {
