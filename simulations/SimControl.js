@@ -37,14 +37,6 @@ class SimControl {
         }
     }
 
-    get justValues() {
-        const values = [];
-        for (const date of this.simulation.portfolio.history) {
-            values.push(date.totalValue)
-        }
-        return values;
-    }
-
 
 }
 

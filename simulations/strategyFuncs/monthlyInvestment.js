@@ -1,4 +1,4 @@
-// buys the given stock whenever you have enough cash and increments your cash by a given amount every month
+// buys the given stock whenever you have enough cash and increments your cash by a given amount after every 20 market days
 
 const Suggestion = require("./utils/Suggestion")
 
