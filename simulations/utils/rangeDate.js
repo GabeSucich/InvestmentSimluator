@@ -87,19 +87,13 @@ function addDate(startMonth, startYear) {
     datesOfPurchase.push(newDate).toString();
     console.log("datesOfPurchase = " + datesOfPurchase);
 
-        // if (startMonth <= 12) {
-        // // increment startMonth
-        // startMonth = parseInt(startMonth) + 1;
-        // console.log("new start year/mo = " +startYear+"-"+ startMonth );
-        // } else {
-        //     console.log("unchanged start year = " +startYear)
-        //     startYear = parseInt(startYear) +1;
-        //     startMonth = 1;
-        //     console.log("new start year = " +startYear)
-        //     // console.log("new start year/mo = " +startYear+"-"+ startMonth )
-        // }
+      
+    // increment startMonth
+    startMonth = parseInt(startMonth) + 1;
+    console.log("new start year/mo = " +startYear+"-"+ startMonth );
+        
     
-    } else if ((startMonth >= 10) && (startMonth <= 12)) {
+    } else if ((startMonth >= 10) && (startMonth < 12)) {
 
     var newDate = (startYear +"-"+ startMonth+"-01");
     console.log("newDate = " + newDate);
@@ -109,7 +103,7 @@ function addDate(startMonth, startYear) {
             startYear = parseInt(startYear) +1;
             startMonth = 1;
             console.log("new start year = " +startYear)
-            // console.log("new start year/mo = " +startYear+"-"+ startMonth )
+            console.log("new start year/mo = " +startYear+"-0"+ startMonth )
     }
 
 
