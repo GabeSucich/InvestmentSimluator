@@ -104,7 +104,9 @@ class Simulation {
 
     // Starts the simulation by calling to simulation the first day
     runSimulation() {
-        this.simulateNextDay()
+        return new Promise((resolve, reject) => {
+            resolve(this.simulateNextDay())
+        })
     }
 
     // Sets the current date to the next date in the timeline interator
