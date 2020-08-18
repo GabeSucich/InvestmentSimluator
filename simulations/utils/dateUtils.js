@@ -45,9 +45,10 @@ processHistoricals(historicals) {
     }
 },
 
-hasElapsed(days, currentDate, startDate) {
+// Returns true if numDays have elapsed between the currentDate and the startDate.
+hasElapsed(numDays, currentDate, startDate) {
 
-    if (new Date(currentDate).getTime() - new Date(startDate).getTime() > days*86400000) {
+    if (new Date(currentDate).getTime() - new Date(startDate).getTime() > numDays*86400000) {
         return true
     }
 
@@ -55,6 +56,8 @@ hasElapsed(days, currentDate, startDate) {
 
 },
 
+// Finds a date to section off the first 10 years of the history from the rest of the history. Used to determine when node should
+// clear stack
 findBreakDate(stockHistory, startDate) {
     for (const date of Object.keys(stockHistory)) {
         if (this.hasElapsed(3650, date, startDate)) {
