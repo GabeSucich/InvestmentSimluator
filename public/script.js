@@ -6,8 +6,8 @@ $.ajax({
     method: "POST",
     url: "/api/simulation/new",
     data: {
-        symbol: 'SPY',
-        startDate: "2020-01-01",
+        symbol: 'TSLA',
+        startDate: "2005-01-01",
         endDate: "2020-06-01",
         investment: 1000,
         strategyFuncName: "example",
