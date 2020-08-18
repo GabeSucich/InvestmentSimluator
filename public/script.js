@@ -7,11 +7,11 @@ $.ajax({
     url: "/api/simulation/new",
     data: {
         symbol: 'SPY',
-        startDate: "2020-01-01",
-        endDate: "2020-06-01",
-        investment: 1000,
-        strategyFuncName: "buyAndWait",
-        strategyParams: []
+        startDate: "2018-10-01",
+        endDate: "2020-08-01",
+        investment: 10000,
+        strategyFuncName: "monthlyInvestment",
+        strategyParams: [1000]
     }
 }).then(result => {
     console.log(result)

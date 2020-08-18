@@ -1,16 +1,18 @@
-// invests all your money in the SNP 500 on the first day and waits
+// invests all your money on the first day then waits
 
 const Suggestion = require("./utils/Suggestion")
 
 function buyAndWait(symbol, portfolio, stockData, currentDate) {
 
     const suggestions = []
+    var cashCopy = portfolio.getCash
     console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
 
 
-    if (currentDate === "2020-01-02") {
-        console.log(stockData[currentDate])
+    while (stockData[currentDate]["markPrice"] < cashCopy) {
+        console.log("Suggesting to buy another share")
         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
+        cashCopy -= stockData[currentDate]["markPrice"]
     }
 
     return suggestions

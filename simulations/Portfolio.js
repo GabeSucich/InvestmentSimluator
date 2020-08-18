@@ -15,6 +15,10 @@ class Portfolio {
         return this.cash + this.invested
     }
 
+    get getCash() {
+        return this.cash;
+    }
+
     increaseCash(amount) {
         this.cash = eval(this.cash) + eval(amount)
     }

@@ -13,7 +13,7 @@ module.exports = function(app) {
     const {symbol, startDate, endDate, investment, strategyFuncName, strategyParams} = req.body
         const simControl = new SimControl(symbol, startDate, endDate, investment, strategyFuncName, strategyParams)
         simControl.runSimulation().then(data => {
-            res.json(simControl.simulation.stockData)
+            res.json(simControl.justValues)
         })
     })
 
