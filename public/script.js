@@ -4,15 +4,17 @@
 
 $.ajax({
     method: "POST",
-    url: "/api/simulation/new",
+    url: "/api/joel",
     data: {
-        symbol: 'TSLA',
-        startDate: "2005-01-01",
+        symbol: 'AAPL',
+        startDate: "2005-01-03",
         endDate: "2020-06-01",
-        investment: 1000,
-        strategyFuncName: "example",
-        strategyParams: [9, 1, 2]
+        investment: 10000,
+        strategyFuncName: "stateTaxAffect",
+        strategyParams: [13, 0]
     }
 }).then(result => {
     console.log(result)
+
+    // logic goes here
 })

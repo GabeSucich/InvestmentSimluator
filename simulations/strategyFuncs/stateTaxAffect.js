@@ -1,0 +1,33 @@
+const Suggestion = require("./utils/Suggestion")
+
+function stateTaxAffect(stateTaxRate1, StateTaxRate2, symbol, portfolio, stockData, currentDate) {
+//     // Always have the final four parameters of your function as shown above
+
+    var suggestionsArr = []
+
+//     // Work/logic goes here
+if (currentDate === "2005-01-03") {
+    suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
+
+}
+
+if (currentDate === "2020-06-01") {
+    suggestionsArr.push(Suggestion.createSellSuggestion(portfolio.holdings[0]))
+}
+
+let percentStateTax1 = stateTaxRate1 / 100
+let percentStateTax2 = StateTaxRate2 / 100
+let deltaStateTax = ((suggestionsArr[0] * percentStateTax1) - (suggestionsArr[1] * percentStateTax2))
+
+
+
+
+    return suggestionsArr
+
+}
+
+module.exports = {
+
+    "name": "stateTaxAffect",
+    "function": stateTaxAffect
+}
