@@ -10,7 +10,6 @@ function runStrategy(symbol, startDate, endDate, interval) {
         data: object
     })
         .then(actionDates => {
-            console.log("action dates is: " + actionDates)
             $.ajax({
                 method: "POST",
                 url: "/api/simulation/new",
@@ -28,4 +27,4 @@ function runStrategy(symbol, startDate, endDate, interval) {
         })
 }
 
-runStrategy("SPY", "2018-08-01", "2020-08-01", 10)
+runStrategy("ACB", "2010-08-01", "2020-08-01", 10)
