@@ -13,8 +13,9 @@ class SimControl {
     runSimulation() {
         return this.simulationPromise.then(simulation => {
             console.log("running simulation")
-            simulation.runSimulation()
             this.simulation = simulation
+            return simulation.runSimulation()
+            
         })
     }
 
