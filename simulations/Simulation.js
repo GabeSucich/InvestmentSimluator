@@ -104,6 +104,7 @@ class Simulation {
 
     // Starts the simulation by calling to simulation the first day
     runSimulation() {
+        console.log(this.breakDate);
         return new Promise((resolve, reject) => {
             resolve(this.simulateNextDay())
         })
@@ -124,7 +125,7 @@ class Simulation {
                 this.updatePortfolio()
                 var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
                 this.processSuggestions(strategySuggestions)
-            }, 20)
+            }, 200)
         }
         // Otherwise,the portfolio is updated, and strategy function is called on the simulation
         else {

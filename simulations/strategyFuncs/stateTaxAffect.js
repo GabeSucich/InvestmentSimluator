@@ -15,12 +15,6 @@ if (currentDate === "2020-06-01") {
     suggestionsArr.push(Suggestion.createSellSuggestion(portfolio.holdings[0]))
 }
 
-let percentStateTax1 = stateTaxRate1 / 100
-let percentStateTax2 = StateTaxRate2 / 100
-let deltaStateTax = ((suggestionsArr[0] * percentStateTax1) - (suggestionsArr[1] * percentStateTax2))
-
-
-
 
     return suggestionsArr
 

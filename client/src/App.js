@@ -1,11 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Sam from "./pages/Sam"
+import Joel from "./pages/Joel"
 
 function App() {
 
   return (
-    <Sam/>
+    <div>
+      <Sam />
+      <Joel />
+    </div>
+
   )
 }
 

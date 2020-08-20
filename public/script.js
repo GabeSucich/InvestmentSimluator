@@ -16,8 +16,12 @@ $.ajax({
 }).then(result => {
     console.log(result)
 
-    // logic goes here
-})
+//     // logic goes here
+//     let percentStateTax1 = stateTaxRate1 / 100
+//     let percentStateTax2 = StateTaxRate2 / 100
+//     let deltaStateTax = ((suggestionsArr[0] * percentStateTax1) - (suggestionsArr[1] * percentStateTax2))
+
+// })
 // function runStrategy(symbol, startDate, endDate, interval) {
 //     const object = { symbol: symbol, startDate: startDate, endDate: endDate, interval: interval };
 //     $.ajax({
@@ -41,6 +45,6 @@ $.ajax({
 //                 console.log(result)
 //             })
 //         })
-// }
+}
 
 // runStrategy("ACB", "2010-08-01", "2020-08-01", 10)
