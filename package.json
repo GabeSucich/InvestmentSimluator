@@ -21,6 +21,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
+<<<<<<< HEAD
+=======
+    "chartjs": "^0.3.24",
+>>>>>>> 9ea7d6ab11f0cc561b9aa0996564c9bcb4530810
     "express": "^4.17.1",
     "mongoose": "^5.9.28",
     "react-chartjs-2": "^2.10.0"

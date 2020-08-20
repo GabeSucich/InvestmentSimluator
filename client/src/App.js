@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import Axios from "axios"
 import ChartHandler from "./components/ChartHandler"
@@ -39,6 +40,17 @@ function App() {
       data.length > 0 ? <ChartHandler simulations={data} labels={["test"]} />
     </div>
   );
+=======
+import React, {useState, useEffect} from 'react';
+
+import Sam from "./pages/Sam"
+
+function App() {
+
+  return (
+    <Sam/>
+  )
+>>>>>>> 9ea7d6ab11f0cc561b9aa0996564c9bcb4530810
 }
 
 export default App;
