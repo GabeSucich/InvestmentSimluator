@@ -12,10 +12,10 @@ export default function Colin() {
       method: "POST",
       url: "/api/simulation/getIntervalDates",
       data: {
-        symbol: "PLAY",
-        startDate: "2010-08-10",
+        symbol: "SPY",
+        startDate: "2019-08-10",
         endDate: "2020-08-10",
-        interval: 30
+        interval: 4
       }
     })
     // Create a new simulation with 
@@ -25,13 +25,13 @@ export default function Colin() {
           method: "POST",
           url: "/api/simulation/new",
           data: {
-            symbol: "PLAY",
+            symbol: "SPY",
             startDate: "2010-08-10",
             endDate: "2020-08-10",
             investment: 0,
             strategyFuncName: "frequencyPurchase",
-            // var - invested, dates
-            strategyParams: [10000, actionDates]
+            // var - total amount to be invested, dates of purchase
+            strategyParams: [100000, actionDates]
           }
         }).then(result => {
           setData([...data, result.data])

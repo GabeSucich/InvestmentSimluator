@@ -1,29 +1,32 @@
-import Stock from "../Stock";
-
 // buys the given stock whenever you have enough cash and increments your cash by a given amount after every 20 market days
 const Suggestion = require("./utils/Suggestion")
 
-// 
+// "global" variables
+var rolloverMoney = 0; 
+
+
 function frequencyPurchase(savedAmt, actionDates, symbol, portfolio, stockData, currentDate) {
 
     // takes total amt to be invested and divides it equally into action dates
     var amtPerPurchase  = savedAmt / actionDates.length;
     console.log('amt per purchase = ' + amtPerPurchase);
 
-    // finds daily value of Stock
-    var currStockVal = Stock.markPrice();
 
     const suggestions = []
 
     // checks if current date is in range
     if (actionDates.includes(currentDate)) {
 
+        var stockPrice = stockData[currentDate]["markPrice"];
+        console.log("stockprice" = stockPrice);
+
        // checks if amount per Purchase can afford price of stock
-       if (amtPerPurchase > currStockVal) {
+       if (amtPerPurchase > stockPrice) {
         console.log(`investing another $${amtPerPurchase} into the portfolio`);
         portfolio.increaseCash(amtPerPurchase)
        } else {
-           console.log('sorry, not enough money to make purchase.')
+           console.log('sorry, not enough money to make purchase.');
+           rolloverFunds();
        }
     }
 
@@ -38,6 +41,10 @@ function frequencyPurchase(savedAmt, actionDates, symbol, portfolio, stockData, 
     }
 
     return suggestions
+
+}
+
+function rolloverFunds() {
 
 }
 
