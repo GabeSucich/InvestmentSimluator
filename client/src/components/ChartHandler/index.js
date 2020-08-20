@@ -4,7 +4,7 @@ import React from "react"
 export default function ChartHandler(props) {
     const { simulations } = props; // simulations is an array of objects, each object has a key of the simulation pointing to that simulation's data
     const { labels } = props; // the names of the series to be charted
-    if (typeof(props.options) === "undefined") {
+    if (typeof (props.options) === "undefined") {
         var options = {}
     } else {
         var { options } = props;
@@ -20,16 +20,17 @@ export default function ChartHandler(props) {
         for (const dataPoint of simulation.portfolioHistory) {
             data.push(eval(dataPoint.totalValue))
         }
-
+        console.log(props)
         // iterates through all other props
-        for (const attribute of Object.keys(props)){
+        for (const attribute of Object.keys(props)) {
             // excluding sim, labels, children
-            if (attribute !== "simulations" && attribute !== "labels" && attribute !== "children"){
-            otherAttributes[String(attribute)] = props.attribute[i];
+            if (attribute !== "simulations" && attribute !== "labels" && attribute !== "children") {
+                console.log(attribute)
+                otherAttributes[String(attribute)] = props[attribute][i];
             }
         }
 
-        return {"label": label, "data": data, ...otherAttributes}
+        return { "label": label, "data": data, ...otherAttributes }
     }
 
     function processAllSimulations(simulations) {
@@ -38,7 +39,7 @@ export default function ChartHandler(props) {
             var processedSimulation = processSimulation(i);
             datasets.push(processedSimulation);
         }
-        return {"labels": processDates(simulations), "datasets": datasets}
+        return { "labels": processDates(simulations), "datasets": datasets }
     }
 
     function processDates(simulations) {
