@@ -12,6 +12,7 @@ class Simulation {
         this.startDate = startDate;
         this.endDate = endDate;
         this.currentDate = startDate
+        this.previousDate = null
         this.investment = investment
         this.strategyFunc = strategyFunc
         this.strategyParams = strategyParams
@@ -128,6 +129,8 @@ class Simulation {
         return this
 
     }
+
+
 
     processSuggestions(strategySuggestions) {
         if (strategySuggestions.length > 0) {
