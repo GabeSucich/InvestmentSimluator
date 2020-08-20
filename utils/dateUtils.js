@@ -1,5 +1,5 @@
 
-const Utils = {
+const DateUtils = {
 
     // This function removes the dashes from a standard-formatted date. Useful for comparing which dates are ahead of which.
     // removeDateDashes("2020-01-01") -> "20200101"
@@ -74,9 +74,9 @@ const Utils = {
         let foundInterval = false;
         let counter = 1;
         for (const date of allDates) {
-            if (!Utils.isInRange(startDate, endDate, date) && foundInterval) {
+            if (!this.isInRange(startDate, endDate, date) && foundInterval) {
                 break;
-            } else if (Utils.isInRange(startDate, endDate, date)) {
+            } else if (this.isInRange(startDate, endDate, date)) {
                 foundInterval = true;
                 if (counter >= parseInt(interval)) {
                     counter = 1;
@@ -98,5 +98,5 @@ const Utils = {
 
 
 
-module.exports = Utils
+module.exports = DateUtils
 
