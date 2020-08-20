@@ -11,7 +11,7 @@ export default function Sam() {
       method: "POST",
       url: "/api/simulation/getIntervalDates",
       data: {
-        symbol: "ACB",
+        symbol: "AAPL",
         startDate: "2010-08-10",
         endDate: "2020-08-10",
         interval: 300
@@ -23,7 +23,7 @@ export default function Sam() {
           method: "POST",
           url: "/api/simulation/new",
           data: {
-            symbol: "ACB",
+            symbol: "AAPL",
             startDate: "2010-08-10",
             endDate: "2020-08-10",
             investment: 1000,
