@@ -34,7 +34,7 @@ class Simulation {
                     var historicals = response.data["Time Series (Daily)"]
                     // Remove the periods from the keys of the historical data. Mongo doesnt like the character "." in object keys.
                     DateUtils.processHistoricals(historicals)
-                    return StockHistory.create(this.symbol, historicals).then(result => {
+                    return Historicals.createHistory(this.symbol, historicals).then(result => {
                         // Add this stock data to our database for the future, and then move on with object construction
                         return this.setBoundedHistory(result.historicals)
                     })
