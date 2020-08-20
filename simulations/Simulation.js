@@ -1,7 +1,7 @@
 const Historicals = require("../controllers/stockcontroller")
 const Portfolio = require("./Portfolio")
 const API = require("../utils/API")
-const DateUtils = require("../utils/DateUtils")
+const DateUtils = require("../utils/dateUtils")
 const Calendar = require("./Calendar")
 const Stock = require("./Stock")
 
@@ -105,34 +105,27 @@ class Simulation {
     // Starts the simulation by calling to simulation the first day
     runSimulation() {
         return new Promise((resolve, reject) => {
-            resolve(this.simulateNextDay())
+            resolve(this.simulation())
         })
     }
 
     // Sets the current date to the next date in the timeline interator
-    simulateNextDay() {
-        this.currentDate = this.calender.getNextDate()
 
-        // If there are no more dates in the timeline, the simulaiton is finished
-        if (!this.currentDate) {
-            console.log("Simulation completed")
-            return this
-        }
-
-        else if (this.currentDate === this.breakDate) {
-            setTimeout(() => {
-                this.updatePortfolio()
-                var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
-                this.processSuggestions(strategySuggestions)
-            }, 20)
-        }
-        // Otherwise,the portfolio is updated, and strategy function is called on the simulation
-        else {
+    simulation() {
+        
+        while (this.currentDate) {
+            if (this.currentDate === this.breakDate) {
+                console.log("Broken")
+                setTimeout(() => {console.log("Broken")}, 200)
+            }
             this.updatePortfolio()
             var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
-            // The strategy function returns specially-formatted suggestions which the simulation can process
             this.processSuggestions(strategySuggestions)
+            this.currentDate = this.calender.getNextDate()
         }
+
+        return this
+
     }
 
     processSuggestions(strategySuggestions) {
@@ -152,7 +145,6 @@ class Simulation {
         }
 
         this.portfolio.saveHistory()
-        this.simulateNextDay()
     }
 
 

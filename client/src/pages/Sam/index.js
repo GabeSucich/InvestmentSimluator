@@ -6,8 +6,6 @@ import API from "../../utils/API"
 
 export default function Sam() {
 
-  var actionDates;
-
   const [data, setData] = useState([]);
 
   // function run(symbol, startDate, endDate, investment, strategyFuncName, strategyParams, interval) {
@@ -34,12 +32,12 @@ export default function Sam() {
 
 
   useEffect(() => {
-    API.getActionDates(100, "2000-08-25", "2003-02-14", "GE")
+    API.getActionDates(100, "2000-08-25", "2020-02-14", "GE")
       .then(actionDates => {
         console.log(actionDates)
         API.runMultipleSimulations([
-          ["GE", "2000-08-25", "2003-02-14", 1000, "monthlyInvestment", [1000, actionDates]],
-          ["GE", "2000-08-25", "2003-02-14", 8000, "buyAndWait", []]
+          ["GE", "2000-08-25", "2020-02-14", 1000, "monthlyInvestment", [1000, actionDates]],
+          ["GE", "2000-08-25", "2020-02-14", 8000, "buyAndWait", []]
         ])
           .then(res => {
             console.log(res)
@@ -52,7 +50,7 @@ export default function Sam() {
 
   return (
     <div>
-      {data.length > 0 ? <ChartHandler simulations={data} labels={["buyAndWait", "Colin"]}/> : "Waiting for data"}
+      {data.length > 0 ? <ChartHandler simulations={data} labels={["Colin", "Buy And Wait"]}/> : "Waiting for data"}
     </div>
   )
 

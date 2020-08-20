@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
     <Sam/>
-    <Colin/>
+    {/* <Colin/> */}
     </div>
   )
 }
