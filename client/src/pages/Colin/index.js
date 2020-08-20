@@ -26,7 +26,7 @@ export default function Colin() {
           url: "/api/simulation/new",
           data: {
             symbol: "SPY",
-            startDate: "2010-08-10",
+            startDate: "2019-08-10",
             endDate: "2020-08-10",
             investment: 0,
             strategyFuncName: "frequencyPurchase",
