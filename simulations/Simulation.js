@@ -1,7 +1,7 @@
 const Historicals = require("../controllers/stockcontroller")
 const Portfolio = require("./Portfolio")
-const API = require("./utils/API")
-const Utils = require("./utils/dateUtils")
+const API = require("../utils/API")
+const DateUtils = require("../utils/dateUtils")
 const Calendar = require("./Calendar")
 const Stock = require("./Stock")
 
@@ -33,7 +33,7 @@ class Simulation {
                     // Parse out the data from the API call
                     var historicals = response.data["Time Series (Daily)"]
                     // Remove the periods from the keys of the historical data. Mongo doesnt like the character "." in object keys.
-                    Utils.processHistoricals(historicals)
+                    DateUtils.processHistoricals(historicals)
                     return StockHistory.create(this.symbol, historicals).then(result => {
                         // Add this stock data to our database for the future, and then move on with object construction
                         return this.setBoundedHistory(result.historicals)
@@ -59,7 +59,7 @@ class Simulation {
 
         // We are going to iterate through each date in the historical data. If it is within the date interval, we will add it.
         for (const [date, stockData] of Object.entries(historicalData)) {
-            if (Utils.isInRange(this.startDate, this.endDate, date)) {
+            if (DateUtils.isInRange(this.startDate, this.endDate, date)) {
                 boundedHistoryArr.push({ date: date, data: stockData })
                 foundTimeInterval = true
             }
@@ -82,7 +82,7 @@ class Simulation {
 
         // The bounded historical data is an attribute on our simulation object
         this.stockData = boundedHistory
-        this.breakDate = Utils.findBreakDate(this.stockData, this.startDate)
+        this.breakDate = DateUtils.findBreakDate(this.stockData, this.startDate)
         console.log(this.breakDate)
         // We create a new Portfolio object to keep track of our holdings over time. This portfolio object belongs to the simulation.
         this.portfolio = new Portfolio(this.symbol, this.investment, this.startDate)

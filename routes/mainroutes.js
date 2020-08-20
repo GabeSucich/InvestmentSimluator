@@ -1,7 +1,7 @@
 var SimControl = require("../simulations/SimControl")
 var path = require("path")
-const API = require("../simulations/utils/API")
-const Utils = require("../simulations/utils/dateUtils")
+const API = require("../utils/API")
+const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
 
 module.exports = function (app) {
@@ -28,8 +28,8 @@ module.exports = function (app) {
                 API.getStockData(symbol)
                     .then(response => {
                         const historicals = response.data["Time Series (Daily)"]
-                        const resultDates = Utils.findIntervalDates(historicals, startDate, endDate, interval)
-                        Utils.processHistoricals(historicals)
+                        const resultDates = DateUtils.findIntervalDates(historicals, startDate, endDate, interval)
+                        DateUtils.processHistoricals(historicals)
                         Historicals.createHistory(symbol, historicals).then(data => {
                             res.json(resultDates);
                         })
@@ -39,7 +39,7 @@ module.exports = function (app) {
             else {
                 console.log("Grabbing from database")
                 const historicals = databaseData.historicals
-                const resultDates = Utils.findIntervalDates(historicals, startDate, endDate, interval)
+                const resultDates = DateUtils.findIntervalDates(historicals, startDate, endDate, interval)
                 res.json(resultDates)
             }
 
