@@ -37,7 +37,7 @@ export default function Sam() {
         console.log(actionDates)
         API.runMultipleSimulations([
           ["GE", "2000-08-25", "2020-02-14", 1000, "monthlyInvestment", [1000, actionDates]],
-          ["GE", "2000-08-25", "2020-02-14", 8000, "buyAndWait", []]
+          ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
         ])
           .then(res => {
             console.log(res)

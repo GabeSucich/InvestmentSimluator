@@ -114,6 +114,7 @@ class Simulation {
     simulation() {
         
         while (this.currentDate) {
+            
             if (this.currentDate === this.breakDate) {
                 console.log("Broken")
                 setTimeout(() => {console.log("Broken")}, 200)
