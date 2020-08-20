@@ -30,7 +30,8 @@ export default function Colin() {
             endDate: "2020-08-10",
             investment: 0,
             strategyFuncName: "frequencyPurchase",
-            strategyParams: [10000, actionDates ]
+            // var - invested, dates
+            strategyParams: [10000, actionDates]
           }
         }).then(result => {
           setData([...data, result.data])
