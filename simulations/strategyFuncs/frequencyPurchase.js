@@ -24,7 +24,11 @@ function frequencyPurchase(savedAmt, actionDates, symbol, portfolio, stockData, 
        if (amtPerPurchase > stockPrice) {
         console.log(`investing another $${amtPerPurchase} into the portfolio`);
         portfolio.increaseCash(amtPerPurchase)
-       } else {
+        } else if (rolloverMoney > stockPrice){
+            console.log(`investing another $${amtPerPurchase} into the portfolio`);
+            portfolio.increaseCash(amtPerPurchase);
+            rolloverMoney = 0;
+        }  else {
            console.log('sorry, not enough money to make purchase.');
            rolloverFunds();
        }
