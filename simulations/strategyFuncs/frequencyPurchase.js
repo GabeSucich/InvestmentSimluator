@@ -1,11 +1,11 @@
 // buys the given stock whenever you have enough cash and increments your cash by a given amount after every 20 market days
 const Suggestion = require("./utils/Suggestion")
 
-// "global" variables
-var rolloverMoney = 0; 
-
 
 function frequencyPurchase(savedAmt, actionDates, symbol, portfolio, stockData, currentDate) {
+
+    // "global" variables
+    var rolloverMoney = 0; 
 
     // takes total amt to be invested and divides it equally into action dates
     var amtPerPurchase  = savedAmt / actionDates.length;
@@ -18,21 +18,28 @@ function frequencyPurchase(savedAmt, actionDates, symbol, portfolio, stockData, 
     if (actionDates.includes(currentDate)) {
 
         var stockPrice = stockData[currentDate]["markPrice"];
-        console.log("stockprice" = stockPrice);
+        console.log("stockprice = " + stockPrice);
 
        // checks if amount per Purchase can afford price of stock
        if (amtPerPurchase > stockPrice) {
         console.log(`investing another $${amtPerPurchase} into the portfolio`);
         portfolio.increaseCash(amtPerPurchase)
+        
+        // if not enough money in amtPerPurchase:
+        // runs the purchase with rolloverMoney
         } else if (rolloverMoney > stockPrice){
             console.log(`investing another $${amtPerPurchase} into the portfolio`);
             portfolio.increaseCash(amtPerPurchase);
             rolloverMoney = 0;
+        
+
+        // if not enough money in rollover:
         }  else {
            console.log('sorry, not enough money to make purchase.');
-           rolloverFunds();
-       }
+           rolloverFunds(amtPerPurchase);
+        } 
     }
+    
 
     var cashCopy = portfolio.getCash
     console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
@@ -46,11 +53,12 @@ function frequencyPurchase(savedAmt, actionDates, symbol, portfolio, stockData, 
 
     return suggestions
 
+    function rolloverFunds(moneyToAdd) {
+        rolloverMoney = moneyToAdd + rolloverMoney;
+    }
+
 }
 
-function rolloverFunds() {
-
-}
 
 module.exports = {
     "name": "frequencyPurchase",

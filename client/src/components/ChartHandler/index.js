@@ -11,13 +11,25 @@ export default function ChartHandler(props) {
     }
 
     function processSimulation(i) {
+        var otherAttributes = {};
         var simulation = simulations[i];
         var label = labels[i];
         var data = [];
+
+        // create data from sim
         for (const dataPoint of simulation.portfolioHistory) {
             data.push(eval(dataPoint.totalValue))
         }
-        return {"label": label, "data": data}
+
+        // iterates through all other props
+        for (const attribute of Object.keys(props)){
+            // excluding sim, labels, children
+            if (attribute !== "simulations" && attribute !== "labels" && attribute !== "children"){
+            otherAttributes[String(attribute)] = props.attribute[i];
+            }
+        }
+
+        return {"label": label, "data": data, ...otherAttributes}
     }
 
     function processAllSimulations(simulations) {
