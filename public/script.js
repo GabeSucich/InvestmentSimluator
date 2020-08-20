@@ -18,3 +18,29 @@ $.ajax({
 
     // logic goes here
 })
+// function runStrategy(symbol, startDate, endDate, interval) {
+//     const object = { symbol: symbol, startDate: startDate, endDate: endDate, interval: interval };
+//     $.ajax({
+//         method: "POST",
+//         url: "/api/simulation/getIntervalDates",
+//         data: object
+//     })
+//         .then(actionDates => {
+//             $.ajax({
+//                 method: "POST",
+//                 url: "/api/simulation/new",
+//                 data: {
+//                     symbol: symbol,
+//                     startDate: startDate,
+//                     endDate: endDate,
+//                     investment: 100,
+//                     strategyFuncName: "monthlyInvestment",
+//                     strategyParams: [10, actionDates]
+//                 }
+//             }).then(result => {
+//                 console.log(result)
+//             })
+//         })
+// }
+
+// runStrategy("ACB", "2010-08-01", "2020-08-01", 10)
