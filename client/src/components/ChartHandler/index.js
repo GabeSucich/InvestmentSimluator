@@ -3,6 +3,7 @@ import React from "react"
 
 export default function ChartHandler(props) {
     const { simulations } = props; // simulations is an array of objects, each object has a key of the simulation pointing to that simulation's data
+    console.log(simulations)
     const { labels } = props; // the names of the series to be charted
     if (typeof(props.options) === "undefined") {
         var options = {}
@@ -14,6 +15,7 @@ export default function ChartHandler(props) {
         var simulation = simulations[i];
         var label = labels[i];
         var data = [];
+        console.log(simulation)
         for (const dataPoint of simulation.portfolioHistory) {
             data.push(eval(dataPoint.totalValue))
         }
