@@ -1,7 +1,7 @@
 const Historicals = require("../controllers/stockcontroller")
 const Portfolio = require("./Portfolio")
 const API = require("../utils/API")
-const DateUtils = require("../utils/dateUtils")
+const DateUtils = require("../utils/DateUtils")
 const Calendar = require("./Calendar")
 const Stock = require("./Stock")
 
