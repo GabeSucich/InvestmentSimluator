@@ -5,7 +5,7 @@ const Utils = {
     },
 
     // function takes in date range determines current high price
-    findBuyDate(stockData, currentDate) {
+    findBuyDate(stockData) {
         console.log('findBuyDate running');
         var highPrice = 0;
         var buyPrice;
@@ -32,7 +32,7 @@ const Utils = {
 
                 // once it finds the first dip date, stop searching
                 console.log("buy date = " + date);
-                return buyDate;
+                return date;
             }
         }
     } 
