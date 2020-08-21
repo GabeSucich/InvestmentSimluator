@@ -1,5 +1,3 @@
-const Suggestion = require("./Suggestion")
-
 const Utils = {
 
 

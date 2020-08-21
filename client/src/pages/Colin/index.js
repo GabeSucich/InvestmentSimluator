@@ -9,18 +9,15 @@ export default function Colin() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        API.getActionDates(1, "2019-08-25", "2020-02-14", "GE")
-        .then(actionDates => {
-            console.log(actionDates)
             API.runMultipleSimulations([
-            ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", []],
+            // ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", []],
             ["GE", "2019-08-25", "2020-02-14", 60000, "buyAndWait", []]
             ])
             .then(res => {
                 console.log(res)
                 setData([...data, ...res])
             })
-        })
+       
     }, [])
 
   return (
