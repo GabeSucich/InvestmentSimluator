@@ -6,12 +6,12 @@ function stateTaxAffect(stateTaxRate1, StateTaxRate2, symbol, portfolio, stockDa
     var suggestionsArr = []
 
 //     // Work/logic goes here
-if (currentDate === "2005-01-03") {
+if (currentDate === "2014-08-07") {
     suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
-
+console.log(stockData);
 }
 
-if (currentDate === "2020-06-01") {
+if (currentDate === "2020-08-10") {
     suggestionsArr.push(Suggestion.createSellSuggestion(portfolio.holdings[0]))
 }
 
