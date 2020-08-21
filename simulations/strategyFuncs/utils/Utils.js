@@ -1,5 +1,8 @@
-const buyLowUtils = {
+const Utils = {
 
+    maxStockPurchases(stockPrice, cashAmt) {
+        return Math.floor(eval(cashAmt)/eval(stockPrice));
+    },
 
     // function takes in date range determines current high price
     findBuyDate(stockData, currentDate) {
@@ -29,4 +32,4 @@ const buyLowUtils = {
         }
     } 
 }
-module.export =  buyLowUtils;
+module.exports = Utils;
