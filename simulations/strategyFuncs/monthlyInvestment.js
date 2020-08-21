@@ -6,16 +6,16 @@ function monthlyInvestment(monthlyAmount, actionDates, symbol, portfolio, stockD
     const suggestions = []
 
     if (actionDates.includes(currentDate)) {
-        console.log(`investing another $${monthlyAmount} into the portfolio`);
+        // console.log(`investing another $${monthlyAmount} into the portfolio`);
         portfolio.increaseCash(eval(monthlyAmount))
     }
 
     var cashCopy = portfolio.getCash
-    console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
+    // console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
     
 
     while (eval(stockData[currentDate]["markPrice"]) < cashCopy) {
-        console.log("Suggesting to buy another share")
+        // console.log("Suggesting to buy another share")
         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
         cashCopy -= stockData[currentDate]["markPrice"]
     }

@@ -1,14 +1,15 @@
 class Stock {
 
-    constructor(symbol, history, currentDate) {
+    constructor(symbol, startData, quantity=1) {
         this.symbol = symbol
-        this.history = history
-        this.updateData(currentDate)
+        this.currentData = startData
+        this.purchaseCost = this.markPrice
+        this.quantity = quantity
     }
 
     // This will set the current data of the stock equal to that found in the stock history
-    updateData(date) {
-        this.currentData = this.history[date]
+    updateData(data) {
+        this.currentData = data
     }
 
 
@@ -28,6 +29,10 @@ class Stock {
     get markPrice() {
         return (this.openPrice + this.closePrice)/2
     }
+    get percentChange() {
+        return (100*(this.markPrice - this.purchaseCost)/this.purchaseCost).toFixed(2)
+    }
+    
 
 }
 

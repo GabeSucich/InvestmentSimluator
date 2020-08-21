@@ -1,7 +1,7 @@
 const Historicals = require("../controllers/stockcontroller")
 const Portfolio = require("./Portfolio")
 const API = require("../utils/API")
-const DateUtils = require("../utils/DateUtils")
+const DateUtils = require("../utils/dateUtils")
 const Calendar = require("./Calendar")
 const Stock = require("./Stock")
 
@@ -11,7 +11,8 @@ class Simulation {
         this.symbol = symbol;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.currentDate = startDate
+        this.currentDate = null
+        this.previousDate = null
         this.investment = investment
         this.strategyFunc = strategyFunc
         this.strategyParams = strategyParams
@@ -85,7 +86,7 @@ class Simulation {
         this.breakDate = DateUtils.findBreakDate(this.stockData, this.startDate)
         console.log(this.breakDate)
         // We create a new Portfolio object to keep track of our holdings over time. This portfolio object belongs to the simulation.
-        this.portfolio = new Portfolio(this.symbol, this.investment, this.startDate)
+        this.portfolio = new Portfolio(this.symbol, this.investment, this.stockData, this.startDate)
         // This calendar object will help us to run through all the relevant dates. It also belongs to the simulation.
         this.calender = new Calendar(this.stockData)
         // Out of our constructor's promise we return the object itself. This will allow us to add a callback function to the instantiation of simulations,
@@ -105,34 +106,70 @@ class Simulation {
     // Starts the simulation by calling to simulation the first day
     runSimulation() {
         return new Promise((resolve, reject) => {
-            resolve(this.simulateNextDay())
+            resolve(this.simulation())
         })
     }
 
     // Sets the current date to the next date in the timeline interator
-    simulateNextDay() {
+
+    simulation() {
         this.currentDate = this.calender.getNextDate()
+        while (this.currentDate) {
 
-        // If there are no more dates in the timeline, the simulaiton is finished
-        if (!this.currentDate) {
-            console.log("Simulation completed")
-            return this
-        }
-
-        else if (this.currentDate === this.breakDate) {
-            setTimeout(() => {
-                this.updatePortfolio()
-                var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
-                this.processSuggestions(strategySuggestions)
-            }, 20)
-        }
-        // Otherwise,the portfolio is updated, and strategy function is called on the simulation
-        else {
+            if (this.previousDate) {
+                this.checkForSplits()
+            }
+            
             this.updatePortfolio()
+
+
+
+
             var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
-            // The strategy function returns specially-formatted suggestions which the simulation can process
             this.processSuggestions(strategySuggestions)
+
+            this.previousDate = this.currentDate
+            this.currentDate = this.calender.getNextDate()
+
         }
+
+        return this
+
+    }
+
+    checkForSplits() {
+
+        var currentPrice = eval(this.stockData[this.currentDate].markPrice)
+        var previousPrice = eval(this.stockData[this.previousDate].markPrice)
+        var intraDayRatio = currentPrice / previousPrice
+
+        if (intraDayRatio >= 1.8) {
+            console.log("ReverseSplit")
+            this.handleReverseSplit(currentPrice, previousPrice)
+        }
+        else if (intraDayRatio <= .6) {
+            console.log("Split")
+            console.log(this.currentDate, currentPrice, previousPrice, intraDayRatio)
+            this.handleSplit(currentPrice, previousPrice)
+        }
+        else {
+            return
+        }
+
+        return
+
+    }
+
+    handleSplit(currentPrice, previousPrice) {
+        const splitRatio = (previousPrice / currentPrice).toFixed()
+
+        this.portfolio.adjustForSplit(splitRatio, this.currentDate)
+
+    }
+
+    handleReverseSplit(currentPrice, previousPrice) {
+        const splitRatio = (currentPrice / previousPrice).toFixed()
+        this.portfolio.adjustForReverseSplit(splitRatio, this.previousDate, this.currentDate)
     }
 
     processSuggestions(strategySuggestions) {
@@ -152,18 +189,17 @@ class Simulation {
         }
 
         this.portfolio.saveHistory()
-        this.simulateNextDay()
     }
 
 
     // Instantiate a new stock to buy for each suggestion
     handleBuy(suggestion) {
-        this.portfolio.buyStock(suggestion.stock)
+        this.portfolio.buyStock(suggestion.stock, suggestion.quantity)
     }
 
     // Sell a stock if suggested
     handleSell(suggestion) {
-        this.portfolio.sellStock(suggestion.stock)
+        this.portfolio.sellStock(suggestion.stock, suggestion.quantity)
     }
 
 }
