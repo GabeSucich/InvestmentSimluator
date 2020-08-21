@@ -27,9 +27,9 @@ module.exports = function (app) {
             if (!databaseData) {
                 API.getStockData(symbol)
                     .then(response => {
-                        const historicals = response.data["Time Series (Daily)"]
+                        const reversedHistoricals = response.data["Time Series (Daily)"]
+                        var historicals = DateUtils.processHistoricals(reversedHistoricals)
                         const resultDates = DateUtils.findIntervalDates(historicals, startDate, endDate, interval)
-                        DateUtils.processHistoricals(historicals)
                         Historicals.createHistory(symbol, historicals).then(data => {
                             res.json(resultDates);
                         })
@@ -48,13 +48,13 @@ module.exports = function (app) {
 
     app.post("/api/simulation/getBuyDate", (req, res) => {
         const { symbol, startDate, endDate } = req.body
-
+        console.log(req.body)
         Historicals.findHistory(symbol).then(databaseData => {
             if (!databaseData) {
                 API.getStockData(symbol)
                     .then(response => {
-                        const historicals = response.data["Time Series (Daily)"]
-                        DateUtils.processHistoricals(historicals);
+                        const reversedHistoricals = response.data["Time Series (Daily)"]
+                        var historicals = DateUtils.processHistoricals(reversedHistoricals);
                         const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate);
                         Historicals.createHistory(symbol, historicals).then(data => {
                             res.json(resultDate);

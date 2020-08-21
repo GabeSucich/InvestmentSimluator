@@ -9,7 +9,7 @@ function buyLow(investmentAmt, symbol, portfolio, stockData, currentDate) {
     const buyDate = Utils.findBuyDate(stockData);
     console.log("buyDate on strat = " + buyDate);
     // var cashCopy = portfolio.getCash;
-    // console.log('strat cash copy = ' + cashCopy);
+    console.log('strat cash copy = ' + cashCopy);
 
     var priceOnBuy = stockData[buyDate]["markPrice"];
     console.log("priceOnBuy = " + priceOnBuy);
@@ -18,7 +18,7 @@ function buyLow(investmentAmt, symbol, portfolio, stockData, currentDate) {
    if (priceOnBuy < investmentAmt) {
         // gives back the number of stocks to buy 
         var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, investmentAmt);
-        console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
+        // console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
 
         suggestions.push(Suggestion.createBuySuggestion(symbol , stockData, buyDate, amtToPurchase));
     }

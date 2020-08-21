@@ -31,6 +31,30 @@ const DateUtils = {
         return false
     },
 
+    reorderHistoricals(historicalData) {
+        const HistoryArr = []
+
+        // This boolean flag will help us to not iterate over giant portions of unnecessary data after get get the historicals we need
+
+        // We are going to iterate through each date in the historical data. If it is within the date interval, we will add it.
+        for (const [date, stockData] of Object.entries(historicalData)) {
+            HistoryArr.push({ date: date, data: stockData })
+
+            // When we step out of time interval, this statement will break us out of the loop. If we are looking for data between 2010 and 2020,
+            //  this flag will stop us from unnecessary iterating over all the dates between 1999 and 2009 in the historical data.
+        }
+
+        const History = {}
+
+        // We read the data from the API call in reverse chronological order. Here, we reverse this order
+        for (var i = HistoryArr.length - 1; i >= 0; i--) {
+            var dataPoint = HistoryArr[i]
+            History[dataPoint.date] = dataPoint.data
+        }
+
+        return History
+    },
+
     // The historicals come from the API with keys that are strangely formatted as, for example: "1. open", "2. close"
     // MongoDB does not like keys containt ".", so this function removes the periods from the object keys for storage in the databse.
     processHistoricals(historicals) {
@@ -42,6 +66,22 @@ const DateUtils = {
             }
             data["markPrice"] = ((eval(data.open) + eval(data.close)) / 2).toFixed(2)
         }
+        return this.reorderHistoricals(historicals)
+    },
+
+    boundHistoricals(historicals, startDate, endDate) {
+        const boundedHistoricals = {}
+        var foundInterval = false
+        for (const [date, data] of Object.entries(historicals)) {
+            if (this.isInRange(startDate, endDate, date)) {
+                foundInterval = true
+                boundedHistoricals[date] = data
+            }
+            else if (foundInterval) {
+                break
+            }
+        }
+        return boundedHistoricals
     },
 
 

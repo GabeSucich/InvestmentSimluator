@@ -9,7 +9,7 @@ export default function Colin() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-      API.findBuyDate("2019-08-25", "2020-02-14", "GE")
+      API.findBuyDate("2010-08-21", "2020-02-14", "GE")
       // chcek this. 
         .then(res => {console.log(res)})
             // API.runMultipleSimulations([
