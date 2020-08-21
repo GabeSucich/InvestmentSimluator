@@ -10,8 +10,8 @@ function App() {
 
   return (
     <div>
-    <Gabe/>
-    {/* <Colin/> */}
+    {/* <Gabe/> */}
+    <Colin/>
     {/* <Sam/> */}
   
     </div>
