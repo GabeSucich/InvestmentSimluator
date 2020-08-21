@@ -15,6 +15,8 @@ export default function Sam() {
           console.log(actionDates)
         API.runMultipleSimulations([
             ["AAPL", "2000-08-25", "2020-02-14", 5100, "buyAndWait", []],
+            ["AAPL", "2000-08-25", "2020-02-14", 5100, "buyAndWait", []],
+            ["AAPL", "2000-08-25", "2020-02-14", 5100, "buyAndWait", []],
             ["AAPL", "2000-08-25", "2020-02-14", 5100, "buyAndWait", []]
             // ["AAPL", "2000-08-25", "2020-02-14", 100, "monthlyInvestment", [100, actionDates]]
         ])
@@ -27,7 +29,7 @@ export default function Sam() {
 
     return (
         <div>
-            {data.length > 0 ? <DataHandler func={"decrease5Percent"} simulations={data} labels={["Buy And Wait", "Dollar Cost Averaging"]} borderColor={["#8A2BE2", "Red"]} fill={[false, false]} pointRadius={[0,0]} /> : "Waiting for data"}
+            {data.length > 0 ? <DataHandler func={"decreasePercent"} params={[[1, .75, .60, .45]]} simulations={data} labels={["Florida", "Wyoming", "California", "Sweden"]} borderColor={["#8A2BE2", "Red", "Green", "Blue"]} fill={[false, false, false, false]} pointRadius={[0,0, 0, 0]} /> : "Waiting for data"}
         </div>
     )
 
