@@ -87,7 +87,7 @@ class Portfolio {
     // This function takes in a newly instantiated stock object and "buys" it
     buyStock(stock) {
         if (this.cash <= stock.markPrice) {
-            console.log("Not enough cash to buy this stock: ", stock.currentData)
+            console.log("Not enough cash to buy this stock")
             return
         }
         this.holdings.push(stock)
