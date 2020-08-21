@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import "./App.css"
-// import 'semantic-ui-css/semantic.min.css'
+import React, { useState, useEffect } from 'react';
 
 import Sam from "./pages/Sam"
-import Colin from './pages/Colin';
-import Gabe from "./pages/Gabe"
+import Joel from "./pages/Joel"
+import Colin from './pages/Colin'
+import "./App.css"
+// import 'semantic-ui-css/semantic.min.css'
 
 function App() {
 
@@ -15,6 +15,7 @@ function App() {
     {/* <Sam/> */}
   
     </div>
+
   )
 }
 
