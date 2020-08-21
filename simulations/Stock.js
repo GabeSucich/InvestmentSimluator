@@ -28,6 +28,10 @@ class Stock {
     get markPrice() {
         return (this.openPrice + this.closePrice)/2
     }
+    get percentChange() {
+        return (100*(this.markPrice - this.purchaseCost)/this.purchaseCost).toFixed(2)
+    }
+    
 
 }
 
