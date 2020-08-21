@@ -1,9 +1,10 @@
 class Stock {
 
-    constructor(symbol, startData) {
+    constructor(symbol, startData, quantity=1) {
         this.symbol = symbol
         this.currentData = startData
         this.purchaseCost = this.markPrice
+        this.quantity = quantity
     }
 
     // This will set the current data of the stock equal to that found in the stock history

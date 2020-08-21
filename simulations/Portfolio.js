@@ -54,7 +54,7 @@ class Portfolio {
         const currentData = this.stockData[date]
         for (const stock of this.holdings) {
             stock.updateData(currentData)
-            this.increaseInvested(stock.markPrice)
+            this.increaseInvested(stock.markPrice*stock.quantity)
         }
     }
 
@@ -74,7 +74,7 @@ class Portfolio {
     // This function takes in a newly instantiated stock object and "buys" it
     buyStock(stock) {
         if (this.cash <= stock.markPrice) {
-            console.log("Not enough cash to buy this stock")
+            console.log("Not enough cash to buy this stock: ", stock.currentData)
             return
         }
         this.holdings.push(stock)
@@ -93,14 +93,11 @@ class Portfolio {
 
 
     adjustForSplit(splitRatio, currentDate) {
-        const originalLength = this.holdings.length
         const currentStockPrice = eval(this.holdings[0].markPrice)
-        for (var i=0; i< originalLength; i++) {
-            for (var j = 1; j < splitRatio; j++) {
-                this.increaseCash(currentStockPrice)
-                this.buyStock(new Stock(this.symbol, this.stockData[currentDate]))
-            }
+        for (const stock of this.holdings) {
+            stock.quantity *= splitRatio
         }
+        this.updateHoldings(currentDate)
     }
 
     adjustForReverseSplit(splitRatio, previousDate) {
