@@ -46,5 +46,30 @@ module.exports = function (app) {
         })
     })
 
+    app.post("/api/simulation/getBuyDate", (req, res) => {
+        const { symbol, startDate, endDate } = req.body
+
+        Historicals.findHistory(symbol).then(databaseData => {
+            if (!databaseData) {
+                API.getStockData(symbol)
+                    .then(response => {
+                        const historicals = response.data["Time Series (Daily)"]
+                        DateUtils.processHistoricals(historicals);
+                        const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate);
+                        Historicals.createHistory(symbol, historicals).then(data => {
+                            res.json(resultDate);
+                        })
+                        
+                    })
+            }
+            else {
+                console.log("Grabbing from database")
+                const historicals = databaseData.historicals
+                const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate);
+                res.json(resultDate);
+            }
+
+        })
+    })
 
 }
