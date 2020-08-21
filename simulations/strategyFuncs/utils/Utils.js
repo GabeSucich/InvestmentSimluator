@@ -27,8 +27,7 @@ const Utils = {
 
             // if the current price is 5% less than high price - push date
             if ( currentPrice <= buyPrice) {
-                console.log('we gonna buy now boi');
-              
+
 
                 // once it finds the first dip date, stop searching
                 console.log("buy date = " + date);

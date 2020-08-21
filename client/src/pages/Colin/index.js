@@ -10,7 +10,9 @@ export default function Colin() {
 
     useEffect(() => {
             API.runMultipleSimulations([
-            ["ACB", "2019-08-25", "2020-02-14", 60000, "buyLow", []]
+            ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", [60000]],
+            ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
+            
             ])
             .then(res => {
                 console.log(res)
@@ -21,7 +23,7 @@ export default function Colin() {
 
   return (
     <div>
-      {data.length > 0 ? <ChartHandler simulations={data} labels={["Colin", "Buy And Wait"]}/> : "Waiting for data"}
+       {data.length > 0 ? <ChartHandler func={"decrease5Percent"} simulations={data} labels={["Buy Low", "Buy And Wait"]} borderColor={["#8A2BE2", "Red"]} fill={[false, false]} pointRadius={[0,0]} /> : "Waiting for data"}
     </div>
   )
 
