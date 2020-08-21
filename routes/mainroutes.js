@@ -1,7 +1,7 @@
 var SimControl = require("../simulations/SimControl")
 var path = require("path")
 const API = require("../utils/API")
-const DateUtils = require("../utils/DateUtils")
+const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
 
 module.exports = function (app) {

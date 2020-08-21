@@ -1,9 +1,10 @@
 var Stock = require("./Stock")
 
 class Portfolio {
-    constructor(symbol, investment, startDate) {
+    constructor(symbol, investment, stockData, startDate) {
         this.symbol = symbol
         this.cash = parseInt(investment)
+        this.stockData = stockData
         this.invested = 0
         this.holdings = []
         this.date = startDate
@@ -50,41 +51,83 @@ class Portfolio {
     // This function updates the value of each stock in the portfolio for a given day.
     updateHoldings(date) {
         this.invested = 0
+        const currentData = this.stockData[date]
         for (const stock of this.holdings) {
-            stock.updateData(date)
-            this.increaseInvested(stock.markPrice)
+            stock.updateData(currentData)
+            this.increaseInvested(stock.markPrice*stock.quantity)
         }
     }
 
     // This function takes in a stock object in the portfolio.holdings and sells it
-    sellStock(stock) {
+    sellStock(stock, quantity="all") {
 
         if (!this.holdings.includes(stock)) {
             console.log("Stock cannot be sold if it is not owned")
-            return 
+            return
         }
 
-        this.decreaseInvested(stock.markPrice)
-        this.holdings = this.holdings.filter(holding => holding !== stock)
-        this.increaseCash(stock.markPrice)
+        else if (quantity === "all" || quantity === stock.quantity) {
+            this.decreaseInvested(stock.quantity*stock.quantity)
+            this.holdings = this.holdings.filter(holding => holding !== stock)
+            this.increaseCash(stock.markPrice*stock.quantity)
+        }
+
+        else {
+            if (quantity > stock.quantity) {
+                console.log("Cannot sell more stock than you have")
+                return
+            }
+            this.decreaseInvested(quantity*stock.markPrice)
+            stock.quantity -= quantity
+            this.increaseCash(quantity*stock.markPrice)
+        }        
+        
     }
 
     // This function takes in a newly instantiated stock object and "buys" it
     buyStock(stock) {
         if (this.cash <= stock.markPrice) {
-            console.log("Not enough cash to buy this stock")
+            console.log("Not enough cash to buy this stock: ", stock.currentData)
             return
         }
         this.holdings.push(stock)
-        this.increaseInvested(stock.markPrice)
-        this.decreaseCash(stock.markPrice)
+        this.increaseInvested(stock.markPrice*stock.quantity)
+        this.decreaseCash(stock.markPrice*stock.quantity)
     }
+
+
 
     // This function sells all holdings in the portfolio
     sellAllholdings() {
         for (const stock of this.holdings) {
             this.sellStock(stock)
         }
+    }
+
+
+    adjustForSplit(splitRatio, currentDate) {
+        if (this.holdings[0]) {
+           const currentStockPrice = eval(this.holdings[0].markPrice) 
+        }
+        for (const stock of this.holdings) {
+            stock.quantity *= splitRatio
+        }
+        this.updateHoldings(currentDate)
+    }
+
+    adjustForReverseSplit(splitRatio, previousDate, currentDate) {
+        var totalStock = 0
+        for (const stock of this.holdings) {
+            totalStock += stock.quantity
+        }
+        const convertedStocks = Math.floor(totalStock/splitRatio)
+        this.holdings = []
+        this.decreaseInvested(eval(totalStock*eval(this.stockData[previousDate].markPrice)))
+        this.increaseCash(eval(totalStock*eval(this.stockData[previousDate].markPrice)))
+        const currentData = this.stockData[currentDate]
+        this.buyStock(new Stock(this.symbol, currentData, convertedStocks))
+
+
     }
 }
 

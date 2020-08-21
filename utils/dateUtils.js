@@ -63,8 +63,9 @@ const DateUtils = {
             if (this.hasElapsed(3650, date, startDate)) {
                 return date
             }
-            return null
+            
         }
+        return null
     },
 
 
