@@ -2,7 +2,8 @@ const Stock = require("../../Stock")
 
 const Suggestion = {
     createBuySuggestion(symbol, stockData, currentDate) {
-        const newStock = new Stock(symbol, stockData, currentDate)
+        // console.log(stockData[currentDate])
+        const newStock = new Stock(symbol, stockData[currentDate])
         return {action: "buy", stock: newStock}
     },
 
