@@ -8,7 +8,6 @@ function buyAndWait(symbol, portfolio, stockData, currentDate) {
     var cashCopy = portfolio.getCash
     // console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
     // console.log(`Cash available: ${portfolio.getCash}`)
-    console.log(currentDate)
 
     while (stockData[currentDate]["markPrice"] < cashCopy) {
         // console.log("Suggesting to buy another share")
