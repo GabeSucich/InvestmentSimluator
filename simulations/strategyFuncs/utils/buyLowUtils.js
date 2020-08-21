@@ -1,6 +1,5 @@
 const Utils = {
 
-
     // function takes in date range determines current high price
     findBuyDate(stockData, currentDate) {
         var highPrice = 0;
@@ -29,4 +28,5 @@ const Utils = {
         }
     } 
 }
-export default Utils;
+
+module.exports = Utils;
