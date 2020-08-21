@@ -105,6 +105,7 @@ class Simulation {
 
     // Starts the simulation by calling to simulation the first day
     runSimulation() {
+        console.log(this.breakDate);
         return new Promise((resolve, reject) => {
             resolve(this.simulation())
         })
