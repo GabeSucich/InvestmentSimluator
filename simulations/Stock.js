@@ -1,14 +1,13 @@
 class Stock {
 
-    constructor(symbol, history, currentDate) {
+    constructor(symbol, startData) {
         this.symbol = symbol
-        this.history = history
-        this.updateData(currentDate)
+        this.currentData = startData
     }
 
     // This will set the current data of the stock equal to that found in the stock history
-    updateData(date) {
-        this.currentData = this.history[date]
+    updateData(data) {
+        this.currentData = data
     }
 
 

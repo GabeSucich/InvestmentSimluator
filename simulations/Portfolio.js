@@ -1,9 +1,10 @@
 var Stock = require("./Stock")
 
 class Portfolio {
-    constructor(symbol, investment, startDate) {
+    constructor(symbol, investment, stockData, startDate) {
         this.symbol = symbol
         this.cash = parseInt(investment)
+        this.stockData = stockData
         this.invested = 0
         this.holdings = []
         this.date = startDate
@@ -50,8 +51,9 @@ class Portfolio {
     // This function updates the value of each stock in the portfolio for a given day.
     updateHoldings(date) {
         this.invested = 0
+        const currentData = this.stockData[date]
         for (const stock of this.holdings) {
-            stock.updateData(date)
+            stock.updateData(currentData)
             this.increaseInvested(stock.markPrice)
         }
     }
@@ -61,7 +63,7 @@ class Portfolio {
 
         if (!this.holdings.includes(stock)) {
             console.log("Stock cannot be sold if it is not owned")
-            return 
+            return
         }
 
         this.decreaseInvested(stock.markPrice)
@@ -80,11 +82,35 @@ class Portfolio {
         this.decreaseCash(stock.markPrice)
     }
 
+
+
     // This function sells all holdings in the portfolio
     sellAllholdings() {
         for (const stock of this.holdings) {
             this.sellStock(stock)
         }
+    }
+
+
+    adjustForSplit(splitRatio, currentDate) {
+        const originalLength = this.holdings.length
+        const currentStockPrice = eval(this.holdings[0].markPrice)
+        for (var i=0; i< originalLength; i++) {
+            for (var j = 1; j < splitRatio; j++) {
+                this.increaseCash(currentStockPrice)
+                this.buyStock(new Stock(this.symbol, this.stockData[currentDate]))
+            }
+        }
+    }
+
+    adjustForReverseSplit(splitRatio, previousDate) {
+        const originalLength = this.holdings.length
+        const convertedStocks = Math.floor(originalLength/splitRatio)
+        const unconvertedStocks = originalLength % unconvertedStocks
+        this.increaseCash(eval(unconvertedStocks*this.stockData[previousDate].markPrice))
+        this.portfolio.holdings = this.portfolio.holdings.slice(0, convertedStocks)
+
+
     }
 }
 

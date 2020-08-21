@@ -11,7 +11,7 @@ export default function Sam() {
     useEffect(() => {
 
         API.runMultipleSimulations([
-            ["SPY", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
+            ["ACB", "2000-08-25", "2020-02-14", 600, "buyAndWait", []]
         ])
             .then(res => {
                 console.log(res)
