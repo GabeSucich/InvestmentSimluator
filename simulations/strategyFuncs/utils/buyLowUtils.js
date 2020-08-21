@@ -1,4 +1,4 @@
-const Utils = {
+const buyLowUtils = {
 
 
     // function takes in date range determines current high price
@@ -29,4 +29,4 @@ const Utils = {
         }
     } 
 }
-export default Utils;
+module.export =  buyLowUtils;
