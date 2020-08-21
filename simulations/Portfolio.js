@@ -106,19 +106,26 @@ class Portfolio {
 
 
     adjustForSplit(splitRatio, currentDate) {
-        const currentStockPrice = eval(this.holdings[0].markPrice)
+        if (this.holdings[0]) {
+           const currentStockPrice = eval(this.holdings[0].markPrice) 
+        }
         for (const stock of this.holdings) {
             stock.quantity *= splitRatio
         }
         this.updateHoldings(currentDate)
     }
 
-    adjustForReverseSplit(splitRatio, previousDate) {
-        const originalLength = this.holdings.length
-        const convertedStocks = Math.floor(originalLength/splitRatio)
-        const unconvertedStocks = originalLength % unconvertedStocks
-        this.increaseCash(eval(unconvertedStocks*this.stockData[previousDate].markPrice))
-        this.portfolio.holdings = this.portfolio.holdings.slice(0, convertedStocks)
+    adjustForReverseSplit(splitRatio, previousDate, currentDate) {
+        var totalStock = 0
+        for (const stock of this.holdings) {
+            totalStock += stock.quantity
+        }
+        const convertedStocks = Math.floor(totalStock/splitRatio)
+        this.holdings = []
+        this.decreaseInvested(eval(totalStock*eval(this.stockData[previousDate].markPrice)))
+        this.increaseCash(eval(totalStock*eval(this.stockData[previousDate].markPrice)))
+        const currentData = this.stockData[currentDate]
+        this.buyStock(new Stock(this.symbol, currentData, convertedStocks))
 
 
     }

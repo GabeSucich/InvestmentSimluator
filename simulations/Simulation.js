@@ -116,11 +116,13 @@ class Simulation {
         this.currentDate = this.calender.getNextDate()
         while (this.currentDate) {
 
-            this.updatePortfolio()
-
             if (this.previousDate) {
                 this.checkForSplits()
             }
+            
+            this.updatePortfolio()
+
+
 
 
             var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
@@ -139,8 +141,8 @@ class Simulation {
 
         var currentPrice = eval(this.stockData[this.currentDate].markPrice)
         var previousPrice = eval(this.stockData[this.previousDate].markPrice)
-        var intraDayRatio = currentPrice/previousPrice
-        
+        var intraDayRatio = currentPrice / previousPrice
+
         if (intraDayRatio >= 1.8) {
             console.log("ReverseSplit")
             this.handleReverseSplit(currentPrice, previousPrice)
@@ -162,12 +164,12 @@ class Simulation {
         const splitRatio = (previousPrice / currentPrice).toFixed()
 
         this.portfolio.adjustForSplit(splitRatio, this.currentDate)
-        
+
     }
 
     handleReverseSplit(currentPrice, previousPrice) {
-        const splitRatio = (currentPrice/previousPrice).toFixed()
-        this.portfolio.adjustForReverseSplit(splitRatio, this.previousDate)
+        const splitRatio = (currentPrice / previousPrice).toFixed()
+        this.portfolio.adjustForReverseSplit(splitRatio, this.previousDate, this.currentDate)
     }
 
     processSuggestions(strategySuggestions) {
