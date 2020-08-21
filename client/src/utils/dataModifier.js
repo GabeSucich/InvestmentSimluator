@@ -1,17 +1,21 @@
-function decrease5Percent(simulations) {
-    // for (const simulation of simulations) {
-        for (const dataPoint of simulations[1].portfolioHistory) {
+function decreasePercent(simulations, percentArr) {
+    console.log(simulations)
+    for (const index in simulations) {
+        console.log(index)
+        const simulation = simulations[index]
+        for (const dataPoint of simulation.portfolioHistory) {
             var value = eval(dataPoint.totalValue)
-            var newValue = value * 0.87;
+            var newValue = value * percentArr[index];
             dataPoint.totalValue = newValue;
         }
-        simulations[1].totalValue = simulations[1].portfolioHistory[simulations[1].portfolioHistory.length - 1].totalValue
-        return simulations
-    // }
+        simulation.finalValue = simulation.portfolioHistory[simulation.portfolioHistory.length - 1].totalValue
+       
+    }
+    return simulations
 }
 
 const modifiers = {
-    "decrease5Percent": decrease5Percent
+    "decreasePercent": decreasePercent
 }
 
 export default modifiers

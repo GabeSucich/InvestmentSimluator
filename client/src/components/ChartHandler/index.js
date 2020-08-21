@@ -24,7 +24,7 @@ export default function ChartHandler(props) {
         // iterates through all other props
         for (const attribute of Object.keys(props)) {
             // excluding sim, labels, children
-            if (attribute !== "simulations" && attribute !== "labels" && attribute !== "func") {
+            if (attribute !== "simulations" && attribute !== "labels" && attribute !== "func" && attribute !== "params") {
                 console.log(attribute)
                 otherAttributes[String(attribute)] = props[attribute][i];
             }
