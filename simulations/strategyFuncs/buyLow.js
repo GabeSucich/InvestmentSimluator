@@ -16,11 +16,14 @@ function buyLow(symbol, portfolio, stockData, currentDate) {
 
    if (priceOnBuy < cashCopy) {
         console.log('strat gonna BUY BOI');
-        Utils.maxStockPurchases(priceOnBuy, cashCopy);
+        // gives back the number of stocks to buy 
+        var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, cashCopy);
+        console.log('buying ' +amtToPurchase+ ' stocks.')
 
-        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, buyDate));
-        cashCopy -= stockData[buyDate]["markPrice"];
+        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, buyDate, amtToPurchase));
     }
+
+return suggestions
 
 }
 
