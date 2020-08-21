@@ -67,7 +67,7 @@ class Portfolio {
         }
 
         else if (quantity === "all" || quantity === stock.quantity) {
-            this.decreaseInvested(stock.quantity*stock.quantity)
+            this.decreaseInvested(stock.quantity*stock.markPrice)
             this.holdings = this.holdings.filter(holding => holding !== stock)
             this.increaseCash(stock.markPrice*stock.quantity)
         }

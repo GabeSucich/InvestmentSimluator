@@ -4,7 +4,7 @@ import ChartHandler from "../../components/ChartHandler"
 
 export default function DataHandler(props) {
 
-    const newSimulations = dataModifiers[props.func](props.simulations)
+    const newSimulations = dataModifiers[props.func](props.simulations, ...props.params)
     
     return (
         <div>
