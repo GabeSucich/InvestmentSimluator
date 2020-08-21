@@ -20,7 +20,7 @@ function buyLow(investmentAmt, symbol, portfolio, stockData, currentDate) {
         var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, investmentAmt);
         console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
 
-        suggestions.push(Suggestion.createBuySuggestion(symbol , stockData, buyDate, quantity=parseInt(amtToPurchase)));
+        suggestions.push(Suggestion.createBuySuggestion(symbol , stockData, buyDate, amtToPurchase));
     }
 return suggestions
 

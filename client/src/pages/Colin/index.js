@@ -9,6 +9,7 @@ export default function Colin() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+      API.findBuyDate()
             API.runMultipleSimulations([
             ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", [60000]],
             ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
