@@ -192,12 +192,12 @@ class Simulation {
 
     // Instantiate a new stock to buy for each suggestion
     handleBuy(suggestion) {
-        this.portfolio.buyStock(suggestion.stock)
+        this.portfolio.buyStock(suggestion.stock, suggestion.quantity)
     }
 
     // Sell a stock if suggested
     handleSell(suggestion) {
-        this.portfolio.sellStock(suggestion.stock)
+        this.portfolio.sellStock(suggestion.stock, suggestion.quantity)
     }
 
 }

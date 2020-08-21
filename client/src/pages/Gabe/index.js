@@ -9,12 +9,12 @@ export default function Sam() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        API.getActionDates(100, "2000-08-25", "2020-02-14", "F")
+        API.getActionDates(100, "2000-08-25", "2020-02-14", "ACB")
       .then(actionDates => {
           console.log(actionDates)
         API.runMultipleSimulations([
-            ["F", "2000-08-25", "2020-02-14", 51000, "buyAndWait", []],
-            ["F", "2000-08-25", "2020-02-14", 1000, "monthlyInvestment", [1000, actionDates]]
+            ["ACB", "2000-08-25", "2020-02-14", 510, "buyAndWait", []],
+            ["ACB", "2000-08-25", "2020-02-14", 10, "monthlyInvestment", [10, actionDates]]
         ])
             .then(res => {
                 console.log(res)

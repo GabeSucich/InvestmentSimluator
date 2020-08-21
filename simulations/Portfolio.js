@@ -59,16 +59,29 @@ class Portfolio {
     }
 
     // This function takes in a stock object in the portfolio.holdings and sells it
-    sellStock(stock) {
+    sellStock(stock, quantity="all") {
 
         if (!this.holdings.includes(stock)) {
             console.log("Stock cannot be sold if it is not owned")
             return
         }
 
-        this.decreaseInvested(stock.markPrice)
-        this.holdings = this.holdings.filter(holding => holding !== stock)
-        this.increaseCash(stock.markPrice)
+        else if (quantity === "all" || quantity === stock.quantity) {
+            this.decreaseInvested(stock.quantity*stock.quantity)
+            this.holdings = this.holdings.filter(holding => holding !== stock)
+            this.increaseCash(stock.markPrice*stock.quantity)
+        }
+
+        else {
+            if (quantity > stock.quantity) {
+                console.log("Cannot sell more stock than you have")
+                return
+            }
+            this.decreaseInvested(quantity*stock.markPrice)
+            stock.quantity -= quantity
+            this.increaseCash(quantity*stock.markPrice)
+        }        
+        
     }
 
     // This function takes in a newly instantiated stock object and "buys" it
@@ -78,8 +91,8 @@ class Portfolio {
             return
         }
         this.holdings.push(stock)
-        this.increaseInvested(stock.markPrice)
-        this.decreaseCash(stock.markPrice)
+        this.increaseInvested(stock.markPrice*stock.quantity)
+        this.decreaseCash(stock.markPrice*stock.quantity)
     }
 
 
