@@ -51,7 +51,23 @@ const API = {
             }
         }
         return gatherData();
-    }
+    },
+
+    findBuyDate(startDate, endDate, symbol) {
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/getBuyDate",
+            data: {
+                symbol: symbol,
+                startDate: startDate,
+                endDate: endDate,
+             
+            }
+        }).then(res => {
+            return res.data
+        })
+    },
+
 }
 
 export default API
