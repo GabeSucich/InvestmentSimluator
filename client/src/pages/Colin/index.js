@@ -10,8 +10,7 @@ export default function Colin() {
 
     useEffect(() => {
             API.runMultipleSimulations([
-            // ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", []],
-            ["GE", "2019-08-25", "2020-02-14", 60000, "buyAndWait", []]
+            ["ACB", "2019-08-25", "2020-02-14", 60000, "buyLow", []]
             ])
             .then(res => {
                 console.log(res)
