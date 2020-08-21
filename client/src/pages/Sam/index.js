@@ -32,12 +32,12 @@ export default function Sam() {
 
 
   useEffect(() => {
-    API.getActionDates(100, "2000-08-25", "2020-02-14", "GE")
+    API.getActionDates(100, "2000-08-25", "2020-02-14", "TWTR")
       .then(actionDates => {
         console.log(actionDates)
         API.runMultipleSimulations([
-          ["GE", "2000-08-25", "2020-02-14", 1000, "monthlyInvestment", [1000, actionDates]],
-          ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
+          ["TWTR", "2000-08-25", "2020-02-14", 1000, "monthlyInvestment", [1000, actionDates]],
+          ["TWTR", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
         ])
           .then(res => {
             console.log(res)
