@@ -2,17 +2,14 @@ const Suggestion = require("./utils/Suggestion");
 const Utils = require("./utils/Utils");
 
 // finds 5% dip and buys with all money 
-function buyLow(investmentAmt, symbol, portfolio, stockData, currentDate) {
-
-    console.log('strat investAmt = ' + investmentAmt)
-    const suggestions = []
-    const buyDate = Utils.findBuyDate(stockData);
+function buyLow(investmentAmt, buyDate, priceOnBuy, symbol, portfolio, stockData, currentDate) {
+    // console library.
+    console.log('buyLow running');
+    console.log('strat investAmt = ' + investmentAmt);
     console.log("buyDate on strat = " + buyDate);
-    // var cashCopy = portfolio.getCash;
-    console.log('strat cash copy = ' + cashCopy);
+    console.log("priceOnBuy on strat = " + priceOnBuy);
 
-    var priceOnBuy = stockData[buyDate]["markPrice"];
-    console.log("priceOnBuy = " + priceOnBuy);
+    const suggestions = []
 
 
    if (priceOnBuy < investmentAmt) {

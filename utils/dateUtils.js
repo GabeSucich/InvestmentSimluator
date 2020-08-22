@@ -159,8 +159,8 @@ const DateUtils = {
 
 
                     // once it finds the first dip date, stop searching
-                    console.log("buy date = " + date);
-                    return date;
+                    console.log("buy date Utils = " + date);
+                    return [date, buyPrice];
                 }
             }
         }

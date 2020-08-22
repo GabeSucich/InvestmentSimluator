@@ -10,18 +10,21 @@ export default function Colin() {
 
     useEffect(() => {
       API.findBuyDate("2010-08-21", "2020-02-14", "TSLA")
-      // chcek this. 
-        .then(res => {console.log(res)})
-            // API.runMultipleSimulations([
-            // ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", [60000]],
-            // ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
+      // check this. 
+        .then(res => {
+          console.log("buyDate = " + res[0]);
+          console.log("buyPrice = " + res[1]);
+           API.runMultipleSimulations([
+             ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", [60000, res[0], res[1]]],
+             ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
             
-            // ])
-            // .then(res => {
-            //     console.log(res)
-            //     setData([...data, ...res])
-            // })
-       
+             ])
+             .then(res => {
+              console.log(res)
+                setData([...data, ...res])
+             })
+        })
+
     }, [])
 
   return (
