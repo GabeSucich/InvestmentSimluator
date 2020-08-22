@@ -13,11 +13,11 @@ export default function Colin() {
       // check this. 
         .then(res => {
           console.log("buyDate = " + res[0]);
-          console.log("buyPrice = " + res[1]);
+          console.log("buyPrice = " + parseInt(res[1]));
            API.runMultipleSimulations([
-             ["GE", "2019-08-25", "2020-02-14", 60000, "buyLow", [60000, res[0], res[1]]],
-             ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
-            
+             ["GE", res[0], "2020-02-14", 60000, "buyLow", [60000, res[0], parseInt(res[1])]],
+             ["GE", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []],
+    
              ])
              .then(res => {
               console.log(res)

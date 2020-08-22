@@ -15,9 +15,9 @@ function buyLow(investmentAmt, buyDate, priceOnBuy, symbol, portfolio, stockData
    if (priceOnBuy < investmentAmt) {
         // gives back the number of stocks to buy 
         var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, investmentAmt);
-        // console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
+        console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
 
-        suggestions.push(Suggestion.createBuySuggestion(symbol , stockData, buyDate, amtToPurchase));
+        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, buyDate, amtToPurchase));
     }
 return suggestions
 
