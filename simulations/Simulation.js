@@ -94,9 +94,6 @@ class Simulation {
             
             this.updatePortfolio()
 
-
-
-
             var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
             this.processSuggestions(strategySuggestions)
 
@@ -149,7 +146,10 @@ class Simulation {
             for (const suggestion of strategySuggestions) {
 
                 // If the strategy function is suggesting a buy
-                if (suggestion.action === "buy") {
+                if (!suggestion) {
+                    continue
+                }
+                else if (suggestion.action === "buy") {
                     this.handleBuy(suggestion)
                 }
 
