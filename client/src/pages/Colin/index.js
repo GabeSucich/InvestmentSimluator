@@ -9,14 +9,14 @@ export default function Colin() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-      API.findBuyDate("2010-08-21", "2020-02-14", "TWTR", 8)
+      API.findBuyDate("2010-08-21", "2020-02-14", "TWTR", 60)
       // check this. 
         .then(res => {
           console.log("buyDate = " + res[0]);
           console.log("buyPrice = " + parseInt(res[1]));
            API.runMultipleSimulations([
              ["TWTR", "2010-08-21", "2020-02-14", 60000, "buyAndWait", []],
-             ["TWTR", res[0], "2020-02-14", 60000, "buyLow", [60000, res[0], parseInt(res[1])]],
+             ["TWTR", "2010-08-21", "2020-02-14", 60000, "buyLow", [res[0], parseInt(res[1])]],
     
              ])
              .then(res => {
