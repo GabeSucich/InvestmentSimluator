@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Axios from "axios"
 import ChartHandler from "../../components/ChartHandler"
+import {defaults} from "react-chartjs-2"
 import API from "../../utils/API"
 import DataHandler from "../../components/DataHandler"
 
 
-export default function Sam() {
+export default function Gabe() {
+
+    defaults.global.animation = {
+
+        easing: "easeOutBounce"
+    }
+
+    const options = {
+        scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 20,
+                }
+            }]
+        },
+
+
+    }
 
     const [data, setData] = useState([]);
 
@@ -26,10 +45,12 @@ export default function Sam() {
             })
     })}, [])
 
+    
+
 
     return (
         <div>
-            {data.length > 0 ? <DataHandler func={"decreasePercent"} params={[[1, .75, .60, .45]]} simulations={data} labels={["Florida", "Wyoming", "California", "Sweden"]} borderColor={["#8A2BE2", "Red", "Green", "Blue"]} fill={[false, false, false, false]} pointRadius={[0,0, 0, 0]} /> : "Waiting for data"}
+            {data.length > 0 ? <DataHandler func={"decreasePercent"} params={[[1, .75, .60, .45]]} simulations={data} labels={["Florida", "Wyoming", "California", "Sweden"]} borderColor={["#8A2BE2", "Red", "Green", "Blue"]} fill={[false, false, false, false]} pointRadius={[0,0, 0, 0]} options={options} /> : "Waiting for data"}
         </div>
     )
 

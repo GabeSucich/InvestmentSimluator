@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Sam from "./pages/Sam"
 import Joel from "./pages/Joel"
 import Colin from './pages/Colin'
+import Gabe from "./pages/Gabe"
+import TaxEffect from "./pages/TaxExample"
+import Loader from "./components/Loader"
 import "./App.css"
-// import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css'
 
 function App() {
 
@@ -12,8 +15,11 @@ function App() {
     <div>
     {/* <Gabe/> */}
     {/* <Colin/> */}
-    <Sam/>
-  
+    {/* <Sam/> */}
+
+    <TaxEffect/>
+
+    {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
 
   )

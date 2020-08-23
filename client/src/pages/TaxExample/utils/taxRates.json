@@ -1,0 +1,206 @@
+[
+	{
+		"region": "California",
+		"tax": 13.30
+	},
+	{
+		"region": "Hawaii",
+		"tax": 11.00
+	},
+	{
+		"region": "New Jersey",
+		"tax": 10.75
+	},
+	{
+		"region": "Oregon",
+		"tax": 9.90
+	},
+	{
+		"region": "Minnesota",
+		"tax": 9.85
+	},
+	{
+		"region": "Washington D.C.",
+		"tax": 8.95
+	},
+	{
+		"region": "New York",
+		"tax": 8.82
+	},
+	{
+		"region": "Vermont",
+		"tax": 8.75
+	},
+	{
+		"region": "Iowa",
+		"tax": 8.53
+	},
+	{
+		"region": "Wisconsin",
+		"tax": 7.65
+	},
+	{
+		"region": "Maine",
+		"tax": 7.15
+	},
+	{
+		"region": "South Carolina",
+		"tax": 7.00
+	},
+	{
+		"region": "Connecticut",
+		"tax": 6.99
+	},
+	{
+		"region": "Idaho",
+		"tax": 6.93
+	},
+	{
+		"region": "Montana",
+		"tax": 6.90
+	},
+	{
+		"region": "Arkansas",
+		"tax": 6.90
+	},
+	{
+		"region": "Nebraska",
+		"tax": 6.84
+	},
+	{
+		"region": "Delaware",
+		"tax": 6.60
+	},
+	{
+		"region": "West Virginia",
+		"tax": 6.50
+	},
+	{
+		"region": "Louisiana",
+		"tax": 6.00
+	},
+	{
+		"region": "Rhode Island",
+		"tax": 5.99
+	},
+	{
+		"region": "Georgia",
+		"tax": 5.75
+	},
+	{
+		"region": "Maryland",
+		"tax": 5.75
+	},
+	{
+		"region": "Virginia",
+		"tax": 5.75
+	},
+	{
+		"region": "Kansas",
+		"tax": 5.70
+	},
+	{
+		"region": "Missouri",
+		"tax": 5.40
+	},
+	{
+		"region": "North Carolina",
+		"tax": 5.25
+	},
+	{
+		"region": "Alabama",
+		"tax": 5.00
+	},
+	{
+		"region": "Kentucky",
+		"tax": 5.00
+	},
+	{
+		"region": "Massachusetts",
+		"tax": 5.00
+	},
+	{
+		"region": "Mississippi",
+		"tax": 5.00
+	},
+	{
+		"region": "Oklahoma",
+		"tax": 5.00
+	},
+	{
+		"region": "Illinois",
+		"tax": 4.95
+	},
+	{
+		"region": "Utah",
+		"tax": 4.95
+	},
+	{
+		"region": "New Mexico",
+		"tax": 4.90
+	},
+	{
+		"region": "Ohio",
+		"tax": 4.80
+	},
+	{
+		"region": "Colorado",
+		"tax": 4.63
+	},
+	{
+		"region": "Arizona",
+		"tax": 4.50
+	},
+	{
+		"region": "Michigan",
+		"tax": 4.25
+	},
+	{
+		"region": "Indiana",
+		"tax": 3.23
+	},
+	{
+		"region": "Pennsylvania",
+		"tax": 3.07
+	},
+	{
+		"region": "North Dakota",
+		"tax": 2.90
+	},
+	{
+		"region": "Alaska",
+		"tax": 0
+	},
+	{
+		"region": "Florida",
+		"tax": 0
+	},
+	{
+		"region": "Nevada",
+		"tax": 0
+	},
+	{
+		"region": "New Hampshire",
+		"tax": 0
+	},
+	{
+		"region": "South Dakota",
+		"tax": 0
+	},
+	{
+		"region": "Tennessee",
+		"tax": 0
+	},
+	{
+		"region": "Texas",
+		"tax": 0
+	},
+	{
+		"region": "Washington",
+		"tax": 0
+	},
+	{
+		"region": "Wyoming",
+		"tax": 0
+	}
+]
