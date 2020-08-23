@@ -2,7 +2,6 @@ const Stock = require("../../Stock")
 
 const Suggestion = {
     createBuySuggestion(symbol, stockData, currentDate, quantity=1) {
-        // console.log(stockData[currentDate])
         if (quantity < 1){
             return 
         }
