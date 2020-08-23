@@ -54,7 +54,6 @@ const API = {
     },
 
     findBuyDate(startDate, endDate, symbol, percent) {
-        console.log("API percente = " + percent);
         return Axios({
             method: "POST",
             url: "/api/simulation/getBuyDate",

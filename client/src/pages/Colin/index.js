@@ -9,7 +9,7 @@ export default function Colin() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-      API.findBuyDate("2010-08-21", "2020-02-14", "TWTR", 7)
+      API.findBuyDate("2010-08-21", "2020-02-14", "TWTR", 8)
       // check this. 
         .then(res => {
           console.log("buyDate = " + res[0]);

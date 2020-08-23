@@ -133,6 +133,7 @@ const DateUtils = {
         return actionDates;
     },
 
+    // takes in an integer (5) and returns the decimal equivalent subtracted from 100% (.95)
     calcPercentChange(percent) {
     var firstStep = 100 - percent;
     var secondStep = firstStep * 0.01;
@@ -148,7 +149,7 @@ const DateUtils = {
         const dateArr = Object.keys(stockData);
 
        var percentOf = this.calcPercentChange(percent);
-       console.log('percentOf dateUtils = ' + percentOf);
+    //    console.log('percentOf dateUtils = ' + percentOf);
 
         // iterate through dates
         for (const date of dateArr) {
