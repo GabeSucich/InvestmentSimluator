@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Axios from "axios"
-import ChartHandler from "../../components/ChartHandler"
-import DataHandler from "../../components/DataHandler"
+import ChartHandler from "../../chartComponents/ChartHandler"
+import DataHandler from "../../chartComponents/DataHandler"
 import API from "../../utils/API"
 
 export default function Joel () {

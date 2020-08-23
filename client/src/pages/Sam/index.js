@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from "axios"
-import ChartHandler from "../../components/ChartHandler"
+import ChartHandler from "../../chartComponents/ChartHandler"
 import API from "../../utils/API"
 
 
