@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactLoading from "react-loading"
+import "./style.css"
 
 export default function Loader(props) {
 
 
     return (
-        <div className="center-align">
-            <ReactLoading {...props} color={"green"} className="center-align"/>
+        <div>
+            <ReactLoading {...props} color={"green"} className={"svg-center " + props.className}/>
             <p>Running Simulations ...</p>
         </div>
         

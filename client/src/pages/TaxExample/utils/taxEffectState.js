@@ -6,16 +6,16 @@ const TaxEffectContext = createContext()
 const reducer = (state, action) => {
     switch (action.type) {
         case SELECT_REGION:
-            const sameTax = state.currentRegions.filter(region => region.tax === action.region.taxRate)
+            const sameTax = state.currentRegions.filter(region => region.tax == action.region.tax)
             if (state.currentRegions.includes(action.region)) {
                 const newRegions = state.currentRegions.filter(region => region !== action.region)
                 return {...state, currentRegions: newRegions}
             }
-            else if (state.currentRegions.length >= 4) {
-                return {...state, currentRegions: [...state.currentRegions.slice(1), action.region]}
-            }
             else if (sameTax.length > 0) {
                 return {...state, currentRegions: [...state.currentRegions.filter(region => region !== sameTax[0]), action.region]}
+            }
+            else if (state.currentRegions.length >= 4) {
+                return {...state, currentRegions: [...state.currentRegions.slice(1), action.region]}
             }
             else {
                 return {...state, currentRegions: [...state.currentRegions, action.region]}

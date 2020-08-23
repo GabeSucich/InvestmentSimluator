@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from "semantic-ui-react"
 
-export default function AnimatedButton(props) {
+export function AnimatedButton(props) {
 
     var animation = props.animation
     const hiddenContent = props.hiddenContent
@@ -24,6 +24,4 @@ export default function AnimatedButton(props) {
             </Button>
         )
     }
-
-
 }

@@ -1,16 +1,18 @@
 import React from 'react';
 import TaxSimulationDisplay from "./components/TaxSimulationDisplay"
-import {TaxEffextProvider} from "./utils/taxEffectState"
+import { TaxEffextProvider } from "./utils/taxEffectState"
 import RegionButtons from "./components/RegionButtons"
-
+import { AlignedContainer } from "../../SemanticUI/Containers"
 
 export default function TaxEffect() {
 
     return (
         <div>
             <TaxEffextProvider>
-                <RegionButtons/>
-                <TaxSimulationDisplay/>
+                <AlignedContainer textAlign="justified">
+                    <RegionButtons />
+                    <TaxSimulationDisplay />
+                </AlignedContainer>
             </TaxEffextProvider>
         </div>
     )

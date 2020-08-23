@@ -1,11 +1,12 @@
 import React from 'react'
-import AnimatedButton from "../../../../SemanticUI/AnimatedButton"
+import { AnimatedButton } from "../../../../SemanticUI/Buttons"
 import taxRates from "../../utils/taxRates.json"
-import {useTaxEffectContext} from "../../utils/taxEffectState"
-import {SELECT_REGION, SET_DATA} from "../../utils/action"
+import { useTaxEffectContext } from "../../utils/taxEffectState"
+import { SELECT_REGION } from "../../utils/action"
+import { Grid } from "semantic-ui-react"
 import "./style.css"
 
-function RegionButton({info}) {
+function RegionButton({ info }) {
 
     const region = info.region
     const taxRate = info.tax
@@ -27,19 +28,23 @@ function RegionButton({info}) {
 
 
     return (
-        
-        <AnimatedButton className={state.currentRegions.includes(info) ? "selected" : ""} onClick = {() => dispatch({type: SELECT_REGION, region: info})} animation="fade" hiddenContent = {formatTaxRate(taxRate) + "%"} visibleContent = {region} />
+
+        <AnimatedButton className={state.currentRegions.includes(info) ? "selected" : ""} onClick={() => dispatch({ type: SELECT_REGION, region: info })} animation="fade" hiddenContent={formatTaxRate(taxRate) + "%"} visibleContent={region} />
     )
 }
 
 export default function RegionButtonDiv() {
 
     return (
-        <div>
-        {taxRates.map((info, index)=> {
-            return <RegionButton key={index} info={info}/>
-        })}
-        </div>
+        <Grid centered>
+            <Grid.Row textAlign="centered">
+                {taxRates.map((info, index) => {
+                    return (
+                        <RegionButton key={index} info={info} className="region" />
+                    )
+                })}
+            </Grid.Row>
+        </Grid>
     )
 
 }
