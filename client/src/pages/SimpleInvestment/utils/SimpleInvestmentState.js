@@ -1,11 +1,13 @@
 import React, {createContext, useContext, useReducer} from "react"
-import {SELECT_STOCK, SELECT_START_DATE, SELECT_END_DATE, SYMBOL_LOADING, START_DATE_LOADING, SET_INVESTMENT, END_DATA_LOADING, INVESTMENT_LOADING, SET_DATA, CLEAR_DATA} from "./action"
+import {NEW_ACTIVE_FORM, SELECT_STOCK, SELECT_START_DATE, SELECT_END_DATE, SYMBOL_LOADING, START_DATE_LOADING, SET_INVESTMENT, END_DATA_LOADING, INVESTMENT_LOADING, SET_HISTORY, CLEAR_DATA, SET_HISTORY, LOAD_SIMULATION, SET_SIMULATION_DATA} from "./action"
 
 const SimpleInvestmentContext = createContext()
 const {Provider} = SimpleInvestmentContext
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case NEW_ACTIVE_FORM:
+            return {...state, activeForm: action.activeForm}
         case SELECT_STOCK:
             return {...state, symbol: action.symbol, symbolLoading: false}
             break
@@ -19,7 +21,7 @@ const reducer = (state, action) => {
             return {...state, startDateLoading: true}
             break
         case SELECT_END_DATE:
-            return {...state, endDate: action.endDate, endDateLoading: fals}
+            return {...state, endDate: action.endDate, endDateLoading: false}
             break
         case END_DATA_LOADING:
             return {...state, endDateLoading: true}
@@ -29,9 +31,11 @@ const reducer = (state, action) => {
         case INVESTMENT_LOADING:
             return {...state, endDateLoading: false, investmentLoading: false}
             break
-        case SET_DATA:
-            return {...state, data: action.data}
+        case SET_HISTORY:
+            return {...state, data: action.history}
             break
+        case LOAD_SIMULATION:
+            return
         case CLEAR_DATA: 
             return {
                 symbol: null,
@@ -42,7 +46,9 @@ const reducer = (state, action) => {
                 startDateLoading: false,
                 endDateLoading: false,
                 investmentLoading: false,
-                data: null,
+                history: null,
+                simulationStarted: false,
+                simulationData: null
                 
             }
             break
@@ -50,13 +56,19 @@ const reducer = (state, action) => {
 }
 
 function SimpleInvestmentProvider({value=[], ...props}) {
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, dispatch] = useReducer(reducer, { 
+        activeForm: 0,
         symbol: null,
         startDate: null, 
         endDate: null,
-        initialInvestment: null,
-        loading: false,
+        investment: null,
+        symbolLoading: false,
+        startDateLoading: false,
+        endDateLoading: false,
+        investmentLoading: false,
+       
         data: null,
+        
     })
 
     return <Provider value={[state, dispatch]} {...props}/>
