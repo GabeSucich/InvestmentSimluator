@@ -176,10 +176,7 @@ const DateUtils = {
             }
         }
         return endDate;
-    }
-
-
-
+    },
 }
 
 

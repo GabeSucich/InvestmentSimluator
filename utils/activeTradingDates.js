@@ -1,6 +1,8 @@
+const ActiveUtils = require("../utils/dateUtils");
+
 const ActiveDateUtils = {
 
-    activeTrading(stockHistory) {
+    activeTrading(stockData, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
         ​
         var buying = true
         const buyDates = []
@@ -8,32 +10,37 @@ const ActiveDateUtils = {
         var currentMax = null;
         var currentMin = null;
         var initalPrice = null;
-        var relevantStockHistory = Object.keys(stockHistory)
-        const totalLenth = relevantStockHistory.length​
-        while (relevantStockHistory.length > 0) {
+
+        // returns an array of all dates in range
+        var dateArr = Object.keys(stockData);
+        const totalLenth = dateArr.length​;
+
+        // goes through all dates to buy or sell
+        while (dateArr.length > 0) {
             if (buying) {
-                nextBuyDate(relevantStockHistory)
+                nextBuyDate(dateArr)
 
             } else {
-                findSellDate(relevantStockHistory)
+                findSellDate(dateArr)
             }
         }​​​
-        function nextBuyDate(relevantStockHistory) {
-            var date1 = findBuyDate(relevantStockHistory, priceDecrease)
-            var date2 = findRunawayBuyDate(relevantStockHistory, priceIncrease)
+
+        function nextBuyDate(dateArr) {
+            var date1 = ActiveUtils.findBuyDateLow(stockData, dateArr, priceDecrease)
+            var date2 = findRunawayBuyDate(stockData, dateArr, priceIncrease)
 
             if (date1 < date2) {
                 buyDates.push(date1)
-                relevantStockHistory = fastForwardHistory(relevantStockHistory, date1)
+                dateArr = fastForwardHistory(dateArr, date1)
                 buying = false
             }​
             else {
                 buyDates.push(date2)
-                relevantStockHistory = fastForwardHistory(relevantStockHistory, date2)
+                dateArr = fastForwardHistory(dateArr, date2)
                 buying = false
             }​
         }​
-        function findSellDate(relevantStockHistory) {
+        function findSellDate(dateArr) {
             ​}​
         return {
             sellDates: sellDates,
