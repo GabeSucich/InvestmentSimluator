@@ -5,6 +5,7 @@ import Joel from "./pages/Joel"
 import Colin from './pages/Colin'
 import Gabe from "./pages/Gabe"
 import TaxEffect from "./pages/TaxExample"
+import SimpleInvestment from "./pages/SimpleInvestment"
 import Loader from "./components/Loader"
 import "./App.css"
 import 'semantic-ui-css/semantic.min.css'
@@ -17,7 +18,8 @@ function App() {
     {/* <Colin/> */}
     {/* <Sam/> */}
 
-    <TaxEffect/>
+    {/* <TaxEffect/> */}
+    <SimpleInvestment/>
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
