@@ -89,6 +89,21 @@ const API = {
         })
     },
 
+    findVolumeDates(symbol, startDate, endDate, percent) {
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/getVolumeDates",
+            data: {
+                symbol: symbol,
+                startDate: startDate,
+                endDate: endDate,
+                percent: percent
+            }
+        }).then(res => {
+            return res.data
+        })
+    }
+
 }
 
 export default API
