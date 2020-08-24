@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Sam from "./pages/Sam"
 import Joel from "./pages/Joel"
+import Volume from "./pages/Volume"
 import Colin from './pages/Colin'
 import Gabe from "./pages/Gabe"
 import TaxEffect from "./pages/TaxExample"
@@ -17,9 +18,11 @@ function App() {
     {/* <Gabe/> */}
     {/* <Colin/> */}
     {/* <Sam/> */}
+    {/* <Joel/> */}
+    <Volume/>
 
     {/* <TaxEffect/> */}
-    <SimpleInvestment/>
+    {/* <SimpleInvestment/> */}
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
