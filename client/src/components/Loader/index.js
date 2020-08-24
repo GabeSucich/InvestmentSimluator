@@ -4,15 +4,10 @@ import "./style.css"
 
 export default function Loader(props) {
 
-
     return (
         <div>
-            <ReactLoading {...props} color={"green"} className={"svg-center " + props.className}/>
+            <ReactLoading color={"green"} type={"bubbles"} {...props}  className={"svg-center " + props.className}/>
             <p>Running Simulations ...</p>
         </div>
-        
     )
-
-    
-
 }
