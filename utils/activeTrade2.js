@@ -1,10 +1,11 @@
 const DateUtils = require("../utils/dateUtils")
 
 module.exports = function activeTrading(stockData, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
+        console.log("test");
         var dateArr = Object.keys(stockData);
         var buying = true;
         const buyDateArr = [];
-        console.log("test");
+        
         const sellDateArr = [];
         var currentMax = null;
         var currentMin = null;

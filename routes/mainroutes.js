@@ -81,12 +81,19 @@ module.exports = function (app) {
             if(!databaseData) {
                 API.getStockData(symbol)
                 .then(response => { 
+                    console.log("main routes response: " + response);
                     const reversedHistoricals = response.data["Time Series (Daily)"];
                     var historicals = DateUtils.processHistoricals(reversedHistoricals);
                     var boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
                     const resultDates = activeTrading(boundedHistoricals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
                     res.json(resultDates);
                 })
+            } else {
+                console.log("Grabbing from database")
+                const historicals = databaseData.historicals;
+                var boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
+                const resultDates = activeTrading(boundedHistoricals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
+                res.json(resultDate);
             }
         })
     })
