@@ -1,22 +1,27 @@
 const ActiveUtils = {
 
     // takes in an integer (5) and returns the decimal equivalent subtracted from 100% (.95)
-    calcPercentChange(percent) {
+    calcPercentChangeDown(percent) {
         var firstStep = 100 - percent;
         var secondStep = firstStep * 0.01;
         return secondStep;
     },
 
+    calcPercentChangeUp(percent) {
+        var firstStep = 100 + percent;
+        var secondStep = firstStep * 0.01;
+        return secondStep;
+    },
 
-    // function takes in date range determines current high price
-    findBuyDateLow(stockData, dateArr, percentDecrease) {
+     // function takes in date range - returns date to buy when stock value has decreased a specified percentage
+    findDateLow(stockData, dateArr, percentDecrease) {
         console.log("activeUtils percent = " + parseInt(percentDecrease));
         console.log('findBuyDateLow running');
         var highPrice = 0;
         var buyPrice;
         const dateArr = dateArr;
 
-        var percentOf = this.calcPercentChange(percentDecrease);
+        var percentOf = this.calcPercentChangeDown(percentDecrease);
         //    console.log('percentOf dateUtils = ' + percentOf);
 
         // iterate through dates
@@ -45,16 +50,16 @@ const ActiveUtils = {
         return endDate;
     },
 
-      // function takes in date range determines current high price
-      findRunawayBuyDate(stockData, dateArr, priceIncrease) {
+      // function takes in date range - returns date to buy when stock value has increased a specified percentage
+      findDateHigh(stockData, dateArr, priceIncrease) {
         console.log("activeUtils percent = " + parseInt(priceIncrease));
         console.log('findRunawayBuyDate running');
         var highPrice = 0;
         var buyPrice;
         const dateArr = dateArr;
 
-        var percentOf = this.calcPercentChange(priceIncrease);
-        //    console.log('percentOf dateUtils = ' + percentOf);
+        var percentOf = this.calcPercentChangeUp(priceIncrease);
+        // console.log('percentOf dateUtils = ' + percentOf);
 
         // iterate through dates
         for (const date of dateArr) {
