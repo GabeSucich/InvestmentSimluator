@@ -3,6 +3,8 @@ var path = require("path")
 const API = require("../utils/API")
 const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
+const ActiveDateUtils = require('../utils/activeTradingDates');
+const StockHistory = require("../models/StockHistory")
 
 module.exports = function (app) {
 
@@ -69,6 +71,20 @@ module.exports = function (app) {
                 res.json(resultDate);
             }
 
+        })
+    })
+
+    app.post("/api/simulation/activeTrading", (req, res) => {
+        const { startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc } = req.body;
+        Historicals.findHistory(symbol).then(databaseData => {
+            if(!databaseData) {
+                API.getStockData(symbol)
+                .then(response => { 
+                    var historicals = DateUtils.processHistoricals(reversedHistoricals);
+                    const resultDates = ActiveDateUtils.activeTrading(historicals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
+                    res.json(resultDates);
+                })
+            }
         })
     })
 

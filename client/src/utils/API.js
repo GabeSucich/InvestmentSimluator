@@ -69,6 +69,24 @@ const API = {
         })
     },
 
+    runActiveTrading(startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/activeTrading",
+            data: {
+                startDate: startDate,
+                endDate: endDate,
+                symbol: symbol,
+                blPerc: blPerc,
+                bhPerc: bhPerc,
+                slPerc: slPerc,
+                shPerc: shPerc,
+            }
+        }).then(res => {
+            return res.data
+        })
+    },
+
 }
 
 export default API
