@@ -1,18 +1,32 @@
-// const Suggestion = require("./utils/Suggestion")
+const Suggestion = require("./utils/Suggestion");
+// finds 5% dip and buys with all money 
+function activeTrading(res, symbol, portfolio, stockData, currentDate) {
 
-// function activeTrading(/* Place all your strategy-specific arguments first */ , symbol, portfolio, stockData, currentDate) {
-//     // Always have the final four parameters of your function as shown above
+    // console library.
+    // console.log('buyLow running');
+    // console.log('strat investAmt = ' + investmentAmt);
+    // console.log("buyDate on strat = " + buyDate);
+    // console.log("priceOnBuy on strat = " + priceOnBuy);
+    console.log(res.sellDateArr);
+    console.log(res.buyDateArr);
 
-//     var suggestionsArr = []
 
-//     // Work/logic goes here
+    const suggestions = []
 
-//     return suggestionsArr
 
-// }
+//    if (currentDate === buyDate) {
 
-// module.exports = {
+//         // gives back the number of stocks to buy 
+//         var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, portfolio.getCash);
+//         console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
 
-//     "name": /* Place the name of the function here as you will reference it in API calls */ ,
-//     "function": funcName
-// }
+//         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, amtToPurchase));
+//     }
+// return suggestions
+
+}
+
+module.exports = {
+    "name": "activeTrading",
+    "function": activeTrading
+}

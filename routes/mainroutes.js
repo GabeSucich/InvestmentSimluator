@@ -80,6 +80,7 @@ module.exports = function (app) {
             if(!databaseData) {
                 API.getStockData(symbol)
                 .then(response => { 
+                    const reversedHistoricals = response.data["Time Series (Daily)"];
                     var historicals = DateUtils.processHistoricals(reversedHistoricals);
                     const resultDates = ActiveDateUtils.activeTrading(historicals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
                     res.json(resultDates);

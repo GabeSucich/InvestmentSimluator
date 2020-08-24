@@ -5,8 +5,8 @@ const ActiveDateUtils = {
     activeTrading(stockData, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
         ​
         var buying = true
-        const buyDates = []
-        const sellDates = []
+        const buyDateArr = [];
+        const sellDateArr = [];
         var currentMax = null;
         var currentMin = null;
         var initalPrice = null;
@@ -37,13 +37,13 @@ const ActiveDateUtils = {
             var date2NoDash = DateUtils.removeDateDashes(date1)[0];
 
             if (date1NoDash < date2NoDash) {
-                buyDates.push(date1);
+                buyDateArr.push(date1);
                 buyPrice = buyPrice1;
                 dateArr = fastForwardHistory(dateArr, date1);
                 buying = false;
             }​
             else {
-                buyDates.push(date2);
+                buyDateArr.push(date2);
                 buyPrice = buyPrice2;
                 dateArr = fastForwardHistory(dateArr, date2);
                 buying = false;
@@ -56,14 +56,14 @@ const ActiveDateUtils = {
 
             var date1NoDash = DateUtils.removeDateDashes(date1);
             var date2NoDash = DateUtils.removeDateDashes(date1);
-            
+
             if (date1NoDash < date2NoDash) {
-                buyDates.push(date1)
+                sellDateArr.push(date1)
                 dateArr = fastForwardHistory(dateArr, date1)
                 buying = false
             }​
             else {
-                buyDates.push(date2)
+                sellDateArr.push(date2)
                 dateArr = fastForwardHistory(dateArr, date2)
                 buying = false
             }​
@@ -71,11 +71,10 @@ const ActiveDateUtils = {
             ​
         }​
         return {
-            sellDates: sellDates,
-            buyDates: buyDates
+            buyDateArr: buyDates,
+            sellDateArr: sellDates
         }​
 
-        ​
     }​,
 
     fastForwardHistory(stockHistory, date) {
@@ -85,8 +84,8 @@ const ActiveDateUtils = {
 
 
 
-     // takes in an integer (5) and returns the decimal equivalent subtracted from 100% (.95)
-     calcPercentChangeDown(percent) {
+    // takes in an integer (5) and returns the decimal equivalent subtracted from 100% (.95)
+    calcPercentChangeDown(percent) {
         var firstStep = 100 - percent;
         var secondStep = firstStep * 0.01;
         return secondStep;
@@ -107,11 +106,11 @@ const ActiveDateUtils = {
         // 100 * 0.8 = 80;
         var sellPrice = (highPrice * percentOf).toFixed(2);
         return sellPrice;
-    
+
     },
 
-     // function takes in date range - returns date to buy when stock value has decreased a specified percentage
-     findDateBuyLow(stockData, dateArr, percentDecrease) {
+    // function takes in date range - returns date to buy when stock value has decreased a specified percentage
+    findDateBuyLow(stockData, dateArr, percentDecrease) {
         console.log("activeTradingDates percent = " + parseInt(percentDecrease));
         console.log('findBuyDateLow running');
         var highPrice = 0;
@@ -147,8 +146,8 @@ const ActiveDateUtils = {
         return endDate;
     },
 
-      // function takes in date range - returns date to buy when stock value has increased a specified percentage
-      findDateBuyHigh(stockData, dateArr, priceIncrease) {
+    // function takes in date range - returns date to buy when stock value has increased a specified percentage
+    findDateBuyHigh(stockData, dateArr, priceIncrease) {
         console.log("activeTradingDates percent = " + parseInt(priceIncrease));
         console.log('findRunawayBuyDate running');
         var highPrice = 0;
@@ -184,71 +183,71 @@ const ActiveDateUtils = {
         return endDate;
     },
 
-         // function takes in date range - returns date to buy when stock value has decreased a specified percentage
-         findDateSellLow(stockData, dateArr, percentDecrease) {
-            console.log("activeTradingDates percent = " + parseInt(percentDecrease));
-            console.log('findBuyDateLow running');
-            var highPrice = 0;
-            var sellPrice;
-            const dateArr = dateArr;
-    
-            // iterate through dates
-            for (const date of dateArr) {
-    
-                // find the price for each day
-                const currentPrice = eval(stockData[date]["markPrice"]);
-                console.log('currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice);
-    
-                // if sets highPrice and sell Price
-                if (currentPrice > highPrice) {
-                    highPrice = currentPrice;
-                    sellPrice = this.calcSellPrice(highPrice, percentDecrease);
-                }
+    // function takes in date range - returns date to buy when stock value has decreased a specified percentage
+    findDateSellLow(stockData, dateArr, percentDecrease) {
+        console.log("activeTradingDates percent = " + parseInt(percentDecrease));
+        console.log('findBuyDateLow running');
+        var highPrice = 0;
+        var sellPrice;
+        const dateArr = dateArr;
 
-                // if the current price is 5% less than high price - push date
-                if (currentPrice <= sellPrice) {
-                    // once it finds the first dip date, stop searching
-                    console.log("sell date Low = " + date);
-                    return date;
-                }
-    
+        // iterate through dates
+        for (const date of dateArr) {
+
+            // find the price for each day
+            const currentPrice = eval(stockData[date]["markPrice"]);
+            console.log('currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice);
+
+            // if sets highPrice and sell Price
+            if (currentPrice > highPrice) {
+                highPrice = currentPrice;
+                sellPrice = this.calcSellPrice(highPrice, percentDecrease);
             }
-            return endDate;
-        },
 
-        // function takes in date range - returns date to buy when stock value has decreased a specified percentage
-        findDateSellHigh(stockData, dateArr, percentIncrease, buyPrice) {
-            console.log("activeTradingDates percent = " + parseInt(percentIncrease));
-            console.log('findBuyDateLow running');
-            const dateArr = dateArr;
-            var sellPrice;
-    
-            // input 20%, returns 1.20
-            var percentOf = this.calcPercentChangeUp(percentIncrease);
-
-            // 100 * 1.2 = 120 (sell!);
-            var sellPrice = (buyPrice * percentOf).toFixed(2);
-           
-    
-            // iterate through dates
-            for (const date of dateArr) {
-    
-                // find the price for each day
-                const currentPrice = eval(stockData[date]["markPrice"]);
-                console.log('currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice);
-    
-    
-                // if the current price is 5% less than high price - push date
-                if (currentPrice >= sellPrice) {
-
-                    // once it finds the first dip date, stop searching
-                    console.log("sell date Low = " + date);
-                    return date;
-                }
-    
+            // if the current price is 5% less than high price - push date
+            if (currentPrice <= sellPrice) {
+                // once it finds the first dip date, stop searching
+                console.log("sell date Low = " + date);
+                return date;
             }
-            return endDate;
-        },
+
+        }
+        return endDate;
+    },
+
+    // function takes in date range - returns date to buy when stock value has decreased a specified percentage
+    findDateSellHigh(stockData, dateArr, percentIncrease, buyPrice) {
+        console.log("activeTradingDates percent = " + parseInt(percentIncrease));
+        console.log('findBuyDateLow running');
+        const dateArr = dateArr;
+        var sellPrice;
+
+        // input 20%, returns 1.20
+        var percentOf = this.calcPercentChangeUp(percentIncrease);
+
+        // 100 * 1.2 = 120 (sell!);
+        var sellPrice = (buyPrice * percentOf).toFixed(2);
+
+
+        // iterate through dates
+        for (const date of dateArr) {
+
+            // find the price for each day
+            const currentPrice = eval(stockData[date]["markPrice"]);
+            console.log('currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice);
+
+
+            // if the current price is 5% less than high price - push date
+            if (currentPrice >= sellPrice) {
+
+                // once it finds the first dip date, stop searching
+                console.log("sell date Low = " + date);
+                return date;
+            }
+
+        }
+        return endDate;
+    },
 
 }​​​
 
