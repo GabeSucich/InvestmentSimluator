@@ -1,19 +1,20 @@
 import React from 'react'
 import API from "../../utils/API"
+import { Form } from "semantic-ui-react"
+import { useSimpleInvestmentContext } from "./utils/SimpleInvestmentState"
+
 
 export default function SimpleInvestment() {
 
-    API.validateStockData('GUSH').then(isValid => {
-        if (isValid) {
-            console.log("valid")
-        }
-        else {
-            console.log("Invalid")
-        }
+    const [state, dispatch] = useSimpleInvestmentContext()
 
-    })
+
+
     return (
-        <div>Test</div>
+        <Form loading>
+            <Form.Input label='Email' placeholder='joe@schmoe.com' />
+            <Button>Submit</Button>
+        </Form>
     )
 
 }
