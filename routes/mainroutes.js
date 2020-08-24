@@ -3,6 +3,7 @@ var path = require("path")
 const API = require("../utils/API")
 const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
+const volumeTrigger = require("../utils/volumeSearch")
 
 module.exports = function (app) {
 
@@ -66,6 +67,33 @@ module.exports = function (app) {
                 const historicals = databaseData.historicals
                 const resultDates = DateUtils.findIntervalDates(historicals, startDate, endDate, interval)
                 res.json(resultDates)
+            }
+
+        })
+    })
+
+    app.post("/api/simulation/getVolumeDates", (req, res) => {
+        const { symbol, startDate, endDate, percent } = req.body
+        Historicals.findHistory(symbol).then(databaseData => {
+            if (!databaseData) {
+                API.getStockData(symbol)
+                    .then(response => {
+                        const reversedHistoricals = response.data["Time Series (Daily)"]
+                        var unboundedHistoricals = DateUtils.processHistoricals(reversedHistoricals);
+                        const boundedHistoricals = DateUtils.boundHistoricals(unboundedHistoricals, startDate, endDate);
+                        const resultDates = volumeTrigger(boundedHistoricals, eval(percent))
+                        Historicals.createHistory(symbol, unboundedHistoricals).then(data => {
+                            res.json(resultDates);
+                        })
+
+                    })
+            }
+            else {
+                console.log("Grabbing from database")
+                const historicals = databaseData.historicals
+                const boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
+                const resultDates = volumeTrigger(boundedHistoricals, eval(percent));
+                res.json(resultDates);
             }
 
         })
