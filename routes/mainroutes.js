@@ -10,13 +10,38 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "/public/index.html"))
     })
 
+    app.get('/api/stockdata/:symbol', (req, res) => {
+        const symbol = req.params.symbol
+        API.getStockData(symbol).then(response => {
+            if (response.data['Error Message']) {
+                res.json(null)
+            }
+            else {
+                Historicals.findHistory(symbol).then(databaseData => {
+                    if (!(databaseData)) {
+                        var reversedHistoricals = response.data["Time Series (Daily)"]
+                        // Remove the periods from the keys of the historical data. Mongo doesnt like the character "." in object keys.
+                        var historicals = DateUtils.processHistoricals(reversedHistoricals)
+                        Historicals.createHistory(symbol, historicals).then(_ => {
+                            res.json(historicals)
+                        })
+                    }
+                    else {
+                        res.json(databaseData)
+                    }
+                })
+            }
+
+        })
+    })
+
     // This is a basic api call for simulation data. In the request comes the information needed to create a simulation. 
     //The simulation is instantiated and run, and the data is sent back to the client
     app.post('/api/simulation/new', (req, res) => {
         const { symbol, startDate, endDate, investment, strategyFuncName, strategyParams } = req.body
         const simControl = new SimControl(symbol, startDate, endDate, investment, strategyFuncName, strategyParams)
         simControl.runSimulation().then(data => {
-                res.json(simControl.simulationResult)
+            res.json(simControl.simulationResult)
         })
     })
 
@@ -33,7 +58,7 @@ module.exports = function (app) {
                         Historicals.createHistory(symbol, historicals).then(data => {
                             res.json(resultDates);
                         })
-                        
+
                     })
             }
             else {
@@ -59,7 +84,7 @@ module.exports = function (app) {
                         Historicals.createHistory(symbol, historicals).then(data => {
                             res.json(resultDate);
                         })
-                        
+
                     })
             }
             else {
