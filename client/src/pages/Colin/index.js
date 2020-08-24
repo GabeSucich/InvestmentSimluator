@@ -52,7 +52,7 @@ export default function Colin() {
       // check this. 
         .then(res => {
            API.runMultipleSimulations([
-             ["TWTR", "2010-08-21", "2020-02-14", 10000, "activeTrading", res],
+             ["TWTR", "2019-12-11", "2020-02-14", 10000, "activeTrading", res],
              ["TWTR", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []],
     
              ])

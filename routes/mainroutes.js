@@ -93,7 +93,7 @@ module.exports = function (app) {
                 const historicals = databaseData.historicals;
                 var boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
                 const resultDates = activeTrading(boundedHistoricals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
-                res.json(resultDate);
+                res.json(resultDates);
             }
         })
     })
