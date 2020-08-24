@@ -1,0 +1,5 @@
+export const CLEAR_DATA = "CLEAR_DATA"
+export const SELECT_REGION = "SELECT_REGION"
+export const SET_DATA = "SET_DATA"
+export const NEW_DATA = "NEW_DATA"
+export const LOADING = "LOADING"

@@ -1,6 +1,27 @@
 import Axios from "axios"
 
 const API = {
+
+    validateStockData(symbol) {
+
+        return this.getStockData(symbol).then(response => {
+            if (response.data) {
+                return true
+            }
+            else {
+                return false
+            }
+
+        })
+    },
+
+    getStockData(symbol) {
+        return Axios({
+            method: "GET",
+            url: "/api/stockdata/" + symbol
+        })
+    },
+
     getActionDates(interval, startDate, endDate, symbol) {
         return Axios({
             method: "POST",
@@ -51,7 +72,23 @@ const API = {
             }
         }
         return gatherData();
-    }
+    },
+
+    findBuyDate(startDate, endDate, symbol) {
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/getBuyDate",
+            data: {
+                symbol: symbol,
+                startDate: startDate,
+                endDate: endDate,
+
+            }
+        }).then(res => {
+            return res.data
+        })
+    },
+
 }
 
 export default API

@@ -32,9 +32,9 @@ class Simulation {
             if (!databaseData) {
                 return API.getStockData(this.symbol).then(response => {
                     // Parse out the data from the API call
-                    var historicals = response.data["Time Series (Daily)"]
+                    var reversedHistoricals = response.data["Time Series (Daily)"]
                     // Remove the periods from the keys of the historical data. Mongo doesnt like the character "." in object keys.
-                    DateUtils.processHistoricals(historicals)
+                    var historicals = DateUtils.processHistoricals(reversedHistoricals)
                     return Historicals.createHistory(this.symbol, historicals).then(result => {
                         // Add this stock data to our database for the future, and then move on with object construction
                         return this.setBoundedHistory(result.historicals)
@@ -53,38 +53,9 @@ class Simulation {
     // After we get this bounded historical data, it's also going to instantiate the other objects that we need for our simulation
     setBoundedHistory(historicalData) {
 
-        const boundedHistoryArr = []
-
-        // This boolean flag will help us to not iterate over giant portions of unnecessary data after get get the historicals we need
-        var foundTimeInterval = false
-
-        // We are going to iterate through each date in the historical data. If it is within the date interval, we will add it.
-        for (const [date, stockData] of Object.entries(historicalData)) {
-            if (DateUtils.isInRange(this.startDate, this.endDate, date)) {
-                boundedHistoryArr.push({ date: date, data: stockData })
-                foundTimeInterval = true
-            }
-
-            // When we step out of time interval, this statement will break us out of the loop. If we are looking for data between 2010 and 2020,
-            //  this flag will stop us from unnecessary iterating over all the dates between 1999 and 2009 in the historical data.
-            else if (foundTimeInterval) {
-                break
-            }
-        }
-
-        const boundedHistory = {}
-
-        // We read the data from the API call in reverse chronological order. Here, we reverse this order
-        for (var i = boundedHistoryArr.length - 1; i >= 0; i--) {
-            var dataPoint = boundedHistoryArr[i]
-            boundedHistory[dataPoint.date] = dataPoint.data
-        }
-
-
         // The bounded historical data is an attribute on our simulation object
-        this.stockData = boundedHistory
+        this.stockData = DateUtils.boundHistoricals(historicalData, this.startDate, this.endDate)
         this.breakDate = DateUtils.findBreakDate(this.stockData, this.startDate)
-        console.log(this.breakDate)
         // We create a new Portfolio object to keep track of our holdings over time. This portfolio object belongs to the simulation.
         this.portfolio = new Portfolio(this.symbol, this.investment, this.stockData, this.startDate)
         // This calendar object will help us to run through all the relevant dates. It also belongs to the simulation.
@@ -122,9 +93,6 @@ class Simulation {
             }
             
             this.updatePortfolio()
-
-
-
 
             var strategySuggestions = this.strategyFunc(...this.strategyParams, this.symbol, this.portfolio, this.stockData, this.currentDate)
             this.processSuggestions(strategySuggestions)
@@ -178,7 +146,10 @@ class Simulation {
             for (const suggestion of strategySuggestions) {
 
                 // If the strategy function is suggesting a buy
-                if (suggestion.action === "buy") {
+                if (!suggestion) {
+                    continue
+                }
+                else if (suggestion.action === "buy") {
                     this.handleBuy(suggestion)
                 }
 
