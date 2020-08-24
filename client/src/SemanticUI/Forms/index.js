@@ -10,14 +10,6 @@ export function StandardForm(props) {
     )
 }
 
-export function DisabledForm(props) {
-
-    return (
-        <Form disabled {...props}>
-            {props.children}
-        </Form>
-    )
-}
 
 export function  LoadingForm(props) {
 
