@@ -5,10 +5,10 @@ import DataHandler from "../../components/DataHandler"
 import API from "../../utils/API"
 
 export default function volumeTrigger() {
-    API.findVolumeDates("AMZN", "2014-08-07", "2015-08-10", "10")
+    API.findVolumeDates("AMZN", "2014-08-07", "2015-08-30", "10")
         .then(volumeDates => {
             API.runMultipleSimulations([
-                ["AMZN", "2014-08-07", "2015-08-10", 1, "volumeTrigger", [volumeDates]]
+                ["AMZN", "2014-08-07", "2015-08-30", 1, "volumeTrigger", [volumeDates]]
             ])
             .then(res => {
                 console.log(res);

@@ -1,7 +1,8 @@
 const Suggestion = require("./utils/Suggestion")
 
-function volumeTrigger(buyDates, symbol, portfolio, stockData, currentDate) {
-
+function volumeTrigger(actionDates, symbol, portfolio, stockData, currentDate) {
+var buyDates = actionDates.buyDates
+var sellDates = actionDates.sellDates
 //     // Always have the final four parameters of your function as shown above
 
     var suggestionsArr = []
@@ -20,7 +21,10 @@ if (!portfolio.purchased) {
 
 }
 if (buyDates.includes(currentDate)) {
-    console.log(currentDate);
+    console.log("buyDate:" + currentDate);
+}
+if (sellDates.includes(currentDate)) {
+    console.log("sellDate:" + currentDate);
 }
 // console.log(stockData);
 
