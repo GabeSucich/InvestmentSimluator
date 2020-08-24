@@ -70,6 +70,7 @@ const API = {
     },
 
     runActiveTrading(startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
+        console.log('API runActive called');
         return Axios({
             method: "POST",
             url: "/api/simulation/activeTrading",
