@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import "./style.css"
 import API from "../../../../utils/API"
-import DataHandler from "../../../../chartComponents/DataHandler"
+import DataHandler from "../../../../components/DataHandler"
 import ChartOptions from "../../../../utils/ChartOptions"
 import { useTaxEffectContext } from "../../utils/taxEffectState"
 import colors from "../../../../utils/Colors.json"
 import { Button } from "semantic-ui-react"
 import { SET_DATA, CLEAR_DATA, LOADING } from "../../utils/action"
-import Loader from "../../../../chartComponents/Loader"
+import Loader from "../../../../components/Loader"
 import { Grid } from "semantic-ui-react"
 import TaxBar from "../TaxBar"
 

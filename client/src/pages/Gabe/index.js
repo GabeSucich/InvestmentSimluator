@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Axios from "axios"
-import ChartHandler from "../../chartComponents/ChartHandler"
+import ChartHandler from "../../components/ChartHandler"
 import {defaults} from "react-chartjs-2"
 import API from "../../utils/API"
-import DataHandler from "../../chartComponents/DataHandler"
+import DataHandler from "../../components/DataHandler"
 
 
 export default function Gabe() {
