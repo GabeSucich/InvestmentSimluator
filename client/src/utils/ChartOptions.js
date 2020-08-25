@@ -1,6 +1,9 @@
 const ChartOptions = {
 
     TaxEffectOptions : {
+        legend: {
+            position: "left"
+        },
         scales: {
             xAxes: [{
                 ticks: {
@@ -10,6 +13,12 @@ const ChartOptions = {
             }]
         }
     },
+
+    TaxEffectBarOptions : {
+        legend : {
+            display: false
+        }
+    }
 
 
 }

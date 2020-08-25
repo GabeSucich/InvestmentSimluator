@@ -29,7 +29,7 @@ function RegionButton({ info }) {
 
     return (
 
-        <AnimatedButton className={state.currentRegions.includes(info) ? "selected" : ""} onClick={() => dispatch({ type: SELECT_REGION, region: info })} animation="fade" hiddenContent={formatTaxRate(taxRate) + "%"} visibleContent={region} />
+        <AnimatedButton className={state.currentRegions.includes(info) ? "selected" : ""} onClick={() => dispatch({ type: SELECT_REGION, region: info })} animation="fade" hiddencontent={formatTaxRate(taxRate) + "%"} visiblecontent={region} />
     )
 }
 
@@ -37,7 +37,7 @@ export default function RegionButtonDiv() {
 
     return (
         <Grid centered>
-            <Grid.Row textAlign="centered">
+            <Grid.Row textAlign="center">
                 {taxRates.map((info, index) => {
                     return (
                         <RegionButton key={index} info={info} className="region" />

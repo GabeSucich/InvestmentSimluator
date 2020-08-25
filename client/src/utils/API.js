@@ -1,6 +1,27 @@
 import Axios from "axios"
 
 const API = {
+
+    validateStockData(symbol) {
+
+        return this.getStockData(symbol).then(response => {
+            if (response.data) {
+                return true
+            }
+            else {
+                return false
+            }
+
+        })
+    },
+
+    getStockData(symbol) {
+        return Axios({
+            method: "GET",
+            url: "/api/stockdata/" + symbol
+        })
+    },
+
     getActionDates(interval, startDate, endDate, symbol) {
         return Axios({
             method: "POST",
@@ -61,14 +82,19 @@ const API = {
                 symbol: symbol,
                 startDate: startDate,
                 endDate: endDate,
+<<<<<<< HEAD
                 percent: percent,
              
+=======
+
+>>>>>>> master
             }
         }).then(res => {
             return res.data
         })
     },
 
+<<<<<<< HEAD
     runActiveTrading(startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
         console.log('API runActive called');
         return Axios({
@@ -82,11 +108,26 @@ const API = {
                 bhPerc: bhPerc,
                 slPerc: slPerc,
                 shPerc: shPerc,
+=======
+    findVolumeDates(symbol, startDate, endDate, percent) {
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/getVolumeDates",
+            data: {
+                symbol: symbol,
+                startDate: startDate,
+                endDate: endDate,
+                percent: percent
+>>>>>>> master
             }
         }).then(res => {
             return res.data
         })
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> master
 
 }
 
