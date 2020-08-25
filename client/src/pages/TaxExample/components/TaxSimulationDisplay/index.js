@@ -4,13 +4,16 @@ import API from "../../../../utils/API"
 import DataHandler from "../../../../components/DataHandler"
 import ChartOptions from "../../../../utils/ChartOptions"
 import { useTaxEffectContext } from "../../utils/taxEffectState"
-import colors from "../../../../utils/Colors.json"
+import randomColors from "../../../../utils/colorRandomize"
 import { Button } from "semantic-ui-react"
 import { SET_DATA, CLEAR_DATA, LOADING } from "../../utils/action"
 import Loader from "../../../../components/Loader"
 import { Grid } from "semantic-ui-react"
 import TaxBar from "../TaxBar"
 
+console.log(randomColors)
+const colors = randomColors()
+console.log(colors)
 
 
 export default function TaxSimulationDisplay() {
