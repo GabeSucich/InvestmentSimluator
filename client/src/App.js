@@ -26,7 +26,7 @@ function App() {
     {/* <TaxEffect/> */}
     {/* <SimpleInvestment/> */}
 
-    <Loader type={"bubbles"} className={"center-align"}/>
+    {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
 
   )

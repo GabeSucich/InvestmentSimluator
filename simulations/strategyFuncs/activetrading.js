@@ -1,4 +1,7 @@
+const Utils = require("../strategyFuncs/utils/Utils");
 const Suggestion = require("./utils/Suggestion");
+var switcher = "buy";
+
 // finds 5% dip and buys with all money 
 function activeTrading(res, symbol, portfolio, stockData, currentDate) {
 
@@ -7,22 +10,35 @@ function activeTrading(res, symbol, portfolio, stockData, currentDate) {
     // console.log('strat investAmt = ' + investmentAmt);
     // console.log("buyDate on strat = " + buyDate);
     // console.log("priceOnBuy on strat = " + priceOnBuy);
-    console.log("strat sellDate " + res.sellDateArr);
-    console.log("strat buyDate " + res.buyDateArr);
+    // console.log("strat sellDate " + res.sellDateArr);
+    // console.log("strat buyDate " + res.buyDateArr);
+    // console.log('strat currDay = ' + currentDate);
 
+    var buyDates = res.buyDateArr;
+    var sellDates = res.sellDateArr;
+
+
+    // console.log("buyDate = " + buyDates);
 
     const suggestions = []
 
 
-   if (currentDate === res.buyDateArr) {
+   if (buyDates && (switcher = "buy")) {
+
+        var switcher = "sell"; 
 
         // gives back the number of stocks to buy 
         const stockstoPurchase = Utils.maxStockPurchases(stockData[currentDate].markPrice, portfolio.getCash)
-        console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
+        // console.log('buying ' + stockstoPurchase + ' stocks of ' + symbol + " on " + buyDates);
 
         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, stockstoPurchase));
-        console.log("suggestions: = " + suggestions);
     }
+
+    // if (sellDates && (switcher === "sell")) {
+
+    //     // console.log('sell called');
+    //     suggestions.push(Suggestion.createSellSuggestion(symbol, "all"));
+    // }
 
 
 return suggestions
