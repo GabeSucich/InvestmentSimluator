@@ -100,8 +100,12 @@ class Portfolio {
 
     // This function sells all holdings in the portfolio
     sellAllholdings() {
-        for (const stock of this.holdings) {
-            this.sellStock(stock)
+        for (var i in this.holdings) {
+            console.log("Portfolio this.holdings = " + this.holdings);
+            // console.log("port stock = " + stock);
+            // console.log("port markprice = " +stock.markPrice);
+            // console.log('port quantity = ' + stock.quantity);
+            this.sellStock(this.holdings[i])
         }
     }
 
