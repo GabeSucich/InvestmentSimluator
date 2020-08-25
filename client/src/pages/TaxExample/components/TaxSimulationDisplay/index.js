@@ -15,8 +15,7 @@ import TaxBar from "../TaxBar"
 
 export default function TaxSimulationDisplay() {
 
-    const LineOptions = ChartOptions.TaxEffectOptions
-    const BarOptions = ChartOptions.TaxEffectBarOptions
+    const BarOptions = ChartOptions.StandardBarOption
 
     const [labels, setLabels] = useState([])
     const [taxRates, setTaxRates] = useState([])
@@ -59,7 +58,7 @@ export default function TaxSimulationDisplay() {
             <Grid.Row textAlign="center">
                 {state.data ? <TaxBar backgroundColor={labels.map((_, index) => colors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null}
                 <Grid.Column width={12} id="line-chart">
-                    {state.data ? <DataHandler func={"decreasePercent"} params={[taxRates]} simulations={state.data} labels={labels} borderColor={colors} fill={labels.map(label => false)} pointRadius={labels.map(label => 0)} options={LineOptions} /> : null}
+                    {state.data ? <DataHandler func={"decreasePercent"} params={[taxRates]} simulations={state.data} labels={labels} /> : null}
                 </Grid.Column>
             </Grid.Row>
         </div>

@@ -2,7 +2,7 @@ import Axios from "axios"
 
 const API = {
 
-    validateStockData(symbol) {
+    validateStockSymbol(symbol) {
 
         return this.getStockData(symbol).then(response => {
             if (response.data) {
@@ -110,7 +110,7 @@ const API = {
         })
     },
 
-    findVolumeDates(symbol, startDate, endDate, percent) {
+    findVolumeDates(symbol, startDate, endDate, criticalVolumeGradient, criticalAverageSelloff, recordLength) {
         return Axios({
             method: "POST",
             url: "/api/simulation/getVolumeDates",
@@ -118,7 +118,9 @@ const API = {
                 symbol: symbol,
                 startDate: startDate,
                 endDate: endDate,
-                percent: percent
+                criticalAverageSelloff: criticalAverageSelloff,
+                criticalVolumeGradient: criticalVolumeGradient,
+                recordLength: recordLength
             }
         }).then(res => {
             return res.data

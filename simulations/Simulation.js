@@ -55,6 +55,7 @@ class Simulation {
 
         // The bounded historical data is an attribute on our simulation object
         this.stockData = DateUtils.boundHistoricals(historicalData, this.startDate, this.endDate)
+
         this.breakDate = DateUtils.findBreakDate(this.stockData, this.startDate)
         // We create a new Portfolio object to keep track of our holdings over time. This portfolio object belongs to the simulation.
         this.portfolio = new Portfolio(this.symbol, this.investment, this.stockData, this.startDate)

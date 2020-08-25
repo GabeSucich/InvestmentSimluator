@@ -3,20 +3,32 @@ import Axios from "axios"
 import ChartHandler from "../../components/ChartHandler"
 import DataHandler from "../../components/DataHandler"
 import API from "../../utils/API"
+import { SET_SIMULATION_DATA } from '../SimpleInvestment/utils/action';
 
-export default function volumeTrigger() {
-    API.findVolumeDates("AMZN", "2014-08-07", "2015-08-30", "10")
-        .then(volumeDates => {
-            API.runMultipleSimulations([
-                ["AMZN", "2014-08-07", "2015-08-30", 1, "volumeTrigger", [volumeDates]]
-            ])
-            .then(res => {
-                console.log(res);
+export default function VolumeTrigger() {
+
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        API.findVolumeDates("GE", "2010-08-07", "2020-08-30", 200, -.01, 3)
+            .then(volumeDates => {
+                console.log(volumeDates)
+                API.runMultipleSimulations([
+                    ["GE", "2010-08-07", "2020-08-30", 1000, "volumeTrigger2", [volumeDates, 11, 60]],
+                    ["GE", "2010-08-07", "2020-08-30", 1000, "buyAndWait", []]
+                ])
+                    .then(res => {
+                        console.log(res)
+                        setData([...data, ...res])
+                    })
             })
-        })
-        return <div></div>
-    }
-    
+    }, [])
+
+    return <div>
+        {data.length > 0 ? <ChartHandler simulations={data} labels={["Volume", "Buy andWait"]} borderColor={["#8A2BE2", "Red"]} fill={[false, false]} pointRadius={[0, 0]} /> : "Waiting for data"}
+    </div>
+}
+
 
     // const [data, setData] = useState([]);
 

@@ -1,19 +1,23 @@
 import React from 'react'
-import API from "../../utils/API"
+import { SimpleInvestmentProvider } from "./utils/SimpleInvestmentState"
+import SymbolForm from "./components/Forms/SymbolForm"
+import StartDateMenu from "./components/Menus/StartDateMenu"
+import EndDateMenu from "./components/Menus/EndDateMenu"
+import InvestmentForm from "./components/Forms/InvestmentForm"
+import SimulationDisplay from "./components/SimulationDisplay"
+
 
 export default function SimpleInvestment() {
 
-    API.validateStockData('GUSH').then(isValid => {
-        if (isValid) {
-            console.log("valid")
-        }
-        else {
-            console.log("Invalid")
-        }
 
-    })
     return (
-        <div>Test</div>
+        <SimpleInvestmentProvider>
+            <SymbolForm/>
+            <StartDateMenu/>
+            <EndDateMenu/>
+            <InvestmentForm/>
+            <SimulationDisplay/>
+        </SimpleInvestmentProvider>
     )
 
 }
