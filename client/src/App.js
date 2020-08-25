@@ -6,6 +6,8 @@ import Volume from "./pages/Volume"
 import Colin from './pages/Colin'
 import Gabe from "./pages/Gabe"
 import TaxEffect from "./pages/TaxExample"
+// changed this because 2 imports titled "Loader"
+// import ChartLoader from "./chartComponents/Loader"
 import SimpleInvestment from "./pages/SimpleInvestment"
 import Loader from "./components/Loader"
 import "./App.css"
@@ -16,10 +18,10 @@ function App() {
   return (
     <div>
     {/* <Gabe/> */}
-    {/* <Colin/> */}
+    <Colin/>
     {/* <Sam/> */}
     {/* <Joel/> */}
-    <Volume/>
+    {/* <Volume/> */}
 
     {/* <TaxEffect/> */}
     {/* <SimpleInvestment/> */}

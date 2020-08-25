@@ -3,6 +3,9 @@ var path = require("path")
 const API = require("../utils/API")
 const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
+const activeTrading = require("../utils/activeTradingDates")
+const StockHistory = require("../models/StockHistory")
+// const volumeTrigger = require("../utils/volumeSearch")
 const volumeTrigger = require("../utils/volumeSearch2")
 
 module.exports = function (app) {
@@ -100,15 +103,15 @@ module.exports = function (app) {
     })
 
     app.post("/api/simulation/getBuyDate", (req, res) => {
-        const { symbol, startDate, endDate } = req.body
-        console.log(req.body)
+        const { symbol, startDate, endDate, percent } = req.body
+        console.log("main routes percent = " + percent)
         Historicals.findHistory(symbol).then(databaseData => {
             if (!databaseData) {
                 API.getStockData(symbol)
                     .then(response => {
                         const reversedHistoricals = response.data["Time Series (Daily)"]
                         var historicals = DateUtils.processHistoricals(reversedHistoricals);
-                        const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate);
+                        const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate, percent);
                         Historicals.createHistory(symbol, historicals).then(data => {
                             res.json(resultDate);
                         })
@@ -118,10 +121,34 @@ module.exports = function (app) {
             else {
                 console.log("Grabbing from database")
                 const historicals = databaseData.historicals
-                const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate);
+                const resultDate = DateUtils.findBuyDate(historicals, startDate, endDate, percent);
                 res.json(resultDate);
             }
 
+        })
+    })
+
+    app.post("/api/simulation/activeTrading", (req, res) => {
+        console.log('main routes ActiveTrading called');
+        const { startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc } = req.body;
+        Historicals.findHistory(symbol).then(databaseData => {
+            if(!databaseData) {
+                API.getStockData(symbol)
+                .then(response => { 
+                    console.log("main routes response: " + response);
+                    const reversedHistoricals = response.data["Time Series (Daily)"];
+                    var historicals = DateUtils.processHistoricals(reversedHistoricals);
+                    var boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
+                    const resultDates = activeTrading(boundedHistoricals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
+                    res.json(resultDates);
+                })
+            } else {
+                console.log("Grabbing from database")
+                const historicals = databaseData.historicals;
+                var boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
+                const resultDates = activeTrading(boundedHistoricals, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc);
+                res.json(resultDates);
+            }
         })
     })
 
