@@ -123,7 +123,7 @@ const API = {
         }).then(res => {
             return res.data
         })
-    },
+    }
 
 }
 export default API
