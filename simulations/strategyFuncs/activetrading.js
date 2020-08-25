@@ -12,35 +12,34 @@ function activeTrading(res, symbol, portfolio, stockData, currentDate) {
     // console library.
     // console.log('buyLow running');
     // console.log('strat investAmt = ' + investmentAmt);
-    console.log("buyDate on strat = " + buyDates);
-    console.log("sellDates on strat = " + sellDates);
+    // console.log("buyDate1 on strat = " + buyDatesPrev);
+    // console.log("sellDates1 on strat = " + sellDatesPrev);
     // console.log("priceOnBuy on strat = " + priceOnBuy);
     // console.log("strat sellDate " + res.sellDateArr);
     // console.log("strat buyDate " + res.buyDateArr);
     // console.log('strat currDay = ' + currentDate);
 
-
- 
-
     const suggestions = []
 
-
-   if (buyDates && (switcher = "buy")) {
-
-        var switcher = "sell"; 
+for (var i=0; i < buyDates.length; i++){
+   if (currentDate === buyDates[i]) {
 
         // gives back the number of stocks to buy 
         const stockstoPurchase = Utils.maxStockPurchases(stockData[currentDate].markPrice, portfolio.getCash)
-        // console.log('buying ' + stockstoPurchase + ' stocks of ' + symbol + " on " + buyDates);
+        console.log('buying ' + stockstoPurchase + ' stocks of ' + symbol + " on " + buyDates[i]);
 
         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, stockstoPurchase));
+        // console.log('buying!');
     }
 
-    // if (sellDates && (switcher === "sell")) {
 
-    //     // console.log('sell called');
-    //     suggestions.push(Suggestion.createSellSuggestion(symbol, "all"));
-    // }
+     if (currentDate === sellDates[i]) {
+
+        // console.log('sell called');
+        suggestions.push(Suggestion.createSellSuggestion(symbol)); 
+        console.log('selling ' + symbol + ' on ' + sellDates[i]);
+    }
+}
 
 
 return suggestions

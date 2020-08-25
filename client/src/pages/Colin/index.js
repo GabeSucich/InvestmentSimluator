@@ -16,8 +16,8 @@ export default function Colin() {
       // check this. 
         .then(res => {
            API.runMultipleSimulations([
-             ["GE", "2018-09-11", "2020-02-14", 10000, "activeTrading", [res]],
-             ["GE", "2018-09-11", "2020-02-14", 60000, "buyAndWait", []],
+             ["GE", "2018-09-11", "2020-02-14", 30000, "activeTrading", [res]],
+             ["GE", "2018-09-11", "2020-02-14", 40000, "buyAndWait", []],
     
              ])
              .then(res => {
