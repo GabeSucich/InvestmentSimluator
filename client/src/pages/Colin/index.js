@@ -12,12 +12,12 @@ export default function Colin() {
     useEffect(() => {
       // params startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc
       // returns an object with buyDates and sellDates
-      API.runActiveTrading("2019-10-11", "2020-02-14", "TWTR", 12, 30, 10, 20)
+      API.runActiveTrading("2019-09-11", "2020-02-14", "GE", 12, 40, 10, 20)
       // check this. 
         .then(res => {
            API.runMultipleSimulations([
-             ["TWTR", "2019-10-11", "2020-02-14", 10000, "activeTrading", [res]],
-             ["TWTR", "2019-10-11", "2020-02-14", 60000, "buyAndWait", []],
+             ["GE", "2019-09-11", "2020-02-14", 10000, "activeTrading", [res]],
+             ["GE", "2019-09-11", "2020-02-14", 60000, "buyAndWait", []],
     
              ])
              .then(res => {
