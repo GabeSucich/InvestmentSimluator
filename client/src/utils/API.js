@@ -89,7 +89,7 @@ const API = {
         })
     },
 
-    findVolumeDates(symbol, startDate, endDate, percent) {
+    findVolumeDates(symbol, startDate, endDate, criticalVolumeGradient, criticalAverageSelloff, recordLength) {
         return Axios({
             method: "POST",
             url: "/api/simulation/getVolumeDates",
@@ -97,7 +97,9 @@ const API = {
                 symbol: symbol,
                 startDate: startDate,
                 endDate: endDate,
-                percent: percent
+                criticalAverageSelloff: criticalAverageSelloff,
+                criticalVolumeGradient: criticalVolumeGradient,
+                recordLength: recordLength
             }
         }).then(res => {
             return res.data
