@@ -3,7 +3,7 @@ var path = require("path")
 const API = require("../utils/API")
 const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
-const volumeTrigger = require("../utils/volumeSearch")
+const volumeTrigger = require("../utils/volumeSearch2")
 
 module.exports = function (app) {
 
@@ -73,7 +73,7 @@ module.exports = function (app) {
     })
 
     app.post("/api/simulation/getVolumeDates", (req, res) => {
-        const { symbol, startDate, endDate, percent } = req.body
+        const { symbol, startDate, endDate, criticalVolumeGradient, criticalAverageSelloff, recordLength } = req.body
         Historicals.findHistory(symbol).then(databaseData => {
             if (!databaseData) {
                 API.getStockData(symbol)
@@ -81,7 +81,7 @@ module.exports = function (app) {
                         const reversedHistoricals = response.data["Time Series (Daily)"]
                         var unboundedHistoricals = DateUtils.processHistoricals(reversedHistoricals);
                         const boundedHistoricals = DateUtils.boundHistoricals(unboundedHistoricals, startDate, endDate);
-                        const resultDates = volumeTrigger(boundedHistoricals, eval(percent))
+                        const resultDates = volumeTrigger(boundedHistoricals, eval(criticalVolumeGradient), eval(criticalAverageSelloff), eval(recordLength))
                         Historicals.createHistory(symbol, unboundedHistoricals).then(data => {
                             res.json(resultDates);
                         })
@@ -92,7 +92,7 @@ module.exports = function (app) {
                 console.log("Grabbing from database")
                 const historicals = databaseData.historicals
                 const boundedHistoricals = DateUtils.boundHistoricals(historicals, startDate, endDate);
-                const resultDates = volumeTrigger(boundedHistoricals, eval(percent));
+                const resultDates = volumeTrigger(boundedHistoricals, eval(criticalVolumeGradient), eval(criticalAverageSelloff), eval(recordLength));
                 res.json(resultDates);
             }
 

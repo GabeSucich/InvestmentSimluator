@@ -19,9 +19,9 @@ function App() {
     {/* <Colin/> */}
     {/* <Sam/> */}
     {/* <Joel/> */}
-    <Volume/>
+    {/* <Volume/> */}
 
-    {/* <TaxEffect/> */}
+    <TaxEffect/>
     {/* <SimpleInvestment/> */}
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
