@@ -4,26 +4,24 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
     var dateArr = Object.keys(stockData);
     var buying = true;
     const buyDateArr = [];
-    console.log("test");
     const sellDateArr = [];
     var currentMax = null;
     var currentMin = null;
     var initalPrice = null;
     var buyPrice;
-    var updatedDateArr = dateArr;
     var indexTracker = 0;
 
     console.log('dateArr leng = ' + dateArr.length);
 
     // goes through all dates to buy or sell
     for (var i=0; i < dateArr.length; i++) {
-        if (buying && i > indexTracker) {
-            console.log("indexTracker = " + indexTracker);
+        if (buying) {
+            console.log("dateArr leng " + dateArr.length);
             nextBuyDate(dateArr)
 
-        } else if (!buying && i > indexTracker) {
+        } else {
             findSellDate(dateArr)
-            console.log("indexTracker = " + indexTracker);
+            console.log("dateArr leng " + dateArr.length);
 
         }
 
@@ -79,9 +77,10 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
 
         function fastForwardHistory(dateArr, date) {
             const indexOfDate = dateArr.indexOf(date);
-            console.log(indexOfDate);
-            // var updatedDateArr = dateArr.slice(parseInt(indexOfDate))
-            return indexTracker = indexOfDate;
+            console.log("ff index of Date = " + indexOfDate);
+            var dateArr = dateArr.splice(0, (parseInt(indexOfDate) - 1))
+            console.log('ff dateArr leng = ' + dateArr.length);
+            return dateArr;
         }
 
         // takes in an integer (5) and returns the decimal equivalent subtracted from 100% (.95)
