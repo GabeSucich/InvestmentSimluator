@@ -7,22 +7,25 @@ function activeTrading(res, symbol, portfolio, stockData, currentDate) {
     // console.log('strat investAmt = ' + investmentAmt);
     // console.log("buyDate on strat = " + buyDate);
     // console.log("priceOnBuy on strat = " + priceOnBuy);
-    console.log(res.sellDateArr);
-    console.log(res.buyDateArr);
+    console.log("strat sellDate " + res.sellDateArr);
+    console.log("strat buyDate " + res.buyDateArr);
 
 
     const suggestions = []
 
 
-//    if (currentDate === buyDate) {
+   if (currentDate === res.buyDateArr) {
 
-//         // gives back the number of stocks to buy 
-//         var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, portfolio.getCash);
-//         console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
+        // gives back the number of stocks to buy 
+        const stockstoPurchase = Utils.maxStockPurchases(stockData[currentDate].markPrice, portfolio.getCash)
+        console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
 
-//         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, amtToPurchase));
-//     }
-// return suggestions
+        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, stockstoPurchase));
+        console.log("suggestions: = " + suggestions);
+    }
+
+
+return suggestions
 
 }
 
