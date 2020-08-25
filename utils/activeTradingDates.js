@@ -1,7 +1,8 @@
 const DateUtils = require("../utils/dateUtils")
 
 module.exports = function activeTrading(stockData, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
-    var dateArr = Object.keys(stockData);
+    var dateArrPrev = Object.keys(stockData);
+    var dateArr = [];
     var buying = true;
     const buyDateArr = [];
     const sellDateArr = [];
@@ -10,8 +11,14 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
     var initalPrice = null;
     var buyPrice;
     var indexTracker = 0;
+   
+    for (var i = dateArrPrev.length - 1; i >= 0; i--) {
+        dateArr.push(dateArrPrev[i]);
+        // console.log("dateaArr i = " + dateArrPrev[i]);
+    }
 
     console.log('dateArr leng = ' + dateArr.length);
+    console.log('dateArr 0 = ' + dateArr[0]);
 
     // goes through all dates to buy or sell
     for (var i=0; i < dateArr.length; i++) {
@@ -78,7 +85,7 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
         function fastForwardHistory(dateArr, date) {
             const indexOfDate = dateArr.indexOf(date);
             console.log("ff index of Date = " + indexOfDate);
-            var dateArr = dateArr.splice(0, (parseInt(indexOfDate) - 1))
+            dateArr.splice(0, (parseInt(indexOfDate) - 1));
             console.log('ff dateArr leng = ' + dateArr.length);
             return dateArr;
         }
@@ -202,7 +209,7 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
                 // if the current price is 5% less than high price - push date
                 if (currentPrice <= sellPrice) {
                     // once it finds the first dip date, stop searching
-                    // console.log('Sell Low currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice);
+                    console.log('Sell Low currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice + ' & highPrice = ' + highPrice);
                     return date;
                 }
 
@@ -212,9 +219,9 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
 
         // function takes in date range - returns date to buy when stock value has decreased a specified percentage
         function findDateSellHigh(stockData, dateArr, percentIncrease, buyPrice) {
-            var sellPrice;
+            var sellPrice = 0;
 
-            // input 20%, returns 1.20
+            // input 20(%), returns 1.20
             var percentOf = calcPercentChangeUp(percentIncrease);
 
             // 100 * 1.2 = 120 (sell!);
@@ -230,7 +237,7 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
 
                 // if the current price is 5% less than high price - push date
                 if (currentPrice >= sellPrice) {
-                    // console.log('Sell High currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice);
+                    console.log('Sell High currentDay = ' + date + ' currentPrice = ' + currentPrice + ' sellPrice = ' + sellPrice + ' & buyPrice = ' + buyPrice);
                     return date;
                 }
 
@@ -239,5 +246,7 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
         }
 
     }
+    console.log(buyDateArr, sellDateArr)
+    return [buyDateArr, sellDateArr];
 }
 

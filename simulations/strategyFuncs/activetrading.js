@@ -1,24 +1,26 @@
 const Utils = require("../strategyFuncs/utils/Utils");
 const Suggestion = require("./utils/Suggestion");
+const DateUtils = require("../../utils/dateUtils");
 var switcher = "buy";
 
 // finds 5% dip and buys with all money 
 function activeTrading(res, symbol, portfolio, stockData, currentDate) {
+    
+    var buyDates = res[0];
+    var sellDates = res[1];
 
     // console library.
     // console.log('buyLow running');
     // console.log('strat investAmt = ' + investmentAmt);
-    // console.log("buyDate on strat = " + buyDate);
+    console.log("buyDate on strat = " + buyDates);
+    console.log("sellDates on strat = " + sellDates);
     // console.log("priceOnBuy on strat = " + priceOnBuy);
     // console.log("strat sellDate " + res.sellDateArr);
     // console.log("strat buyDate " + res.buyDateArr);
     // console.log('strat currDay = ' + currentDate);
 
-    var buyDates = res.buyDateArr;
-    var sellDates = res.sellDateArr;
 
-
-    // console.log("buyDate = " + buyDates);
+ 
 
     const suggestions = []
 
