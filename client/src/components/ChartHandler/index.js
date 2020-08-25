@@ -1,14 +1,21 @@
 import { Line } from 'react-chartjs-2';
 import React from "react"
+import randomColors from "../../utils/colorRandomize"
+import ChartOption from "../../utils/ChartOptions"
+const randomizedColors = randomColors()
+
 
 export default function ChartHandler(props) {
     const { simulations } = props; // simulations is an array of objects, each object has a key of the simulation pointing to that simulation's data
     const { labels } = props; // the names of the series to be charted
-    if (typeof (props.options) === "undefined") {
-        var options = {}
+    if (!props.options) {
+        var options = ChartOption.StandardLineOptions
     } else {
         var { options } = props;
     }
+
+    const propKeys = Object.keys(props)
+
 
     function processSimulation(i) {
         var otherAttributes = {};
@@ -29,6 +36,18 @@ export default function ChartHandler(props) {
             }
         }
 
+        if (!propKeys.includes("borderColor")) {
+            otherAttributes["borderColor"] = randomizedColors[i]
+        }
+
+        if (!propKeys.includes("pointRadius")) {
+            otherAttributes["pointRadius"] = 0
+        }
+
+        if (!propKeys.includes("fill")) {
+            otherAttributes["fill"] = false
+        }
+
         return { "label": label, "data": data, ...otherAttributes }
     }
 
@@ -38,6 +57,8 @@ export default function ChartHandler(props) {
             var processedSimulation = processSimulation(i);
             datasets.push(processedSimulation);
         }
+       
+
         return { "labels": processDates(simulations), "datasets": datasets }
     }
 

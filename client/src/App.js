@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div>
-    <Gabe/>
+    {/* <Gabe/> */}
     {/* <Colin/> */}
     {/* <Sam/> */}
     {/* <Joel/> */}

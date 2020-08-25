@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useReducer} from "react"
-import {INVALID, SET_STOCK, SET_START_DATE, SET_END_DATE, SYMBOL_LOADING, START_DATE_LOADING, SET_INVESTMENT, END_DATA_LOADING, INVESTMENT_LOADING, SET_HISTORY, CLEAR_DATA, LOAD_SIMULATION, SET_SIMULATION_DATA} from "./action"
+import Helper from "./Helper"
+import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA} from "./action"
 
 const SimpleInvestmentContext = createContext()
 const {Provider} = SimpleInvestmentContext
@@ -12,19 +13,19 @@ const reducer = (state, action) => {
         case SYMBOL_LOADING:
             return {...state, symbolLoading: true}
             break
-        case SET_START_DATE:
-            return {...state, startDate: action.startDate, activeForm: 2}
+        case SET_START_YEAR:
+            return {...state, startYear: action.startYear, activeForm: 2}
             break
-        case SET_END_DATE:
-            return {...state, endDate: action.endDate, activeForm: 3}
+        case SET_END_YEAR:
+            const earliestDate = Helper.findFirstDateInYear(state.history, action.endYear)
+            const lowestPrice = eval(state.history[earliestDate].markPrice)
+            return {...state, endYear: action.endYear, activeForm: 3, smallestInvestment: Math.ceil(lowestPrice/10)*10}
             break
         case SET_INVESTMENT:
-            return {...state, investment: eval(action.investment).toFixed()}
+            
+            return {...state, investment: eval(action.investment).toFixed(), simulationStarted: true }
         case SET_HISTORY:
             return {...state, history: action.history}
-            break
-        case LOAD_SIMULATION:
-            return {...state, simulationStarted: true}
             break
         case SET_SIMULATION_DATA:
             return {...state, simulationData: action.data}
@@ -32,12 +33,13 @@ const reducer = (state, action) => {
             return {
                 activeForm: 0,
                 symbol: null,
-                startDate: null, 
-                endDate: null,
+                startYear: null, 
+                endYear: null,
                 investment: null,
+                smallestInvestment: null,
                 symbolLoading: false,
                 startDateLoading: false,
-                endDateLoading: false,
+                endYearLoading: false,
                 investmentLoading: false,
                 history: null,
                 simulationStarted: false,
@@ -54,12 +56,13 @@ function SimpleInvestmentProvider({value=[], ...props}) {
     const [state, dispatch] = useReducer(reducer, { 
         activeForm: 0,
         symbol: null,
-        startDate: null, 
-        endDate: null,
+        startYear: null, 
+        endYear: null,
         investment: null,
+        smallestInvestment: null,
         symbolLoading: false,
         startDateLoading: false,
-        endDateLoading: false,
+        endYearLoading: false,
         investmentLoading: false,
         history: null,
         simulationStarted: false,

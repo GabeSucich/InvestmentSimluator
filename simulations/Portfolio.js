@@ -2,6 +2,7 @@ var Stock = require("./Stock")
 
 class Portfolio {
     constructor(symbol, investment, stockData, startDate) {
+        console.log("Portfolio investment: " + investment)
         this.symbol = symbol
         this.cash = parseInt(investment)
         this.stockData = stockData

@@ -29,7 +29,9 @@ export default function SymbolForm(props) {
                 }, 1500)
             }
             else {
+                
                 API.getStockData(uppercaseSymbol).then(response => {
+                    console.log(response.data.historicals)
                     dispatch({ type: SET_HISTORY, history: response.data.historicals })
                     dispatch({ type: SET_STOCK, symbol: uppercaseSymbol })
                 })
@@ -37,8 +39,10 @@ export default function SymbolForm(props) {
         })
     }
 
-
-    if (state.activeForm === 0 && !state.symbolLoading) {
+    if (state.simulationStarted) {
+        return null
+    }
+    else if (state.activeForm === 0 && !state.symbolLoading) {
         return (
             <StandardForm>
                 <Form.Input
@@ -60,7 +64,6 @@ export default function SymbolForm(props) {
                     label="Input the stock ticker for a stock to simulation. If you are unfamiliar with stock symbols, some are provided below!"
                     value={symbol}
                     onChange={handleOnChange}
-                    selection
                 />
             </LoadingForm>
         )
@@ -71,7 +74,7 @@ export default function SymbolForm(props) {
             <StandardForm>
                 <Form.Input
                     placeholder="Stock Ticker"
-                    value={symbol}
+                    value={symbol.toUpperCase()}
                     onChange={handleOnChange}
                     disabled
                 />
