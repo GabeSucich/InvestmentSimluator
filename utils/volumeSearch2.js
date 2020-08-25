@@ -59,7 +59,7 @@ module.exports = function volumeSearch(stockHistory, criticalVolumeGradientPerce
             const buyVolumeGradient = VolumeUtils.buyVolumeGradient(records)
             const buyFractionAverage = VolumeUtils.buyFractionAverage(records)
 
-            if (VolumeUtils(buyVolumeGradient, record)  > criticalVolumeGradientPercent && buyFractionAverage < criticalAverageSelloff) {
+            if (VolumeUtils.findGradientAsPercent(buyVolumeGradient, records)  > criticalVolumeGradientPercent && buyFractionAverage < criticalAverageSelloff) {
 
                 buyDates.push(currentDate)
             }

@@ -2,7 +2,7 @@ import Axios from "axios"
 
 const API = {
 
-    validateStockData(symbol) {
+    validateStockSymbol(symbol) {
 
         return this.getStockData(symbol).then(response => {
             if (response.data) {

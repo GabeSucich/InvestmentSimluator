@@ -1,50 +1,45 @@
 import React, {createContext, useContext, useReducer} from "react"
-import {NEW_ACTIVE_FORM, SELECT_STOCK, SELECT_START_DATE, SELECT_END_DATE, SYMBOL_LOADING, START_DATE_LOADING, SET_INVESTMENT, END_DATA_LOADING, INVESTMENT_LOADING, SET_HISTORY, CLEAR_DATA, LOAD_SIMULATION, SET_SIMULATION_DATA} from "./action"
+import Helper from "./Helper"
+import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA} from "./action"
 
 const SimpleInvestmentContext = createContext()
 const {Provider} = SimpleInvestmentContext
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case NEW_ACTIVE_FORM:
-            return {...state, activeForm: action.activeForm}
-        case SELECT_STOCK:
-            return {...state, symbol: action.symbol, symbolLoading: false}
+        case SET_STOCK:
+            return {...state, symbol: action.symbol, symbolLoading: false, activeForm: 1}
             break
         case SYMBOL_LOADING:
             return {...state, symbolLoading: true}
             break
-        case SELECT_START_DATE:
-            return {...state, startDate: action.startDate, startDateLoading: false}
+        case SET_START_YEAR:
+            return {...state, startYear: action.startYear, activeForm: 2}
             break
-        case START_DATE_LOADING:
-            return {...state, startDateLoading: true}
-            break
-        case SELECT_END_DATE:
-            return {...state, endDate: action.endDate, endDateLoading: false}
-            break
-        case END_DATA_LOADING:
-            return {...state, endDateLoading: true}
+        case SET_END_YEAR:
+            const earliestDate = Helper.findFirstDateInYear(state.history, action.endYear)
+            const lowestPrice = eval(state.history[earliestDate].markPrice)
+            return {...state, endYear: action.endYear, activeForm: 3, smallestInvestment: Math.ceil(lowestPrice/10)*10}
             break
         case SET_INVESTMENT:
-            return {...state, investment: eval(action.investment).toFixed(), investmentLoading: false}
-        case INVESTMENT_LOADING:
-            return {...state, endDateLoading: false, investmentLoading: false}
-            break
+            
+            return {...state, investment: eval(action.investment).toFixed(), simulationStarted: true }
         case SET_HISTORY:
-            return {...state, data: action.history}
+            return {...state, history: action.history}
             break
-        case LOAD_SIMULATION:
-            return
+        case SET_SIMULATION_DATA:
+            return {...state, simulationData: action.data}
         case CLEAR_DATA: 
             return {
+                activeForm: 0,
                 symbol: null,
-                startDate: null, 
-                endDate: null,
+                startYear: null, 
+                endYear: null,
                 investment: null,
+                smallestInvestment: null,
                 symbolLoading: false,
                 startDateLoading: false,
-                endDateLoading: false,
+                endYearLoading: false,
                 investmentLoading: false,
                 history: null,
                 simulationStarted: false,
@@ -52,6 +47,8 @@ const reducer = (state, action) => {
                 
             }
             break
+        case INVALID:
+            return {...state, symbolLoading: false}
     }
 }
 
@@ -59,15 +56,17 @@ function SimpleInvestmentProvider({value=[], ...props}) {
     const [state, dispatch] = useReducer(reducer, { 
         activeForm: 0,
         symbol: null,
-        startDate: null, 
-        endDate: null,
+        startYear: null, 
+        endYear: null,
         investment: null,
+        smallestInvestment: null,
         symbolLoading: false,
         startDateLoading: false,
-        endDateLoading: false,
+        endYearLoading: false,
         investmentLoading: false,
-       
-        data: null,
+        history: null,
+        simulationStarted: false,
+        simulationData: null
         
     })
 

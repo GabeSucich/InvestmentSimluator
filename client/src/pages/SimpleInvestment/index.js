@@ -1,18 +1,22 @@
 import React from 'react'
-import API from "../../utils/API"
-import { Form } from "semantic-ui-react"
 import { SimpleInvestmentProvider } from "./utils/SimpleInvestmentState"
+import SymbolForm from "./components/Forms/SymbolForm"
+import StartDateMenu from "./components/Menus/StartDateMenu"
+import EndDateMenu from "./components/Menus/EndDateMenu"
+import InvestmentForm from "./components/Forms/InvestmentForm"
+import SimulationDisplay from "./components/SimulationDisplay"
 
 
 export default function SimpleInvestment() {
 
-    // const [state, dispatch] = useSimpleInvestmentContext()
-
-
 
     return (
         <SimpleInvestmentProvider>
-            
+            <SymbolForm/>
+            <StartDateMenu/>
+            <EndDateMenu/>
+            <InvestmentForm/>
+            <SimulationDisplay/>
         </SimpleInvestmentProvider>
     )
 

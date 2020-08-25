@@ -1,7 +1,7 @@
 const Suggestion = require("./utils/Suggestion")
 const Utils = require("./utils/Utils")
 
-function volumeTrigger2(actionDates, sellPercent, symbol, portfolio, stockData, currentDate) {
+function volumeTrigger2(actionDates, sellPercent, holdPercent, symbol, portfolio, stockData, currentDate) {
     var buyDates = actionDates.buyDates
     var sellDates = actionDates.sellDates
     //     // Always have the final four parameters of your function as shown above
@@ -14,17 +14,33 @@ function volumeTrigger2(actionDates, sellPercent, symbol, portfolio, stockData, 
 
     // First we'll have to buy a stock
 
+    if (!portfolio.initialBuy) {
+        portfolio.initialBuy = true
+        var stockPrice = eval(stockData[currentDate].markPrice)
+        var stockAmt = Utils.maxStockPurchases(stockPrice, portfolio.getCash * holdPercent / 100)
+        suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, quantity = stockAmt))
+
+    }
+
     if (buyDates.includes(currentDate)) {
+        portfolio.bought = true
         const stockPrice = eval(stockData[currentDate].markPrice)
         const stockAmt = Utils.maxStockPurchases(stockPrice, portfolio.getCash)
-        suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, quantity=stockAmt))
+        console.log("Buying " + stockAmt + " stock")
+        suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, quantity = stockAmt))
     }
+
 
     for (const stock of portfolio.holdings) {
 
-        if (stock.percentChange >= sellPercent) {
-            suggestionsArr.push(Suggestion.createSellSuggestion(stock))
+        if (portfolio.bought) {
+            portfolio.bought = false
+            if (stock.percentChange >= sellPercent) {
+                suggestionsArr.push(Suggestion.createSellSuggestion(stock, quantity = Math.floor(stock.quantity * (1 - eval(holdPercent) / 100))))
+            }
         }
+
+
     }
 
 

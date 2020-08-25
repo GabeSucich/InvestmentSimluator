@@ -1,6 +1,6 @@
 const ChartOptions = {
 
-    TaxEffectOptions : {
+    StandardLineOptions : {
         legend: {
             position: "left"
         },
@@ -14,7 +14,7 @@ const ChartOptions = {
         }
     },
 
-    TaxEffectBarOptions : {
+    StandardBarOption : {
         legend : {
             display: false
         }
