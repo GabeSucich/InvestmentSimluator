@@ -6,12 +6,10 @@ import Volume from "./pages/Volume"
 import Colin from './pages/Colin'
 import Gabe from "./pages/Gabe"
 import TaxEffect from "./pages/TaxExample"
-<<<<<<< HEAD
-import Loader from "./chartComponents/Loader"
-=======
+// changed this because 2 imports titled "Loader"
+import ChartLoader from "./chartComponents/Loader"
 import SimpleInvestment from "./pages/SimpleInvestment"
 import Loader from "./components/Loader"
->>>>>>> master
 import "./App.css"
 import 'semantic-ui-css/semantic.min.css'
 
@@ -20,22 +18,15 @@ function App() {
   return (
     <div>
     {/* <Gabe/> */}
-<<<<<<< HEAD
-    <Colin/>,
-    {/* <Sam/> */},
-
-    {/* <TaxEffect/> */},
-=======
-    {/* <Colin/> */}
+    <Colin/>
     {/* <Sam/> */}
     {/* <Joel/> */}
-    <Volume/>
+    {/* <Volume/> */}
 
     {/* <TaxEffect/> */}
     {/* <SimpleInvestment/> */}
->>>>>>> master
 
-    {/* <Loader type={"bubbles"} className={"center-align"}/> */}
+    <Loader type={"bubbles"} className={"center-align"}/>
     </div>
 
   )

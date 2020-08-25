@@ -32,13 +32,6 @@ export default function TaxSimulationDisplay() {
                 allSimulations.push(["AAPL", "2000-08-25", "2020-02-14", 1000, "buyAndWait", []])
             }
 
-<<<<<<< HEAD
-        API.runMultipleSimulations(allSimulations).then(data => {
-            setLabels(state.currentRegions.map(info => info.region))
-            setTaxRates(state.currentRegions.map(info => info.tax))
-            dispatch({ type: SET_DATA, data: data })
-        })
-=======
             dispatch({ type: LOADING })
 
             API.runMultipleSimulations(allSimulations).then(data => {
@@ -48,7 +41,6 @@ export default function TaxSimulationDisplay() {
             })
         }
     }
->>>>>>> master
 
     const clearSimulation = () => {
         dispatch({ type: CLEAR_DATA })

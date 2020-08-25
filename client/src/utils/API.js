@@ -7,8 +7,7 @@ const API = {
         return this.getStockData(symbol).then(response => {
             if (response.data) {
                 return true
-            }
-            else {
+            } else {
                 return false
             }
 
@@ -59,6 +58,7 @@ const API = {
         var counter = 0;
         var finished = false;
         var API = this;
+
         function gatherData() {
             if (counter === arr.length) {
                 return simulations
@@ -82,19 +82,15 @@ const API = {
                 symbol: symbol,
                 startDate: startDate,
                 endDate: endDate,
-<<<<<<< HEAD
                 percent: percent,
-             
-=======
 
->>>>>>> master
+
             }
         }).then(res => {
             return res.data
         })
     },
 
-<<<<<<< HEAD
     runActiveTrading(startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
         console.log('API runActive called');
         return Axios({
@@ -108,7 +104,12 @@ const API = {
                 bhPerc: bhPerc,
                 slPerc: slPerc,
                 shPerc: shPerc,
-=======
+            }
+        }).then(res => {
+            return res.data
+        })
+    },
+
     findVolumeDates(symbol, startDate, endDate, percent) {
         return Axios({
             method: "POST",
@@ -118,17 +119,11 @@ const API = {
                 startDate: startDate,
                 endDate: endDate,
                 percent: percent
->>>>>>> master
             }
         }).then(res => {
             return res.data
         })
-<<<<<<< HEAD
     },
-=======
-    }
->>>>>>> master
 
 }
-
 export default API
