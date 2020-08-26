@@ -1,4 +1,5 @@
 var Stock = require("./Stock")
+const { controllers } = require("chart.js")
 
 class Portfolio {
     constructor(symbol, investment, stockData, startDate) {
@@ -82,7 +83,6 @@ class Portfolio {
             stock.quantity -= quantity
             this.increaseCash(quantity*stock.markPrice)
         }        
-        
     }
 
     // This function takes in a newly instantiated stock object and "buys" it

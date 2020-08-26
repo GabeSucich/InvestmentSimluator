@@ -1,9 +1,9 @@
 import { Line } from 'react-chartjs-2';
 import React from "react"
-import randomColors from "../../utils/colorRandomize"
 import ChartOption from "../../utils/ChartOptions"
-const randomizedColors = randomColors()
 
+import randomColors from "../../utils/colorRandomize"
+const randomizedColors = randomColors()
 
 export default function ChartHandler(props) {
     const { simulations } = props; // simulations is an array of objects, each object has a key of the simulation pointing to that simulation's data
@@ -37,6 +37,7 @@ export default function ChartHandler(props) {
         }
 
         if (!propKeys.includes("borderColor")) {
+            console.log("reassigning color")
             otherAttributes["borderColor"] = randomizedColors[i]
         }
 
