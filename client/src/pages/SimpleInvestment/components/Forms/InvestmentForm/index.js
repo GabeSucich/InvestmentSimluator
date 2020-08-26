@@ -4,7 +4,8 @@ import { useSimpleInvestmentContext } from "../../../utils/SimpleInvestmentState
 import Helper from "../../../utils/Helper"
 import API from "../../../../../utils/API"
 import { SET_INVESTMENT, SET_SIMULATION_DATA } from "../.../../../../utils/action"
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Segment } from 'semantic-ui-react'
+import "./style.css"
 
 export default function InvestmentForm(props) {
 
@@ -18,20 +19,18 @@ export default function InvestmentForm(props) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        console.log(investment)
 
         dispatch({ type: SET_INVESTMENT, investment: investment })
 
         const startDate = Helper.findFirstDateInYear(state.history, state.startYear)
         const endDate = Helper.findLastDateInYear(state.history)
-        console.log(startDate)
-        console.log(endDate)
+        setInvestment("")
 
         API.runMultipleSimulations([
             [state.symbol, startDate, endDate, investment, "buyAndWait", []]
         ]).then(data => {
-            console.log(data)
-            dispatch({type: SET_SIMULATION_DATA, data: data})
+
+            dispatch({ type: SET_SIMULATION_DATA, data: data })
         })
     }
 
@@ -42,16 +41,18 @@ export default function InvestmentForm(props) {
     else {
 
         return (
+            <Segment textAlign="center">
 
-            <StandardForm>
-                <div className="fixed-dollar">$</div>
-                <Form.Input className="form-offset"
-                    placeholder="Initial Investment"
-                    label={`Enter an initial investment amount. To invest in ${state.symbol.toUpperCase()} in ${state.startYear}, you must invest at least $${state.smallestInvestment}`}
-                    onChange={handleOnChange}
-                />
-                {investment >= state.smallestInvestment ? <Button color="olive" onClick={handleSubmit}>Invest!</Button> : null}
-            </StandardForm>
+
+                <StandardForm>
+                    <Form.Input
+                        placeholder="Initial Investment"
+                        label={`Enter an initial investment amount. To invest in ${state.symbol.toUpperCase()} in ${state.startYear}, you must invest at least $${state.smallestInvestment}`}
+                        onChange={handleOnChange}
+                    />
+                    {investment >= state.smallestInvestment ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Invest!</Button> : null}
+                </StandardForm>
+            </Segment>
 
         )
 

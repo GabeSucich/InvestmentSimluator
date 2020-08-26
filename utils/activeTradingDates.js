@@ -1,8 +1,7 @@
 const DateUtils = require("../utils/dateUtils")
 
 module.exports = function activeTrading(stockData, startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
-    var dateArrPrev = Object.keys(stockData);
-    var dateArr = [];
+    var dateArr = Object.keys(stockData);
     var buying = true;
     const buyDateArr = [];
     const sellDateArr = [];
@@ -11,11 +10,7 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
     var initalPrice = null;
     var buyPrice;
     var indexTracker = 0;
-   
-    for (var i = dateArrPrev.length - 1; i >= 0; i--) {
-        dateArr.push(dateArrPrev[i]);
-        // console.log("dateaArr i = " + dateArrPrev[i]);
-    }
+
 
     console.log('dateArr leng = ' + dateArr.length);
     console.log('dateArr 0 = ' + dateArr[0]);

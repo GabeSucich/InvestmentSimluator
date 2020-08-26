@@ -13,8 +13,6 @@ export default function SimulationDisplay(props) {
         dispatch({type: CLEAR_DATA})
     }
 
-    console.log(state.simulationData)
-
 
     if (!state.simulationStarted) {
         return null
@@ -22,14 +20,18 @@ export default function SimulationDisplay(props) {
 
     else if (!state.simulationData) {
 
-        return (<Loader type="cylon" color="red"/>)
+        return (
+            <Segment textAlign="center">
+                <Loader type="cylon" color="red"/>
+            </Segment>
+        )
     }
 
     else {
         return (
         <Segment textAlign="center">
             <ChartHandler simulations={state.simulationData} labels={[state.symbol]}/>
-            <Button primary onClick={reset}>Invest Again</Button>
+            <Button className="btn-margin" primary onClick={reset}>Invest Again</Button>
         </Segment>
         
         )

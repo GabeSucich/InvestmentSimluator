@@ -14,12 +14,12 @@ const reducer = (state, action) => {
             return {...state, symbolLoading: true}
             break
         case SET_START_YEAR:
-            return {...state, startYear: action.startYear, activeForm: 2}
+            const earliestDate = Helper.findFirstDateInYear(state.history, action.startYear)
+            const lowestPrice = eval(state.history[earliestDate].markPrice)
+            return {...state, startYear: action.startYear, activeForm: 2, smallestInvestment: Math.ceil(lowestPrice/10)*10}
             break
         case SET_END_YEAR:
-            const earliestDate = Helper.findFirstDateInYear(state.history, action.endYear)
-            const lowestPrice = eval(state.history[earliestDate].markPrice)
-            return {...state, endYear: action.endYear, activeForm: 3, smallestInvestment: Math.ceil(lowestPrice/10)*10}
+            return {...state, endYear: action.endYear, activeForm: 3}
             break
         case SET_INVESTMENT:
             

@@ -23,8 +23,8 @@ function App() {
     {/* <Joel/> */}
     {/* <Volume/> */}
 
-    <TaxEffect/>
-    {/* <SimpleInvestment/> */}
+    {/* <TaxEffect/> */}
+    <SimpleInvestment/>
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
