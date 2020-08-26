@@ -24,6 +24,7 @@ export default function SimulationDisplay(props) {
     useEffect(() => {
 
         setLoaded(false)
+        
     }, [])
 
     useEffect(() => {
