@@ -51,7 +51,7 @@ module.exports = function activeTrading(stockData, startDate, endDate, symbol, b
                 console.log("pushing " + date2 + " into buyDateArr. date2 BUYHIGH");
                 buyPrice = buyPrice2;
                 dateArr = fastForwardHistory(dateArr, date2);
-                console.log("adjusted DateArr = " + dateArr);
+                // console.log("adjusted DateArr = " + dateArr);
                 buying = false;
             }
         }

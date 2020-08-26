@@ -12,12 +12,12 @@ export default function Colin() {
     useEffect(() => {
       // params startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc
       // returns an object with buyDates and sellDates
-      API.runActiveTrading("2005-09-11", "2020-02-14", "SPY", 15, 13, 12, 60)
+      API.runActiveTrading("2005-09-11", "2020-02-14", "NIO", 3, 2, 6, 4)
       // check this. 
         .then(res => {
            API.runMultipleSimulations([
-             ["SPY", "2005-09-11", "2020-02-14", 40000, "activeTrading", [res]],
-             ["SPY", "2005-09-11", "2020-02-14", 40000, "buyAndWait", []],
+             ["NIO", "2005-09-11", "2020-02-14", 20000, "activeTrading", [res]],
+             ["NIO", "2005-09-11", "2020-02-14", 20000, "buyAndWait", []],
     
              ])
              .then(res => {
@@ -30,7 +30,7 @@ export default function Colin() {
 
   return (
     <div>
-       {data.length > 0 ? <ChartHandler func={"decrease5Percent"} simulations={data} labels={["Buy And Wait", "Buy Low"]} borderColor={["#8A2BE2", "Red"]} fill={[false, false]} pointRadius={[0,0]} /> : "Waiting for data"}
+       {data.length > 0 ? <ChartHandler func={"decrease5Percent"} simulations={data} labels={["Active Trading", "Buy Low"]} borderColor={["#8A2BE2", "Red"]} fill={[false, false]} pointRadius={[0,0]} /> : "Waiting for data"}
     </div>
   )
 
