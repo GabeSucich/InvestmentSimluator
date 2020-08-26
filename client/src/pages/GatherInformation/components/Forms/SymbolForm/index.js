@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/SimpleInvestmentState"
+import { useSimpleInvestmentContext } from "../../../utils/GlobalState"
 import { StandardForm, LoadingForm} from "../../../../../SemanticUI/Forms"
 import { Form, Button, Segment, Menu } from "semantic-ui-react"
 import API from "../../../../../utils/API"
@@ -50,7 +50,7 @@ export default function SymbolForm(props) {
         })
     }
 
-    if (state.simulationStarted) {
+    if (state.informationGathered) {
         return null
     }
     else if (state.activeForm === 0 && !state.symbolLoading) {

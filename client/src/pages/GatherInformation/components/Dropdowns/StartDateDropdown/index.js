@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/SimpleInvestmentState"
+import { useSimpleInvestmentContext } from "../../../utils/GlobalState"
 import { Dropdown, Button, Menu, Segment } from "semantic-ui-react"
 import Helper from "../../../utils/Helper"
 import { SET_START_YEAR } from "../../../utils/action"
@@ -33,7 +33,7 @@ export default function StartDateDropdown(props) {
     }
 
 
-    if (state.activeForm < 1 || state.simulationStarted) {
+    if (state.activeForm < 1 || state.informationGathered) {
         return null
     }
 

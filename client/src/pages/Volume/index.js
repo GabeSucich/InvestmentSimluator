@@ -3,7 +3,7 @@ import Axios from "axios"
 import ChartHandler from "../../components/ChartHandler"
 import DataHandler from "../../components/DataHandler"
 import API from "../../utils/API"
-import { SET_SIMULATION_DATA } from '../SimpleInvestment/utils/action';
+import { SET_SIMULATION_DATA } from '../GatherInformation/utils/action';
 
 export default function VolumeTrigger() {
 

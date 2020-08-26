@@ -1,42 +1,80 @@
-import React from 'react'
-import { SimpleInvestmentProvider } from "./utils/SimpleInvestmentState"
-import { Grid } from "semantic-ui-react"
-import { AlignedContainer } from "../../SemanticUI/Containers"
-import SymbolForm from "./components/Forms/SymbolForm"
-import StartDateDropdown from "./components/Dropdowns/StartDateDropdown"
-import EndDateDropdown from "./components/Dropdowns/EndDateDropdown"
-import InvestmentForm from "./components/Forms/InvestmentForm"
-import SimulationDisplay from "./components/SimulationDisplay"
-import "./style.css"
+import React, { useEffect, useState } from 'react'
+import ChartHandler from "../../components/ChartHandler"
+import Helper from "../GatherInformation/utils/Helper"
+import API from "../../utils/API"
+import Loader from "../../components/Loader"
+import { CLEAR_DATA, SET_SIMULATION_DATA, LOAD_SIMULATION } from "../GatherInformation/utils/action"
+import { Button, Segment } from "semantic-ui-react"
+import { useSimpleInvestmentContext } from "../GatherInformation/utils/GlobalState"
 
-
-export default function SimpleInvestment() {
-
-
-    return (
-        <SimpleInvestmentProvider>
-            <AlignedContainer className="large-container">
-                <Grid centered>
-                    <Grid.Column width={4}>
-                        <SymbolForm />
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                        <StartDateDropdown />
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                        <EndDateDropdown />
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                        <InvestmentForm />
-                    </Grid.Column>
-                </Grid>
-
-                <SimulationDisplay />
-            </AlignedContainer>
+export default function SimulationDisplay(props) {
 
 
 
-        </SimpleInvestmentProvider>
-    )
+    const [state, dispatch] = useSimpleInvestmentContext()
+    const [loaded, setLoaded] = useState(false)
+
+    if (state.informationGathered && !loaded) {
+
+        setLoaded(true)
+        dispatch({type: LOAD_SIMULATION})
+
+    }
+
+    useEffect(() => {
+
+        setLoaded(false)
+    }, [])
+
+    useEffect(() => {
+
+        if (state.informationGathered) {
+
+            const startDate = Helper.findFirstDateInYear(state.history, state.startYear)
+            const endDate = Helper.findLastDateInYear(state.history)
+
+
+            API.runMultipleSimulations([
+                [state.symbol, startDate, endDate, state.investment, "buyAndWait", []]
+            ]).then(data => {
+
+                dispatch({ type: SET_SIMULATION_DATA, data: data })
+            })
+        }
+
+
+    }, [state.loadingSimulation])
+
+    const reset = () => {
+        dispatch({ type: CLEAR_DATA })
+        setLoaded(false)
+    }
+
+    console.log(state)
+
+    if (!state.informationGathered) {
+        return null
+    }
+
+    else if (!state.simulationData) {
+
+        return (
+            <Segment textAlign="center">
+                <Loader type="cylon" color="red" />
+            </Segment>
+        )
+    }
+
+    else {
+        return (
+            <Segment textAlign="center">
+                <ChartHandler simulations={state.simulationData} labels={[state.symbol]} />
+                <Button className="btn-margin" primary onClick={reset}>Invest Again</Button>
+            </Segment>
+
+        )
+
+    }
+
 
 }

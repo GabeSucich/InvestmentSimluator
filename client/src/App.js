@@ -8,7 +8,7 @@ import Gabe from "./pages/Gabe"
 import TaxEffect from "./pages/TaxExample"
 // changed this because 2 imports titled "Loader"
 // import ChartLoader from "./chartComponents/Loader"
-import SimpleInvestment from "./pages/SimpleInvestment"
+import GatherInformation from "./pages/GatherInformation"
 import Loader from "./components/Loader"
 import "./App.css"
 import 'semantic-ui-css/semantic.min.css'
@@ -17,6 +17,8 @@ function App() {
 
   return (
     <div>
+
+    <GatherInformation pathname="/basic"/>
     {/* <Gabe/> */}
     {/* <Colin/> */}
     {/* <Sam/> */}
@@ -24,7 +26,8 @@ function App() {
     {/* <Volume/> */}
 
     {/* <TaxEffect/> */}
-    <SimpleInvestment/>
+    {/* <SimpleInvestment/> */}
+
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
