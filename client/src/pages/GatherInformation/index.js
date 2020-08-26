@@ -30,11 +30,9 @@ export default function GatherInformation(props) {
                     </Grid.Column>
                 </Grid>
             
-             {props.pathname === "/basic" ?  <SimpleInvestment /> : null}  
+             {props.pathname === "/basic" ?  <SimpleInvestment /> : null}
+             {props.pathname === "Sam" ? <SamsComponent/> : null}
             </AlignedContainer>
-
-
-
         </SimpleInvestmentProvider>
     )
 
