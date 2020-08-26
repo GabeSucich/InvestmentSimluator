@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useReducer} from "react"
-import Helper from "./Helper"
+import Helper from "./helper"
 import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA} from "./action"
 
 const ActiveTradingContext = createContext()
