@@ -3,7 +3,7 @@ import Helper from "./Helper"
 import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA} from "./action"
 
 const ActiveTradingContext = createContext()
-const {Provider} = SimpleInvestmentContext
+const {Provider} = ActiveTradingContext
 
 const reducer = (state, action) => {
     switch (action.type) {
