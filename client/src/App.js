@@ -18,13 +18,13 @@ function App() {
   return (
     <div>
     {/* <Gabe/> */}
-    <Colin/>
+    {/* <Colin/> */}
     {/* <Sam/> */}
     {/* <Joel/> */}
     {/* <Volume/> */}
 
     {/* <TaxEffect/> */}
-    {/* <SimpleInvestment/> */}
+    <SimpleInvestment/>
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>
