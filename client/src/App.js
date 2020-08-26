@@ -18,18 +18,9 @@ function App() {
   return (
     <div>
 
-    <GatherInformation pathname="/basic"/>
-    {/* <Gabe/> */}
-    {/* <Colin/> */}
-    {/* <Sam/> */}
-    {/* <Joel/> */}
-    {/* <Volume/> */}
-
-    {/* <TaxEffect/> */}
-    {/* <SimpleInvestment/> */}
-
-
-    {/* <Loader type={"bubbles"} className={"center-align"}/> */}
+    {/* <GatherInformation pathname="/"/> */}
+    {<Sam/>}
+    
     </div>
 
   )
