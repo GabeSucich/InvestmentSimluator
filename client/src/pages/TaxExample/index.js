@@ -3,7 +3,7 @@ import TaxSimulationDisplay from "./components/TaxSimulationDisplay"
 import { TaxEffextProvider } from "./utils/taxEffectState"
 import RegionButtons from "./components/RegionButtons"
 import { AlignedContainer } from "../../SemanticUI/Containers"
-import { useSimpleInvestmentContext } from "../GatherInformation/utils/GlobalState"
+import { useSimpleInvestmentContext } from "../GatherInformation/utils/InformationState"
 
 export default function TaxEffect() {
 

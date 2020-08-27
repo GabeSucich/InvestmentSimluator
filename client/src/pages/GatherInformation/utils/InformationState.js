@@ -2,8 +2,8 @@ import React, {createContext, useContext, useReducer} from "react"
 import Helper from "./Helper"
 import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA, LOAD_SIMULATION} from "./action"
 
-const SimpleInvestmentContext = createContext()
-const {Provider} = SimpleInvestmentContext
+const InformationContext = createContext()
+const {Provider} = InformationContext
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -55,7 +55,7 @@ const reducer = (state, action) => {
     }
 }
 
-function SimpleInvestmentProvider({value=[], ...props}) {
+function InformationProvider({value=[], ...props}) {
     const [state, dispatch] = useReducer(reducer, { 
         activeForm: 0,
         symbol: null,
@@ -77,9 +77,9 @@ function SimpleInvestmentProvider({value=[], ...props}) {
     return <Provider value={[state, dispatch]} {...props}/>
 }
 
-function useSimpleInvestmentContext() {
-    return useContext(SimpleInvestmentContext)
+function useInformationContext() {
+    return useContext(InformationContext)
 }
 
-export {SimpleInvestmentProvider, useSimpleInvestmentContext}
+export {InformationProvider, useInformationContext}
 

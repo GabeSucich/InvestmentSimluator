@@ -1,0 +1,9 @@
+.display {
+    overflow-y: scroll !important ;
+    overflow-x: hidden !important
+    
+}
+
+.whole-view {
+    height: 100vh !important;
+}

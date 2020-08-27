@@ -5,13 +5,13 @@ import API from "../../utils/API"
 import Loader from "../../components/Loader"
 import { CLEAR_DATA, SET_SIMULATION_DATA, LOAD_SIMULATION } from "../GatherInformation/utils/action"
 import { Button, Segment } from "semantic-ui-react"
-import { useSimpleInvestmentContext } from "../GatherInformation/utils/GlobalState"
+import { useInformationContext } from "../GatherInformation/utils/InformationState"
 
 export default function SimulationDisplay(props) {
 
 
 
-    const [state, dispatch] = useSimpleInvestmentContext()
+    const [state, dispatch] = useInformationContext()
     const [loaded, setLoaded] = useState(false)
 
     if (state.informationGathered && !loaded) {
