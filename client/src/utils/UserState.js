@@ -24,6 +24,9 @@ const UserProvider = ({value = [], ...props}) => {
         user: null,
         awaitingIntro: null
     })
+    return (
+        <Provider value={[state, dispatch]} {...props}/>
+   )
 }
 
 const useUserContent = () => {

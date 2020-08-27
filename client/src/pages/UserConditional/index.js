@@ -3,17 +3,15 @@ import { UserProvider, useUserContent } from "../../utils/UserState"
 import TaxEffect from "../TaxExample"
 import GatherInformation from "../GatherInformation"
 import { Container } from "semantic-ui-react"
-import NavMenu from "./components/NavMenu"
-import Navbar from "./components/Navbar"
+import NavMenu from "../../components/NavMenu"
+import Navbar from "../../components/Navbar"
 import { Rail, Grid } from "semantic-ui-react"
-import "./App.css"
-import 'semantic-ui-css/semantic.min.css'
 
 export default function UserConditional({pathname}) {
 
     const [userState, userDispatch] = useUserContent()
 
-    if (userState.user) {
+    // if (userState.user) {
         return (
             <Container fluid>
                 <Grid only="mobile" >
@@ -40,11 +38,11 @@ export default function UserConditional({pathname}) {
                 </Grid>
             </Container>
         )
-    }
+    // }
 
 
-    else {
-        return null
-    }
+    // else {
+    //     return null
+    // }
 
 }

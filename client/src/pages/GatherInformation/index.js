@@ -1,22 +1,14 @@
 import React from 'react'
 import { InformationProvider } from "./utils/InformationState"
 import { Grid, Container } from "semantic-ui-react"
-import { FluidContainer } from "../../SemanticUI/Containers"
 import SymbolForm from "./components/Forms/SymbolForm"
 import StartDateDropdown from "./components/Dropdowns/StartDateDropdown"
 import EndDateDropdown from "./components/Dropdowns/EndDateDropdown"
 import InvestmentForm from "./components/Forms/InvestmentForm"
 import SimpleInvestment from "../SimpleInvestment"
-import ActiveTrading from "../ActiveTrading"
+import ActiveTrading from "../ActiveTrading/Pages"
 import TaxEffect from "../TaxExample"
 import "./style.css"
-import { ActiveTradingProvider } from '../ActiveTrading/utils/ActiveState'
-import RangeFormBL from '../ActiveTrading/components/Forms/BuyLow/index'
-import RangeFormBH from '../ActiveTrading/components/Forms/BuyHigh/index'
-import RangeFormSH from '../ActiveTrading/components/Forms/SellHigh/index'
-import RangeFormSL from '../ActiveTrading/components/Forms/SellLow/index'
-import ActRunBtn from '../ActiveTrading/components/Buttons/index'
-
 
 export default function GatherInformation({ pathname }) {
 
@@ -39,9 +31,9 @@ export default function GatherInformation({ pathname }) {
                 </Grid>
 
 
-                {props.pathname === "/active" ? <ActiveTrading /> : null}
-                {props.pathname === "/basic" ? <SimpleInvestment /> : null}
-                {props.pathname === "/tax" ? <TaxEffect /> : null}
+                {pathname === "/active" ? <ActiveTrading /> : null}
+                {/* {props.pathname === "/basic" ? <SimpleInvestment /> : null}
+                {props.pathname === "/tax" ? <TaxEffect /> : null} */}
 
                 {/* Testing Active Trading input fields */}
                 {/* < ActiveTradingProvider>

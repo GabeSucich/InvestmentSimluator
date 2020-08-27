@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/InformationState"
+import { useInformationContext } from "../../../utils/InformationState"
 import { Menu, Dropdown, Button, Segment } from "semantic-ui-react"
 import Helper from "../../../utils/Helper"
 import { SET_END_YEAR } from "../../../utils/action"
@@ -8,7 +8,7 @@ import "./style.css"
 
 export default function StartDateMenu(props) {
 
-    const [state, dispatch] = useSimpleInvestmentContext()
+    const [state, dispatch] = useInformationContext()
     const [endYear, setEndYear] = useState(null)
 
     const getAvailableYears = () => {
