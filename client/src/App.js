@@ -18,8 +18,8 @@ function App() {
   return (
     <div>
 
-    {/* <GatherInformation pathname="/"/> */}
-    {<Sam/>}
+    <GatherInformation pathname="/"/>
+    {/* {<Sam/>} */}
     
     </div>
 

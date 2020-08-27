@@ -28,7 +28,7 @@ export default function SimulationDisplay(props) {
     }, [])
 
     useEffect(() => {
-
+        console.log('useEffect Called');
         if (state.informationGathered) {
 
             const startDate = Helper.findFirstDateInYear(state.history, state.startYear)

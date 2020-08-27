@@ -10,6 +10,8 @@ export default function Colin() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+
+      
       // params startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc
       // returns an object with buyDates and sellDates
       API.runActiveTrading("2005-09-11", "2020-02-14", "NIO", 3, 2, 6, 4)
