@@ -10,6 +10,10 @@ import TaxEffect from "./pages/TaxExample"
 // import ChartLoader from "./chartComponents/Loader"
 import GatherInformation from "./pages/GatherInformation"
 import Loader from "./components/Loader"
+import { Container } from "semantic-ui-react"
+import NavMenu from "./components/NavMenu"
+import Navbar from "./components/Navbar"
+import { Rail, Grid } from "semantic-ui-react"
 import "./App.css"
 import 'semantic-ui-css/semantic.min.css'
 
@@ -17,12 +21,31 @@ function App() {
 
   return (
     <div>
+      <Grid only="mobile">
+        <Grid.Column width={16} only="mobile">
+          <Navbar />
+        </Grid.Column>
+      </Grid>
+      <Grid>
 
-    {/* <GatherInformation pathname="/"/> */}
-    {<Sam/>}
-    
+        <Grid.Column tablet={5} computer={4} only="tablet computer">
+          {/* <Rail position="left"> */}
+          <NavMenu />
+          {/* </Rail> */}
+        </Grid.Column>
+
+
+
+        <Grid.Column mobile={16} tablet={11} computer={12} >
+          <Container fluid>
+            <GatherInformation pathname="/tax" />
+          </Container>
+        </Grid.Column>
+
+        {/* {<Sam/>} */}
+        {/* <Volume/> */}
+      </Grid>
     </div>
-
   )
 }
 

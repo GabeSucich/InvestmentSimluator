@@ -49,7 +49,7 @@ export default function TaxSimulationDisplay() {
     }
 
     return (
-        <AlignedContainer>
+        <AlignedContainer className="padded-container">
             <Grid.Row textAlign="center" className="margin-above">
                 {!state.data ? <Button onClick={() => runSimulation()} primary>{state.currentRegions.length > 0 ? "Run Simulation" : "Select at least one state"}</Button> : null}
                 {!state.data ? null : <Button color="red" onClick={() => clearSimulation()}>Clear Simulation</Button>}
