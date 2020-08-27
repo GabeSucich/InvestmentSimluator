@@ -6,21 +6,21 @@ const {Provider} = ActiveTradingContext
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case SET_BUYLOW:
-            return { ...state, buyLow: action.buyLow }
-            break
-        case SET_BUYHIGH:
-            return { ...state, buyHigh: action.buyHigh }
-            break
-        case SET_SELLLOW:
-            return { ...state, sellLow: action.sellLow }
-            break
-        case SET_SELLHIGH:
-            return { ...state, sellHigh: action.sellHigh }
-            break
+        case SET_PARAMS:
+            return { ...state, buyLow: action.buyLow, buyHigh: action.buyHigh, sellLow: action.sellLow, sellHigh: action.sellHigh }
+           
+        // case SET_BUYHIGH:
+        //     return { ...state, buyHigh: action.buyHigh }
+          
+        // case SET_SELLLOW:
+        //     return { ...state, sellLow: action.sellLow }
+           
+        // case SET_SELLHIGH:
+        //     return { ...state, sellHigh: action.sellHigh }
+       
         case SYMBOL_LOADING:
             return { ...state, symbolLoading: true }
-            break
+       
         case CLEAR_DATA:
             return {
                 buyLow: null,

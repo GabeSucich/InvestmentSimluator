@@ -13,7 +13,7 @@ const Helper = {
     process(str){
         var strInt = parseInt(str);
         console.log(strInt)
-        console.log(Number.isInteger(strInt));
+        Number.isInteger(strInt);
         if (strInt < 0) strInt = 0;
         if (strInt > 100) strInt = 100;
         console.log('helper stringInt = ' + strInt);
@@ -35,6 +35,24 @@ const Helper = {
             return this.process(str);
         }
     },
+
+    verifyIncrease(num) {
+        if(isNaN(num)){
+            return false;
+        } else if (num < 0){
+            return false
+        } return true
+    },
+
+
+    verifyDrop(num){
+        if(isNaN(num)){
+            return false;
+        } else if (num < 0 || num >= 100) {
+            return false
+        }  return true
+    },
+
 
     findFirstDateInYear(historicals, year) {
         console.log(year)

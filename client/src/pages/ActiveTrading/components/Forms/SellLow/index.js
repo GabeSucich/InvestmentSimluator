@@ -13,10 +13,12 @@ export default function RangeFormSL(props) {
     const [invalid, setInvalid] = useState(false)
     const [sellLow, setSelllow] = useState()
 
-    const handleOnChange = (event, { value }) => {
-        setSelllow(value)
-        dispatch({ type: SET_SELLLOW, sellLow: sellLow});
-    }
+    // const handleOnChange = (event, { value }) => {
+    //     setSelllow(value)
+    //     dispatch({ type: SET_SELLLOW, sellLow: sellLow});
+    // }
+
+    const 
 
     const handleSubmit = event => {
         dispatch({ type: SET_SELLLOW, sellLow: sellLow});

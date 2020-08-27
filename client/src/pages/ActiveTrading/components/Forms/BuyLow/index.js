@@ -10,10 +10,12 @@ import { Form, Button, Segment } from 'semantic-ui-react'
 export default function RangeFormBL(props) {
 
     const [state, dispatch] = useActiveTradingContext()
-    // const [invalid, setInvalid] = useState(false)
     const [buyLow, setBuylow] = useState()
 
-
+    const handleOnChange = (event, { value }) => {
+        setBuylow(value); 
+    }
+    
     const handleOnChange = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
