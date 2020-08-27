@@ -22,9 +22,6 @@ const reducer = (state, action) => {
                 loading: false
             }
 
-        case LOADING:
-            return { ...state, loading: true }
-
     }
 }
 
@@ -33,7 +30,6 @@ function MonthlyInvestmentProvider({ value = [], ...props }) {
         annualIncome: 0,
         monthlyInvestment: 0,
         monthlyExpenses: [],
-        loading: false
     })
 
     return <MonthlyInvestmentContext.Provider value={[state, dispatch]} {...props} />

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChartHandler from "../../components/ChartHandler"
 import API from "../../utils/API"
 import Colors from "../../utils/Colors.json"
 import ChartOptions from "../../utils/ChartOptions"
 import { Grid } from "semantic-ui-react"
 import { Button } from "semantic-ui-react"
-import { SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR, LOADING } from "./actions"
-import { useMonthlyInvestmentContext } from "./monthlyInvestmentState"
+import { SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR, LOADING } from "./utils/actions"
+import { useMonthlyInvestmentContext } from "./utils/monthlyInvestmentState"
 import Loader from "../../components/Loader"
 
 
@@ -52,7 +52,6 @@ export default function Sam() {
           ["SPY", "2005-08-25", "2020-02-14", 0, "monthlyInvestment", [monthly2, actionDates]]
         ])
           .then(res => {
-            console.log(res)
             setData([...data, ...res])
           })
       })
