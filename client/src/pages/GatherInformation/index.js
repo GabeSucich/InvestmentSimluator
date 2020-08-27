@@ -38,10 +38,12 @@ export default function GatherInformation({ pathname }) {
                     </Grid.Column>
                 </Grid>
 
+                {pathname === "/basic" ? <SimpleInvestment /> : null}
+                {pathname === "/tax" ? <TaxEffect /> : null}
+                {pathname === "/monthly"} ? 
+                {pathname === "/active" ? <ActiveTrading /> : null}
 
-                {props.pathname === "/active" ? <ActiveTrading /> : null}
-                {props.pathname === "/basic" ? <SimpleInvestment /> : null}
-                {props.pathname === "/tax" ? <TaxEffect /> : null}
+                
 
                 {/* Testing Active Trading input fields */}
                 {/* < ActiveTradingProvider>
