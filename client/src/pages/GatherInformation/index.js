@@ -41,8 +41,8 @@ export default function GatherInformation(props) {
                     <Grid.Column width={4}>
                         <RangeFormBL /> 
                         <RangeFormBH /> 
-                        <RangeFormSH /> 
                         <RangeFormSL /> 
+                        <RangeFormSH /> 
                     </Grid.Column>
                 </Grid>
                 </AlignedContainer>
