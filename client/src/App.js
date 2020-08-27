@@ -16,10 +16,10 @@ function App() {
     <div>
     {/* <Gabe/> */}
     {/* <Colin/> */}
-    {/* <Sam/> */}
+    <Sam/>
 
     {/* <TaxEffect/> */}
-    <SimpleInvestment/>
+    {/* <SimpleInvestment/> */}
 
     {/* <Loader type={"bubbles"} className={"center-align"}/> */}
     </div>

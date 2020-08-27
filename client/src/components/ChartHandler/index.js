@@ -9,6 +9,7 @@ export default function ChartHandler(props) {
     } else {
         var { options } = props;
     }
+    console.log(options)
 
     function processSimulation(i) {
         var otherAttributes = {};
