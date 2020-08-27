@@ -66,11 +66,6 @@
         "class": 4
     },
     {
-        "name": "Zoom",
-        "symbol": "ZM",
-        "class": 2
-    },
-    {
         "name": "Facebook",
         "symbol": "FB",
         "class": 2
@@ -109,11 +104,6 @@
         "name": "Wells Fargo",
         "symbol": "WFC",
         "class": 6
-    },
-    {
-        "name": "Lyft",
-        "symbol": "LYFT",
-        "class": 5
     },
     {
         "name": "General Motors",

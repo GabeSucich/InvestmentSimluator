@@ -5,3 +5,9 @@
 .btn-margin {
     margin-top: 2% !important
 }
+
+@media only screen and (max-width: 600px) {
+    .large-container {
+        margin-top: 0% !important
+    }
+  }
