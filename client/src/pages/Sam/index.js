@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Axios from "axios"
 import ChartHandler from "../../components/ChartHandler"
 import API from "../../utils/API"
+import Colors from "../../utils/Colors.json"
+import ChartOptions from "../../utils/ChartOptions"
+import { Grid } from "semantic-ui-react"
+import { Button } from "semantic-ui-react"
+import { SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR, LOADING } from "./utils/actions"
+import { useMonthlyInvestmentContext } from "./utils/monthlyInvestmentState"
+import Loader from "../../components/Loader"
+
 
 
 export default function Sam() {
 
-  const [data, setData] = useState([]);
+  const [labels, setLabels] = useState([])
+
+
+  const [state, dispatch] = useMonthlyInvestmentContext();
 
   // function run(symbol, startDate, endDate, investment, strategyFuncName, strategyParams, interval) {
   //   API.getActionDates(interval, startDate, endDate, symbol)
@@ -29,18 +39,19 @@ export default function Sam() {
   //     })
   // }, [])
 
+  const lineOptions = ChartOptions.SamMonthlyOptions;
 
+  const monthly1 = 1000;
+  const monthly2 = 600;
 
   useEffect(() => {
-    API.getActionDates(100, "2000-08-25", "2020-02-14", "TWTR")
+    API.getActionDates(100, "2005-08-25", "2020-02-14", "SPY")
       .then(actionDates => {
-        console.log(actionDates)
         API.runMultipleSimulations([
-          ["TWTR", "2000-08-25", "2020-02-14", 1000, "monthlyInvestment", [1000, actionDates]],
-          ["TWTR", "2000-08-25", "2020-02-14", 60000, "buyAndWait", []]
+          ["SPY", "2005-08-25", "2020-02-14", 0, "monthlyInvestment", [monthly1, actionDates]],
+          ["SPY", "2005-08-25", "2020-02-14", 0, "monthlyInvestment", [monthly2, actionDates]]
         ])
           .then(res => {
-            console.log(res)
             setData([...data, ...res])
           })
       })
@@ -50,7 +61,7 @@ export default function Sam() {
 
   return (
     <div>
-      {data.length > 0 ? <ChartHandler simulations={data} labels={["Colin", "Buy And Wait"]}/> : "Waiting for data"}
+      {data.length > 0 ? <ChartHandler simulations={data} labels={labels} borderColor={Colors} fill={labels.map(label => false)} pointRadius={labels.map(label => 0)} options={lineOptions}/> : "Waiting for data"}
     </div>
   )
 

@@ -13,6 +13,7 @@ export default function ChartHandler(props) {
     } else {
         var { options } = props;
     }
+    console.log(options)
 
     const propKeys = Object.keys(props)
 
