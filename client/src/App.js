@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import Sam from "./pages/Sam"
 import Joel from "./pages/Joel"
 import Volume from "./pages/Volume"
@@ -20,30 +19,32 @@ import 'semantic-ui-css/semantic.min.css'
 function App() {
 
   return (
-    <div>
-      <Grid only="mobile">
+    <div >
+      <Grid only="mobile" >
+
         <Grid.Column width={16} only="mobile">
           <Navbar />
         </Grid.Column>
       </Grid>
       <Grid>
+        <Grid.Row className="whole-view">
+          <Grid.Column stretched tablet={5} computer={3} only="tablet computer" >
+            {/* <Rail position="left"> */}
+            <NavMenu />
+            {/* </Rail> */}
+          </Grid.Column>
 
-        <Grid.Column tablet={5} computer={4} only="tablet computer">
-          {/* <Rail position="left"> */}
-          <NavMenu />
-          {/* </Rail> */}
-        </Grid.Column>
 
 
-
-        <Grid.Column mobile={16} tablet={11} computer={12} >
-          <Container fluid>
-            <GatherInformation pathname="/tax" />
-          </Container>
-        </Grid.Column>
-
+          <Grid.Column stretched mobile={16} tablet={11} computer={13} className="display">
+            <Container fluid>
+              {/* <GatherInformation pathname="/tax" /> */}
+              <Volume/>
+            </Container>
+          </Grid.Column>
+        </Grid.Row>
         {/* {<Sam/>} */}
-        {/* <Volume/> */}
+        
       </Grid>
     </div>
   )

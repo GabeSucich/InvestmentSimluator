@@ -15,14 +15,12 @@ export default function NavMenu(props) {
 
     return (
         <Segment inverted stretched padded className="nav-menu">
-            <Menu vertical fluid>
+            <Menu vertical fluid inverted>
                 <Menu.Item
-                className="enlarge"
-                        active={active === "Introduction"}
-                        onClick={handleClick}
-                        name="Introduction"
+                onClick={() => setActive("Introduction")}
+                active = {active === "Introduction"}
                 >
-    
+                <Menu.Header className="enlarge">Introduction</Menu.Header>
                 </Menu.Item>
                 <Menu.Item>
                     <Menu.Header className="enlarge">Beginner</Menu.Header>

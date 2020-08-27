@@ -10,12 +10,12 @@ export default function VolumeTrigger() {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        API.findVolumeDates("V", "2000-03-15", "2020-08-30", 30, -.001, 4)
+        API.findVolumeDates("FB", "2000-03-15", "2020-08-30", 30, -.003, 2)
             .then(volumeDates => {
                 console.log(volumeDates)
                 API.runMultipleSimulations([
-                    ["V", "2000-03-15", "2020-08-30", 40000, "volumeTrigger2", [volumeDates, 11, 60, 2]],
-                    ["V", "2000-03-15", "2020-08-30", 10000, "buyAndWait", []]
+                    ["FB", "2000-03-15", "2020-08-30", 40000, "volumeTrigger2", [volumeDates, 11, 60, 2]],
+                    ["FB", "2000-03-15", "2020-08-30", 10000, "buyAndWait", []]
                 ])
                     .then(res => {
                         console.log(res)
