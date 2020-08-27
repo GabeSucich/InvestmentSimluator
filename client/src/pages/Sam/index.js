@@ -11,7 +11,7 @@
 
 
 
-export default function Sam() {
+// export default function Sam() {
 
 //   const [labels, setLabels] = useState([])
 
@@ -65,4 +65,4 @@ export default function Sam() {
 //     </div>
 //   )
 
-}
+// }

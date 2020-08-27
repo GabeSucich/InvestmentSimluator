@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/InformationState"
+import { useInformationContext } from "../../../utils/InformationState"
 import { StandardForm, LoadingForm} from "../../../../../SemanticUI/Forms"
 import { Form, Button, Segment, Menu } from "semantic-ui-react"
 import API from "../../../../../utils/API"
@@ -9,7 +9,7 @@ import stockRandomizer from "../../../../../utils/stockRandomizer"
 
 export default function SymbolForm(props) {
 
-    const [state, dispatch] = useSimpleInvestmentContext()
+    const [state, dispatch] = useInformationContext()
     const [invalid, setInvalid] = useState(false)
     const [symbol, setSymbol] = useState("")
     const [stockSelection, setStockSelection] = useState(stockRandomizer())

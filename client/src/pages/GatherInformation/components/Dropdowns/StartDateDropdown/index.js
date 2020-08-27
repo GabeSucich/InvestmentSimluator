@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/InformationState"
+import { useInformationContext } from "../../../utils/InformationState"
 import { Dropdown, Button, Menu, Segment } from "semantic-ui-react"
 import Helper from "../../../utils/Helper"
 import { SET_START_YEAR } from "../../../utils/action"
@@ -8,7 +8,7 @@ import "./style.css"
 
 export default function StartDateDropdown(props) {
 
-    const [state, dispatch] = useSimpleInvestmentContext()
+    const [state, dispatch] = useInformationContext()
     const [startYear, setStartYear] = useState(null)
 
     const getAvailableYears = () => {
