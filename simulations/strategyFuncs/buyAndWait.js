@@ -10,7 +10,9 @@ function buyAndWait(symbol, portfolio, stockData, currentDate) {
     if (!portfolio.purchased) {
         console.log("Looking to buy")
         portfolio.purchased = true
-        const stockstoPurchase = Utils.maxStockPurchases(stockData[currentDate].markPrice, portfolio.getCash)
+        console.log(portfolio.getCash)
+        console.log(eval(stockData[currentDate].markPrice))
+        const stockstoPurchase = Utils.maxStockPurchases(eval(stockData[currentDate].markPrice), portfolio.getCash)
         suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, stockstoPurchase))
 
     }

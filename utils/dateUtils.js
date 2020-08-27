@@ -133,12 +133,23 @@ const DateUtils = {
         return actionDates;
     },
 
+    // takes in an integer (5) and returns the decimal equivalent subtracted from 100% (.95)
+    calcPercentChange(percent) {
+    var firstStep = 100 - percent;
+    var secondStep = firstStep * 0.01;
+    return secondStep;
+    },
+
     // function takes in date range determines current high price
-    findBuyDate(stockData, startDate, endDate) {
+    findBuyDate(stockData, startDate, endDate, percent) {
+        console.log("dateUtils percent = " + parseInt(percent));
         console.log('findBuyDate running');
         var highPrice = 0;
         var buyPrice;
-        const dateArr = Object.keys(stockData)
+        const dateArr = Object.keys(stockData);
+
+       var percentOf = this.calcPercentChange(percent);
+    //    console.log('percentOf dateUtils = ' + percentOf);
 
         // iterate through dates
         for (const date of dateArr) {
@@ -151,7 +162,7 @@ const DateUtils = {
                 // if that price is greater than the previous day, make new high
                 if (currentPrice > highPrice) {
                     highPrice = currentPrice;
-                    buyPrice = (highPrice * 0.95).toFixed(2);
+                    buyPrice = (highPrice * percentOf).toFixed(2);
                 }
 
                 // if the current price is 5% less than high price - push date
@@ -159,16 +170,13 @@ const DateUtils = {
 
 
                     // once it finds the first dip date, stop searching
-                    console.log("buy date = " + date);
-                    return date;
+                    console.log("buy date Utils = " + date);
+                    return [date, buyPrice];
                 }
             }
         }
         return endDate;
-    }
-
-
-
+    },
 }
 
 

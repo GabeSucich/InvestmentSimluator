@@ -2,25 +2,25 @@ const Suggestion = require("./utils/Suggestion");
 const Utils = require("./utils/Utils");
 
 // finds 5% dip and buys with all money 
-function buyLow(investmentAmt, symbol, portfolio, stockData, currentDate) {
+function buyLow(buyDate, priceOnBuy, symbol, portfolio, stockData, currentDate) {
 
-    console.log('strat investAmt = ' + investmentAmt)
+    // console library.
+    // console.log('buyLow running');
+    // console.log('strat investAmt = ' + investmentAmt);
+    // console.log("buyDate on strat = " + buyDate);
+    // console.log("priceOnBuy on strat = " + priceOnBuy);
+
+
     const suggestions = []
-    const buyDate = Utils.findBuyDate(stockData);
-    console.log("buyDate on strat = " + buyDate);
-    // var cashCopy = portfolio.getCash;
-    console.log('strat cash copy = ' + cashCopy);
-
-    var priceOnBuy = stockData[buyDate]["markPrice"];
-    console.log("priceOnBuy = " + priceOnBuy);
 
 
-   if (priceOnBuy < investmentAmt) {
+   if (currentDate === buyDate) {
+
         // gives back the number of stocks to buy 
-        var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, investmentAmt);
-        // console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
+        var amtToPurchase = Utils.maxStockPurchases(priceOnBuy, portfolio.getCash);
+        console.log('buying ' + amtToPurchase + ' stocks on ' + buyDate);
 
-        suggestions.push(Suggestion.createBuySuggestion(symbol , stockData, buyDate, amtToPurchase));
+        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, amtToPurchase));
     }
 return suggestions
 

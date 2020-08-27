@@ -1,0 +1,218 @@
+[
+    {
+        "name": "S&P 500",
+        "symbol": "SPY",
+        "class": 1
+    },
+    {
+        "name": "Dow Jones Industrial Average",
+        "symbol": "DIA",
+        "class": 1
+        
+    },
+    {
+        "name": "NASDAQ",
+        "symbol": "NDAQ",
+        "class": 1
+    },
+    {
+        "name": "Amazon",
+        "symbol": "AMZN",
+        "class": 3
+    },
+    {
+        "name": "Apple",
+        "symbol": "AAPL",
+        "class": 2
+    },
+    {
+        "name": "Microsoft",
+        "symbol": "MSFT",
+        "class": 2
+    },
+    {
+        "name": "Boeing",
+        "symbol": "BA",
+        "class": 4
+    },
+    {
+        "name": "DISNEY",
+        "symbol": "DIS",
+        "class": 3
+    },
+    {
+        "name": "Walmart",
+        "symbol": "WMT",
+        "class": 4
+    },
+    {
+        "name": "Nike",
+        "symbol": "NKE",
+        "class": 4
+    },
+    {
+        "name": "Bank of America",
+        "symbol": "BAC",
+        "class": 6
+    },
+    {
+        "name": "Exxon Mobil",
+        "symbol": "XOM",
+        "class": 3
+    },
+    {
+        "name": "Southwest Airlines",
+        "symbol": "LUV",
+        "class": 4
+    },
+    {
+        "name": "Zoom",
+        "symbol": "ZM",
+        "class": 2
+    },
+    {
+        "name": "Facebook",
+        "symbol": "FB",
+        "class": 2
+    },
+    {
+        "name": "Tesla",
+        "symbol": "TSLA",
+        "class": 4
+    },
+    {
+        "name": "Netflix",
+        "symbol": "NFLX",
+        "class": 2
+    },
+    {
+        "name": "Starbucks",
+        "symbol": "SBUX",
+        "class": 4
+    },
+    {
+        "name": "Google",
+        "symbol": "GOOGL",
+        "class": 2
+    },
+    {
+        "name": "Johnson & Johnson",
+        "symbol": "JNJ",
+        "class": 4
+    },
+    {
+        "name": "United Airlines",
+        "symbol": "UAL",
+        "class": 5
+    },
+    {
+        "name": "Wells Fargo",
+        "symbol": "WFC",
+        "class": 6
+    },
+    {
+        "name": "Lyft",
+        "symbol": "LYFT",
+        "class": 5
+    },
+    {
+        "name": "General Motors",
+        "symbol": "GM",
+        "class": 4
+    },
+    {
+        "name": "Delta Airlines",
+        "symbol": "DAL",
+        "class": 5
+    },
+    {
+        "name": "Uber",
+        "symbol": "UBER",
+        "class": 5
+    },
+    {
+        "name": "Costco",
+        "symbol": "COST",
+        "class": 4
+    },
+    {
+        "name": "Chevron",
+        "symbol": "CVX",
+        "class": 3
+    },
+    {
+        "name": "Mastercard",
+        "symbol": "MA",
+        "class": 6
+    },
+    {
+        "name": "Visa",
+        "symbol": "V",
+        "class": 6
+    },
+    {
+        "name": "PayPal",
+        "symbol": "PYPL",
+        "class": 6
+    },
+    {
+        "name": "JPMorgan Chase",
+        "symbol": "JPM",
+        "class": 6
+    },
+    {
+        "name": "American Express",
+        "symbol": "AXP",
+        "class": 6
+    },
+    {
+        "name": "Shopify",
+        "symbol": "SHOP",
+        "class": 2
+    },
+    {
+        "name": "Adobe",
+        "symbol": "ADBE",
+        "class": 2
+    },
+    {
+        "name": "Spotify",
+        "symbol": "SPOT",
+        "class": 2
+    },
+    {
+        "name": "Roku",
+        "symbol": "ROKU",
+        "class": 2
+    },
+    {
+        "name": "Square",
+        "symbol": "SQ",
+        "class": 2
+    },
+    {
+        "name": "IBM",
+        "symbol": "IBM",
+        "class": 2
+    },
+    {
+        "name": "Caterpillar",
+        "symbol": "CAT",
+        "class": 4
+    },
+    {
+        "name": "3M",
+        "symbol": "MMM",
+        "class": 4
+    },
+    {
+        "name": "Snapchat",
+        "symbol": "SNAP",
+        "class": 2
+    },
+    {
+        "name": "PowerShares",
+        "symbol": "QQQ",
+        "class": 1
+    }
+]

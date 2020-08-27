@@ -4,19 +4,21 @@ import API from "../../../../utils/API"
 import DataHandler from "../../../../components/DataHandler"
 import ChartOptions from "../../../../utils/ChartOptions"
 import { useTaxEffectContext } from "../../utils/taxEffectState"
-import colors from "../../../../utils/Colors.json"
 import { Button } from "semantic-ui-react"
+import {AlignedContainer} from "../../../../SemanticUI/Containers"
 import { SET_DATA, CLEAR_DATA, LOADING } from "../../utils/action"
 import Loader from "../../../../components/Loader"
 import { Grid } from "semantic-ui-react"
 import TaxBar from "../TaxBar"
 
+import randomColors from "../../../../utils/colorRandomize"
+const randomizedColors = randomColors()
+
 
 
 export default function TaxSimulationDisplay() {
 
-    const LineOptions = ChartOptions.TaxEffectOptions
-    const BarOptions = ChartOptions.TaxEffectBarOptions
+    const BarOptions = ChartOptions.StandardBarOption
 
     const [labels, setLabels] = useState([])
     const [taxRates, setTaxRates] = useState([])
@@ -47,8 +49,8 @@ export default function TaxSimulationDisplay() {
     }
 
     return (
-        <div>
-            <Grid.Row textAlign="center">
+        <AlignedContainer>
+            <Grid.Row textAlign="center" className="margin-above">
                 {!state.data ? <Button onClick={() => runSimulation()} primary>{state.currentRegions.length > 0 ? "Run Simulation" : "Select at least one state"}</Button> : null}
                 {!state.data ? null : <Button color="red" onClick={() => clearSimulation()}>Clear Simulation</Button>}
 
@@ -56,13 +58,13 @@ export default function TaxSimulationDisplay() {
             <Grid.Row textAlign="center">
                 {state.loading ? <Loader /> : null}
             </Grid.Row>
-            <Grid.Row textAlign="center">
-                {state.data ? <TaxBar backgroundColor={labels.map((_, index) => colors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null}
+            <Grid.Row textAlign="center" className="margin-above">
+                {state.data ? <TaxBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null}
                 <Grid.Column width={12} id="line-chart">
-                    {state.data ? <DataHandler func={"decreasePercent"} params={[taxRates]} simulations={state.data} labels={labels} borderColor={colors} fill={labels.map(label => false)} pointRadius={labels.map(label => 0)} options={LineOptions} /> : null}
+                    {state.data ? <DataHandler func={"decreasePercent"} params={[taxRates]} borderColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} labels={labels} /> : null}
                 </Grid.Column>
             </Grid.Row>
-        </div>
+        </AlignedContainer>
     )
 
 }

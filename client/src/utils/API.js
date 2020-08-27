@@ -2,13 +2,12 @@ import Axios from "axios"
 
 const API = {
 
-    validateStockData(symbol) {
+    validateStockSymbol(symbol) {
 
         return this.getStockData(symbol).then(response => {
             if (response.data) {
                 return true
-            }
-            else {
+            } else {
                 return false
             }
 
@@ -59,6 +58,7 @@ const API = {
         var counter = 0;
         var finished = false;
         var API = this;
+
         function gatherData() {
             if (counter === arr.length) {
                 return simulations
@@ -74,7 +74,7 @@ const API = {
         return gatherData();
     },
 
-    findBuyDate(startDate, endDate, symbol) {
+    findBuyDate(startDate, endDate, symbol, percent) {
         return Axios({
             method: "POST",
             url: "/api/simulation/getBuyDate",
@@ -82,6 +82,8 @@ const API = {
                 symbol: symbol,
                 startDate: startDate,
                 endDate: endDate,
+                percent: percent,
+
 
             }
         }).then(res => {
@@ -89,6 +91,41 @@ const API = {
         })
     },
 
-}
+    runActiveTrading(startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc) {
+        console.log('API runActive called');
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/activeTrading",
+            data: {
+                startDate: startDate,
+                endDate: endDate,
+                symbol: symbol,
+                blPerc: blPerc,
+                bhPerc: bhPerc,
+                slPerc: slPerc,
+                shPerc: shPerc,
+            }
+        }).then(res => {
+            return res.data
+        })
+    },
 
+    findVolumeDates(symbol, startDate, endDate, criticalVolumeGradient, criticalAverageSelloff, recordLength) {
+        return Axios({
+            method: "POST",
+            url: "/api/simulation/getVolumeDates",
+            data: {
+                symbol: symbol,
+                startDate: startDate,
+                endDate: endDate,
+                criticalAverageSelloff: criticalAverageSelloff,
+                criticalVolumeGradient: criticalVolumeGradient,
+                recordLength: recordLength
+            }
+        }).then(res => {
+            return res.data
+        })
+    }
+
+}
 export default API
