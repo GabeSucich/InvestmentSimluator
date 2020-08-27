@@ -34,6 +34,7 @@ function App() {
             {/* </Rail> */}
           </Grid.Column>
 
+    <GatherInformation pathname="/"/>
 
 
           <Grid.Column stretched mobile={16} tablet={11} computer={13} className="display">
