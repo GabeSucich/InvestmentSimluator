@@ -18,10 +18,10 @@ function App() {
   return (
     <div>
     {/* <Gabe/> */}
-    <Colin/>
+    {/* <Colin/> */}
     {/* <Sam/> */}
     {/* <Joel/> */}
-    {/* <Volume/> */}
+    <Volume/>
 
     {/* <TaxEffect/> */}
     {/* <SimpleInvestment/> */}
