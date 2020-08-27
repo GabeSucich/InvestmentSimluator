@@ -16,6 +16,7 @@ export default function RangeFormBL(props) {
 
     const handleOnChange = (event, { value }) => {
         setBuylow(value);
+        dispatch({ type: SET_BUYLOW, buyLow: buyLow});
     }
 
     const handleSubmit = (event) => {
@@ -41,7 +42,7 @@ export default function RangeFormBL(props) {
                         onChange={handleOnChange}
                        
                     />
-                    {buyLow ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Buy Low!</Button> : null}
+                    {/* {buyLow ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Buy Low!</Button> : null} */}
                     
                 </StandardForm>
             </Segment>

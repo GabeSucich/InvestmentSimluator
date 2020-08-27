@@ -17,11 +17,20 @@ export default function RangeFormBH(props) {
    const handleOnChange = (event, { value }) => {
         setBuyhigh(value);
         // console.log(value);
-     
+        // sendDispatch();
+        dispatch({ type: SET_BUYHIGH, buyHigh: buyHigh});
+        console.log("state buyHigh = " + state.buyHigh);
+    
+
    }
 
-   const handleSubmit = event => {
+   const sendDispatch = () => {
+       console.log("dispatch sent.");
+    dispatch({ type: SET_BUYHIGH, buyHigh: buyHigh});
+   }
 
+
+   const handleSubmit = event => {
     event.preventDefault();
     dispatch({ type: SET_BUYHIGH, buyHigh: buyHigh});
     console.log("state buyHigh = " + state.buyHigh);
@@ -45,7 +54,7 @@ export default function RangeFormBH(props) {
                         onChange={handleOnChange}
                        
                     />
-                    {buyHigh ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Buy High!</Button> : null}
+                    {/* {buyHigh ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Buy High!</Button> : null} */}
                     
                 </StandardForm>
             </Segment>

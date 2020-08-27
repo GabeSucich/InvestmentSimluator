@@ -15,6 +15,7 @@ export default function RangeFormSH(props) {
 
     const handleOnChange = (event, { value }) => {
         setSellhigh(value)
+        dispatch({ type: SET_SELLHIGH, sellHigh: sellHigh});
     }
 
     const handleSubmit = event => {
@@ -41,7 +42,7 @@ export default function RangeFormSH(props) {
                         onChange={handleOnChange}
                        
                     />
-                    {sellHigh ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Invest!</Button> : null}
+                    {/* {sellHigh ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Invest!</Button> : null} */}
                     
                 </StandardForm>
             </Segment>
