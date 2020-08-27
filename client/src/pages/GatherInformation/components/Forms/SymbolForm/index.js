@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/GlobalState"
+import { useSimpleInvestmentContext } from "../../../utils/InformationState"
 import { StandardForm, LoadingForm} from "../../../../../SemanticUI/Forms"
 import { Form, Button, Segment, Menu } from "semantic-ui-react"
 import API from "../../../../../utils/API"

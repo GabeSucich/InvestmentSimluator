@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StandardForm } from "../../../../../SemanticUI/Forms"
-import { useSimpleInvestmentContext } from "../../../utils/GlobalState"
+import { useSimpleInvestmentContext } from "../../../utils/InformationState"
 import Helper from "../../../utils/Helper"
 import API from "../../../../../utils/API"
 import { SET_INVESTMENT, SET_SIMULATION_DATA } from "../../../utils/action"
@@ -18,11 +18,7 @@ export default function InvestmentForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
-
         dispatch({ type: SET_INVESTMENT, investment: investment })
-
-        
     }
 
     if (state.activeForm < 3 || state.informationGathered) {
