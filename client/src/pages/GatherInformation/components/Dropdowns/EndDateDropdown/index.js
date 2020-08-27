@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSimpleInvestmentContext } from "../../../utils/GlobalState"
+import { useSimpleInvestmentContext } from "../../../utils/InformationState"
 import { Menu, Dropdown, Button, Segment } from "semantic-ui-react"
 import Helper from "../../../utils/Helper"
 import { SET_END_YEAR } from "../../../utils/action"

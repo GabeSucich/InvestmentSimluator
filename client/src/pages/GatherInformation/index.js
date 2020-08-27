@@ -1,7 +1,7 @@
 import React from 'react'
-import { SimpleInvestmentProvider } from "./utils/GlobalState"
+import { InformationProvider } from "./utils/InformationState"
 import { Grid, Container } from "semantic-ui-react"
-import { FluidContainer} from "../../SemanticUI/Containers"
+import { FluidContainer } from "../../SemanticUI/Containers"
 import SymbolForm from "./components/Forms/SymbolForm"
 import StartDateDropdown from "./components/Dropdowns/StartDateDropdown"
 import EndDateDropdown from "./components/Dropdowns/EndDateDropdown"
@@ -18,10 +18,10 @@ import RangeFormSL from '../ActiveTrading/components/Forms/SellLow/index'
 import ActRunBtn from '../ActiveTrading/components/Buttons/index'
 
 
-export default function GatherInformation(props) {
+export default function GatherInformation({ pathname }) {
 
     return (
-        <SimpleInvestmentProvider>
+        <InformationProvider>
             <Container className="large-container">
                 <Grid centered>
                     <Grid.Column mobile={8} tablet={8} computer={4} textAlign="center">
@@ -37,10 +37,14 @@ export default function GatherInformation(props) {
                         <InvestmentForm />
                     </Grid.Column>
                 </Grid>
-              
 
-    {/* Testing Active Trading input fields */}
-            < ActiveTradingProvider>
+
+                {props.pathname === "/active" ? <ActiveTrading /> : null}
+                {props.pathname === "/basic" ? <SimpleInvestment /> : null}
+                {props.pathname === "/tax" ? <TaxEffect /> : null}
+
+                {/* Testing Active Trading input fields */}
+                {/* < ActiveTradingProvider>
                 <Container className="large-container">
                 <Grid centered>
                     <Grid.Column width={4}>
@@ -52,17 +56,11 @@ export default function GatherInformation(props) {
                     </Grid.Column>
                 </Grid>
                 </Container>
-            </ActiveTradingProvider>
+            </ActiveTradingProvider> */}
 
-            {props.pathname === "/" ?  <ActiveTrading /> : null}
-             {/* {props.pathname === "/simple" ?  <SimpleInvestment /> : null} */}
-             {/* {props.pathname === "Sam" ? <SamsComponent/> : null} */}
-            {/* </AlignedContainer> */}
-            
-             {props.pathname === "/basic" ?  <SimpleInvestment /> : null}
-             {props.pathname === "/tax" ? <TaxEffect/> : null}
+
             </Container>
-        </SimpleInvestmentProvider>
+        </InformationProvider>
     )
 
 }
