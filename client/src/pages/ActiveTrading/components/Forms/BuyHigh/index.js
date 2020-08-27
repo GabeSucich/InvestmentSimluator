@@ -20,8 +20,9 @@ export default function RangeFormBH(props) {
      
    }
 
-   const handleSubmit = () => {
-       
+   const handleSubmit = event => {
+
+    event.preventDefault();
     dispatch({ type: SET_BUYHIGH, buyHigh: buyHigh});
     console.log("state buyHigh = " + state.buyHigh);
    }
