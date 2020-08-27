@@ -24,11 +24,11 @@ export default function RangeFormSH(props) {
         console.log("state sellHigh = " + state.sellHigh);
        }
 
-    // if (state.activeForm < 3 || state.informationGathered) {
-    //     return null
-    // }
+    if (state.activeForm < 3 || state.informationGathered) {
+        return null
+    }
 
-    // else {
+    else {
 
         return (
             <Segment textAlign="center">
@@ -49,3 +49,4 @@ export default function RangeFormSH(props) {
         )
 
     }
+}

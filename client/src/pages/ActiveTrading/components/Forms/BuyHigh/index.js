@@ -28,11 +28,11 @@ export default function RangeFormBH(props) {
    }
 
 
-    // if (state.activeForm < 3 || state.informationGathered) {
-    //     return null
-    // }
+    if (state.activeForm < 3 || state.informationGathered) {
+        return null
+    }
 
-    // else {
+    else {
 
         return (
             <Segment textAlign="center">
@@ -54,4 +54,4 @@ export default function RangeFormBH(props) {
 
     }
 
-// }
+}

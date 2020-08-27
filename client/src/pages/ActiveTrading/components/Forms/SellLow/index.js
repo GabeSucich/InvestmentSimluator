@@ -18,17 +18,16 @@ export default function RangeFormSL(props) {
     }
 
     const handleSubmit = event => {
-
-        event.preventDefault();
         dispatch({ type: SET_SELLLOW, sellLow: sellLow});
+        event.preventDefault();
         console.log("state sellLow = " + state.sellLow);
        }
 
-    // if (state.activeForm < 3 || state.informationGathered) {
-    //     return null
-    // }
+    if (state.activeForm < 3 || state.informationGathered) {
+        return null
+    }
 
-    // else {
+    else {
 
         return (
             <Segment textAlign="center">
@@ -41,7 +40,7 @@ export default function RangeFormSL(props) {
                         onChange={handleOnChange}
                        
                     />
-                    {sellLow ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Invest!</Button> : null}
+                    {sellLow ? <Button className="btn-margin" color="green" onClick={handleSubmit}>Invest!</Button> : null}
                     
                 </StandardForm>
             </Segment>
@@ -49,3 +48,4 @@ export default function RangeFormSL(props) {
         )
 
     }
+}

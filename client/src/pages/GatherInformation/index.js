@@ -36,6 +36,8 @@ export default function GatherInformation(props) {
                     </Grid.Column>
                 </Grid>
                 </AlignedContainer>
+
+    {/* Testing Active Trading input fields */}
             < ActiveTradingProvider>
                 <AlignedContainer className="large-container">
                 <Grid centered>
