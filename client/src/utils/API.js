@@ -1,6 +1,31 @@
 import Axios from "axios"
+import bcrypt from "bcryptjs"
 
 const API = {
+
+    getUser(username) {
+        return Axios({
+            method: "GET",
+            url: "/api/user/" + username
+        }).then(res => {
+            console.log(res)
+        })
+    },
+
+    creatUser(username, password) {
+        var encryptedPass = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+        return Axios({
+            method: "POST",
+            url: "/api/user",
+            data: {
+                username: username,
+                password: encryptedPass
+            }
+        }).then(res => {
+            console.log(res)
+        })
+
+    },
 
     validateStockSymbol(symbol) {
 

@@ -5,6 +5,8 @@ import AllForm from './Pages'
 
 function ActiveTrading () {
 
+    console.log(ActiveTradingProvider)
+
     return (
         <ActiveTradingProvider>
             <AllForm/>

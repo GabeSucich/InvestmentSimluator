@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { StandardForm } from "../../SemanticUI/Forms/index"
+import React, { useState } from 'react'
 import { useActiveTradingContext } from "./utils/ActiveState"
 import Helper from "./utils/Helper"
-// import API from "../../../../../utils/API"
-import { SET_PARAMS, CLEAR_DATA, } from "./utils/activeAction"
+import { SET_PARAMS, CLEAR_DATA } from "./utils/activeAction"
 import { SET_SIMULATION_DATA } from '../GatherInformation/utils/action'
-// import "./style.css"
 import API from '../../utils/API'
 import { Segment, Input, Button, Container } from 'semantic-ui-react'
 import { useInformationContext } from '../GatherInformation/utils/InformationState'
@@ -49,6 +46,10 @@ export default function AllForm() {
                .then(res => {
                 console.log(res)
                 informationDispatch({ type: SET_SIMULATION_DATA, data: res })
+                setBuyhigh("")
+                setBuylow("")
+                setSellhigh("")
+                setSelllow("")
                })
           })
         //
@@ -65,7 +66,7 @@ export default function AllForm() {
 
         return (
 
-            <div>
+            <Container fluid textAlign="center">
                 <Segment fluid>
 
                     <p>
@@ -102,15 +103,16 @@ export default function AllForm() {
                 {validator() ? <Button onClick={handleSubmit}>Run Simulation</Button> : null}
 
 
-            </div>
+            </Container>
 
         )
     }
 
     else {
        return (
-           <Container fluid>
+           <Container fluid textAlign="center">
            {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol]} />}
+           {!informationState.simulationData ? null : <Button primary onClick ={() => dispatch({type: CLEAR_DATA})}>Run New Simulation</Button>}
            </Container>
        )
     }

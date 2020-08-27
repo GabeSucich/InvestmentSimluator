@@ -6,7 +6,7 @@ import StartDateDropdown from "./components/Dropdowns/StartDateDropdown"
 import EndDateDropdown from "./components/Dropdowns/EndDateDropdown"
 import InvestmentForm from "./components/Forms/InvestmentForm"
 import SimpleInvestment from "../SimpleInvestment"
-import ActiveTrading from "../ActiveTrading/Pages"
+import ActiveTrading from "../ActiveTrading"
 import TaxEffect from "../TaxExample"
 import "./style.css"
 
@@ -30,8 +30,15 @@ export default function GatherInformation({ pathname }) {
                     </Grid.Column>
                 </Grid>
 
+                {/* {pathname === "/basic" ? <SimpleInvestment /> : null}
+                {pathname === "/tax" ? <TaxEffect /> : null}
+                {pathname === "/monthly"} ? 
+                {pathname === "/active" ? <ActiveTrading /> : null} */}
 
+                
                 {pathname === "/active" ? <ActiveTrading /> : null}
+                {pathname === "/basic" ? <SimpleInvestment/> : null}
+                {pathname === "/tax" ? <TaxEffect/> : null}
                 {/* {props.pathname === "/basic" ? <SimpleInvestment /> : null}
                 {props.pathname === "/tax" ? <TaxEffect /> : null} */}
 

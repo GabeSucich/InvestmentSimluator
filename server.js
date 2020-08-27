@@ -11,6 +11,7 @@ app.use(express.json())
 app.use(express.static("public"))
 
 require("./routes/mainroutes")(app)
+require("./routes/userroutes")(app)
 require("./routes/groutes")(app)
 require("./routes/croutes")(app)
 require("./routes/jroutes")(app)
