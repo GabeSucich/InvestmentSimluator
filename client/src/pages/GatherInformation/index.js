@@ -14,7 +14,7 @@ import RangeFormBL from '../ActiveTrading/components/Forms/BuyLow/index'
 import RangeFormBH from '../ActiveTrading/components/Forms/BuyHigh/index'
 import RangeFormSH from '../ActiveTrading/components/Forms/SellHigh/index'
 import RangeFormSL from '../ActiveTrading/components/Forms/SellLow/index'
-import ActRunBtn from '../ActiveTrading/components/Buttons/submitBtn'
+import ActRunBtn from '../ActiveTrading/components/Buttons/index'
 
 
 export default function GatherInformation(props) {
