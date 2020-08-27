@@ -12,19 +12,20 @@ export default function SimulationDisplay(props) {
 
 
     const [state, dispatch] = useSimpleInvestmentContext()
+    // const [localState, localDispatch] = 
     const [loaded, setLoaded] = useState(false)
 
     if (state.informationGathered && !loaded) {
 
         setLoaded(true)
-        dispatch({type: LOAD_SIMULATION})
+        dispatch({ type: LOAD_SIMULATION })
 
     }
 
     useEffect(() => {
 
         setLoaded(false)
-        
+
     }, [])
 
     useEffect(() => {
@@ -34,15 +35,21 @@ export default function SimulationDisplay(props) {
             const startDate = Helper.findFirstDateInYear(state.history, state.startYear)
             const endDate = Helper.findLastDateInYear(state.history)
 
+            // // params startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc
+            API.runActiveTrading(startDate, endDate, state.symbol, 3, 2, 6, 4)
+            //     // check this. 
+                .then(res => {
+                    // API.runMultipleSimulations([
+                    //     ["NIO", "2005-09-11", "2020-02-14", 20000, "activeTrading", [res]],
+                    //     ["NIO", "2005-09-11", "2020-02-14", 20000, "buyAndWait", []],
 
-            API.runMultipleSimulations([
-                [state.symbol, startDate, endDate, state.investment, "buyAndWait", []]
-            ]).then(data => {
-
-                dispatch({ type: SET_SIMULATION_DATA, data: data })
-            })
-        }
-
+                    // ])
+                    //     .then(res => {
+                            console.log(res)
+                            // dispatch({ type: SET_SIMULATION_DATA, data: data })
+                        })
+                }
+    // }
 
     }, [state.loadingSimulation])
 

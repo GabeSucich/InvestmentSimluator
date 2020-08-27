@@ -36,8 +36,10 @@ for (var i=0; i < buyDates.length; i++){
      if (currentDate === sellDates[i]) {
 
         // console.log('sell called');
-        suggestions.push(Suggestion.createSellSuggestion(symbol)); 
+        for (const stock of portfolio.holdings) {
+        suggestions.push(Suggestion.createSellSuggestion(stock)); 
         console.log('selling ' + symbol + ' on ' + sellDates[i]);
+        }
     }
 }
 
