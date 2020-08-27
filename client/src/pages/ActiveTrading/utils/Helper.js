@@ -14,6 +14,9 @@ const Helper = {
         var strInt = parseInt(str);
         console.log(strInt)
         console.log(Number.isInteger(strInt));
+        if (strInt < 0) strInt = 0;
+        if (strInt > 100) strInt = 100;
+        console.log('helper stringInt = ' + strInt);
         return (strInt);
   
     },

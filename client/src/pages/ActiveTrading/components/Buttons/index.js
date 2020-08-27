@@ -5,13 +5,12 @@ import Helper from '../../utils/Helper'
 
 
 export default function ActTradeSubBtn(props) {
+    var intBL;
+    var intBH;
+    var intSL;
+    var intSH;
 
     const [state, dispatch] = useActiveTradingContext()
-
-    var intBL = Helper.verifyInt(state.buyLow);
-    var intBH = Helper.verifyInt(state.buyHigh);
-    var intSL = Helper.verifyInt(state.sellLow);
-    var intSH = Helper.verifyInt(state.sellHigh);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,20 +20,31 @@ export default function ActTradeSubBtn(props) {
       
 
     }
+    const passOff = (intBL, intBH, intSL, intSH) => {
+        console.log('validate passOff intBL = ' + intBL);
+        console.log('validate passOff intBL = ' + intBH);
+        console.log('validate passOff intBL = ' + intSL);
+        console.log('validate passOff intBL = ' + intSH);
 
-    const checkHandOff = () => {
-        // console.log('intBL = ' + intBL);
-        // console.log('intBH = ' + intBH);
-        // console.log('intSL = ' + intSL);
-        // console.log('intSH = ' + intSH);
-        
-        if(intBL && intBH && intSL && intSH){
-            console.log("all ints ready");
-        } else {
-            console.log('not all ints ready');
+        if(!intBL || !intBH || !intSL || !intSH) {
+            alert('Input must be an integer');
         }
+    }
 
+    const validate = () => {
+        var intBL = Helper.verifyInt(state.buyLow);
+        var intBH = Helper.verifyInt(state.buyHigh);
+        var intSL = Helper.verifyInt(state.sellLow);
+        var intSH = Helper.verifyInt(state.sellHigh);
+
+        passOff(intBL, intBH, intSL, intSH);
+    }
+
+    const checkHandOff = () => { 
+        validate();  
     } 
+
+   
 
     // if(state.buyLow && state.buyHigh && state.sellLow && state.sellHigh) {
         return (
@@ -49,4 +59,5 @@ export default function ActTradeSubBtn(props) {
     // else {
     //     return null
     // }
+
 }
