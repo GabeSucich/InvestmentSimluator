@@ -9,25 +9,31 @@ export default function ActTradeSubBtn(props) {
     const [state, dispatch] = useActiveTradingContext()
 
     var intBL = Helper.verifyInt(state.buyLow);
-    // var intBH = Helper.verifyInt(state.buyHigh);
-    // var intSL = Helper.verifyInt(state.sellLow);
-    // var intSH = Helper.verifyInt(state.sellHigh);
+    var intBH = Helper.verifyInt(state.buyHigh);
+    var intSL = Helper.verifyInt(state.sellLow);
+    var intSH = Helper.verifyInt(state.sellHigh);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log("state buyLow = " + state.buyLow);
-        console.log("state buyHigh = " + state.buyHigh);
-        console.log("state sellLow = " + state.sellLow);
-        console.log("state sellHigh = " + state.sellHigh);
-
         checkHandOff();
+        // checkHandOff();
       
 
     }
 
     const checkHandOff = () => {
-        console.log('intBL = ' + intBL);
+        // console.log('intBL = ' + intBL);
+        // console.log('intBH = ' + intBH);
+        // console.log('intSL = ' + intSL);
+        // console.log('intSH = ' + intSH);
+        
+        if(intBL && intBH && intSL && intSH){
+            console.log("all ints ready");
+        } else {
+            console.log('not all ints ready');
+        }
+
     } 
 
     // if(state.buyLow && state.buyHigh && state.sellLow && state.sellHigh) {

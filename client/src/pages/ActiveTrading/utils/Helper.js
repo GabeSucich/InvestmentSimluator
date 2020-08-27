@@ -14,6 +14,7 @@ const Helper = {
         var strInt = parseInt(str);
         console.log(strInt)
         console.log(Number.isInteger(strInt));
+        return (strInt);
   
     },
 
@@ -28,7 +29,7 @@ const Helper = {
             return
         } else {
             console.log('helper, passes first tests ' + str);
-            this.process(str);
+            return this.process(str);
         }
     }
 }
