@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StandardForm } from "../../../../../SemanticUI/Forms"
-import { useSimpleInvestmentContext } from "../../../utils/InformationState"
+import { useInformationContext } from "../../../utils/InformationState"
 import Helper from "../../../utils/Helper"
 import API from "../../../../../utils/API"
 import { SET_INVESTMENT, SET_SIMULATION_DATA } from "../../../utils/action"
@@ -9,7 +9,7 @@ import "./style.css"
 
 export default function InvestmentForm(props) {
 
-    const [state, dispatch] = useSimpleInvestmentContext()
+    const [state, dispatch] = useInformationContext()
     const [investment, setInvestment] = useState()
 
     const handleOnChange = (event, { value }) => {

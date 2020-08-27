@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useReducer} from "react"
-import { SET_BUYLOW, SET_BUYHIGH, SET_SELLLOW, SET_SELLHIGH, SYMBOL_LOADING, CLEAR_DATA, INVALID } from '../utils/activeAction'
+import {  SET_PARAMS , CLEAR_DATA, } from '../utils/activeAction'
 
 const ActiveTradingContext = createContext()
 const {Provider} = ActiveTradingContext
@@ -18,8 +18,6 @@ const reducer = (state, action) => {
         // case SET_SELLHIGH:
         //     return { ...state, sellHigh: action.sellHigh }
        
-        case SYMBOL_LOADING:
-            return { ...state, symbolLoading: true }
        
         case CLEAR_DATA:
             return {
@@ -27,12 +25,8 @@ const reducer = (state, action) => {
                 buyHigh: null,
                 sellLow: null,
                 sellHigh: null,
-                symbolLoading: false
             }
             break
-        case INVALID:
-            return { ...state, symbolLoading: false }
-    }
 }
 
 function ActiveTradingProvider({value=[], ...props}) {
@@ -41,7 +35,6 @@ function ActiveTradingProvider({value=[], ...props}) {
         buyHigh: null,
         sellLow: null,
         sellHigh: null,
-        symbolLoading: false
     })
 
     return <Provider value={[state, dispatch]} {...props}/>

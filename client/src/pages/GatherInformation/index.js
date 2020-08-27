@@ -39,9 +39,9 @@ export default function GatherInformation({ pathname }) {
                 </Grid>
 
 
-                {props.pathname === "/active" ? <ActiveTrading /> : null}
-                {props.pathname === "/basic" ? <SimpleInvestment /> : null}
-                {props.pathname === "/tax" ? <TaxEffect /> : null}
+                {pathname === "/active" ? <ActiveTrading /> : null}
+                {/* {props.pathname === "/basic" ? <SimpleInvestment /> : null}
+                {props.pathname === "/tax" ? <TaxEffect /> : null} */}
 
                 {/* Testing Active Trading input fields */}
                 {/* < ActiveTradingProvider>

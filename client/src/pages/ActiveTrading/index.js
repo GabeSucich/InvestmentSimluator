@@ -1,88 +1,111 @@
-import React, { useEffect, useState } from 'react'
-import ChartHandler from "../../components/ChartHandler"
-import Helper from "../GatherInformation/utils/Helper"
-import API from "../../utils/API"
-import Loader from "../../components/Loader"
-import { CLEAR_DATA, SET_SIMULATION_DATA, LOAD_SIMULATION } from "../GatherInformation/utils/action"
-import { Button, Segment } from "semantic-ui-react"
-import { useSimpleInvestmentContext } from "../GatherInformation/utils/GlobalState"
+import React, { useState, useEffect } from 'react'
+import { StandardForm } from "../../SemanticUI/Forms/index"
+import { useActiveTradingContext } from './utils/ActiveState'
+import Helper from "./utils/Helper"
+// import API from "../../../../../utils/API"
+import { SET_PARAMS, CLEAR_DATA, } from "./utils/activeAction"
+import { SET_SIMULATION_DATA } from '../GatherInformation/utils/action'
+// import "./style.css"
+import API from '../../../src/utils/API'
+import { Segment, Input, Button, Container } from 'semantic-ui-react'
+import { useInformationContext } from '../GatherInformation/utils/InformationState'
+import Loader from '../../components/Loader/index'
 
-export default function SimulationDisplay(props) {
+export default function AllForm() {
 
+    const [informationState, informationDispatch] = useInformationContext();
+    const [state, dispatch] = useActiveTradingContext();
+    const [invalid, setInvalid] = useState(false);
+    const [buyLow, setBuylow] = useState();
+    const [buyHigh, setBuyhigh] = useState();
+    const [sellLow, setSelllow] = useState();
+    const [sellHigh, setSellhigh] = useState();
 
-
-    const [state, dispatch] = useSimpleInvestmentContext()
-    // const [localState, localDispatch] = 
-    const [loaded, setLoaded] = useState(false)
-
-    if (state.informationGathered && !loaded) {
-
-        setLoaded(true)
-        dispatch({ type: LOAD_SIMULATION })
-
+    const validator = () => {
+        if ((Helper.verifyDrop(sellLow)) && (Helper.verifyDrop(buyLow)) && (Helper.verifyIncrease(buyHigh)) && (Helper.verifyIncrease(sellHigh))) {
+            return true
+        } return false
     }
 
-    useEffect(() => {
+    const handleSubmit = event => {
+        dispatch({ type: SET_PARAMS, buyLow: buyLow, buyHigh: buyHigh, sellLow: sellLow, sellHigh: sellHigh })
+        // API call 
 
-        setLoaded(false)
+        const startDate = Helper.findFirstDateInYear(informationState.history, informationState.startYear)
+        const endDate = Helper.findLastDateInYear(informationState.history)
 
-    }, [])
+        // start, end, symbol, BL, BH, SL, SH
+        API.runActiveTrading(startDate, endDate, informationState.symbol, buyLow, buyHigh, sellLow, sellHigh)
+        // check this. 
+          .then(res => {
+             API.runMultipleSimulations([
+               [informationState.symbol, startDate, endDate, informationState.investment, "activeTrading", [res]],
+               [informationState.symbol, startDate, endDate, informationState.investment, "buyAndWait", []],
+      
+               ])
+               .then(res => {
+                console.log(res)
+                informationDispatch({ type: SET_SIMULATION_DATA, data: res })
+               })
+          })
+        //
 
-    useEffect(() => {
-        console.log('useEffect Called');
-        if (state.informationGathered) {
-
-            const startDate = Helper.findFirstDateInYear(state.history, state.startYear)
-            const endDate = Helper.findLastDateInYear(state.history)
-
-            // // params startDate, endDate, symbol, blPerc, bhPerc, slPerc, shPerc
-            API.runActiveTrading(startDate, endDate, state.symbol, 3, 2, 6, 4)
-            //     // check this. 
-                .then(res => {
-                    // API.runMultipleSimulations([
-                    //     ["NIO", "2005-09-11", "2020-02-14", 20000, "activeTrading", [res]],
-                    //     ["NIO", "2005-09-11", "2020-02-14", 20000, "buyAndWait", []],
-
-                    // ])
-                    //     .then(res => {
-                            console.log(res)
-                            // dispatch({ type: SET_SIMULATION_DATA, data: data })
-                        })
-                }
-    // }
-
-    }, [state.loadingSimulation])
-
-    const reset = () => {
-        dispatch({ type: CLEAR_DATA })
-        setLoaded(false)
+        // setState .... 
     }
 
-    console.log(state)
+    if (!informationState.informationGathered) {
+        return null;
+    } else if (!state.buyLow) {
 
-    if (!state.informationGathered) {
-        return null
-    }
 
-    else if (!state.simulationData) {
+
 
         return (
-            <Segment textAlign="center">
-                <Loader type="cylon" color="red" />
-            </Segment>
+
+            <div>
+                <Segment fluid>
+
+                    <p>
+                        This is the buy low
+                <span>
+                            <Input size="mini" placeholder="buyLow" value={buyLow} onChange={(event, { value }) => setBuylow(value)} />
+                        </span>
+                    </p>
+
+                    <p>
+                        This is the buy high
+                <span>
+                            <Input size="mini" placeholder="buyHigh" value={buyHigh} onChange={(event, { value }) => setBuyhigh(value)} />
+                        </span>
+                    </p>
+
+
+                    <p>
+                        This is sell high
+                <span>
+                            <Input size="mini" placeholder="sellHigh" value={sellHigh} onChange={(event, { value }) => setSellhigh(value)} />
+                        </span>
+                    </p>
+
+                    <p>
+                        This is sell low
+                <span>
+                            <Input size="mini" placeholder="sellLow" value={sellLow} onChange={(event, { value }) => setSellLow(value)} />
+                        </span>
+                    </p>
+
+                </Segment>
+
+                {validator() ? <Button onClick={handleSubmit}>Run Simulation</Button> : null}
+
+
+            </div>
+
         )
     }
 
     else {
-        return (
-            <Segment textAlign="center">
-                <ChartHandler simulations={state.simulationData} labels={[state.symbol]} />
-                <Button className="btn-margin" primary onClick={reset}>Invest Again</Button>
-            </Segment>
-
-        )
-
+       {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol]} />}
     }
-
 
 }
