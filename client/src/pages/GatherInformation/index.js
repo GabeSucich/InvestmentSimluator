@@ -54,7 +54,7 @@ export default function GatherInformation(props) {
             </ActiveTradingProvider>
 
             {props.pathname === "/" ?  <ActiveTrading /> : null}
-             {/* {props.pathname === "/" ?  <SimpleInvestment /> : null} */}
+             {/* {props.pathname === "/simple" ?  <SimpleInvestment /> : null} */}
              {/* {props.pathname === "Sam" ? <SamsComponent/> : null} */}
             {/* </AlignedContainer> */}
         </SimpleInvestmentProvider>

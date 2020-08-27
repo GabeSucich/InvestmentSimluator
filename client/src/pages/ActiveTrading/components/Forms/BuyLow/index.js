@@ -10,20 +10,34 @@ import { Form, Button, Segment } from 'semantic-ui-react'
 export default function RangeFormBL(props) {
 
     const [state, dispatch] = useActiveTradingContext()
-    const [invalid, setInvalid] = useState(false)
+    // const [invalid, setInvalid] = useState(false)
     const [buyLow, setBuylow] = useState()
 
 
-    const handleOnChange = (event, { value }) => {
-        setBuylow(value);
-        dispatch({ type: SET_BUYLOW, buyLow: buyLow});
+    const handleOnChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        // console.log('name = '+ name);
+        console.log('value = '+ value);
+        // this.setState({[name]: value});
+        setBuylow(event.target.value); 
+        window.setTimeout(checkBuyLow(), 3000);
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        dispatch({ type: SET_BUYLOW, buyLow: buyLow});
-        console.log("state buyLow = " + state.buyLow);
+    const checkBuyLow = () => {
+        if (buyLow) {
+            console.log('conditional met buyLow = ' + buyLow)
+            dispatch({ type: SET_BUYLOW, buyLow: buyLow});
+        } else {
+            console.log('buyLow not there = '+ buyLow );
+        }
     }
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     dispatch({ type: SET_BUYLOW, buyLow: buyLow});
+    //     console.log("state buyLow = " + state.buyLow);
+    // }
 
     if (state.activeForm < 3 || state.informationGathered) {
         return null
@@ -39,6 +53,7 @@ export default function RangeFormBL(props) {
                     <Form.Input
                         placeholder="Buy Low Percentage (ex: 4)"
                         label={`What percentage below a current high price would you like to buy?`}
+                        name = 'setBuylow'
                         onChange={handleOnChange}
                        
                     />
