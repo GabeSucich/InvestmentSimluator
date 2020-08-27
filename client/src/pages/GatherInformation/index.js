@@ -9,6 +9,7 @@ import InvestmentForm from "./components/Forms/InvestmentForm"
 import SimpleInvestment from "../SimpleInvestment"
 import ActiveTrading from "../ActiveTrading"
 import "./style.css"
+import { ActiveTradingProvider } from '../ActiveTrading/utils/ActiveState'
 import RangeFormBL from '../ActiveTrading/components/Forms/BuyLow/index'
 import RangeFormBH from '../ActiveTrading/components/Forms/BuyHigh/index'
 import RangeFormSH from '../ActiveTrading/components/Forms/SellHigh/index'
@@ -35,7 +36,7 @@ export default function GatherInformation(props) {
                     </Grid.Column>
                 </Grid>
                 </AlignedContainer>
-
+            < ActiveTradingProvider>
                 <AlignedContainer className="large-container">
                 <Grid centered>
                     <Grid.Column width={4}>
@@ -46,7 +47,7 @@ export default function GatherInformation(props) {
                     </Grid.Column>
                 </Grid>
                 </AlignedContainer>
-
+            </ActiveTradingProvider>
 
             {props.pathname === "/" ?  <ActiveTrading /> : null}
              {/* {props.pathname === "/" ?  <SimpleInvestment /> : null} */}

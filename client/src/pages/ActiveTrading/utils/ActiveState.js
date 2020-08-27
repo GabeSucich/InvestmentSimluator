@@ -4,7 +4,7 @@ import { SET_BUY_LOW, SET_BUY_HIGH, SET_SELL_LOW, SET_SELL_HIGH, SYMBOL_LOADING,
 const ActiveTradingContext = createContext()
 const {Provider} = ActiveTradingContext
 
-const useReducer = (state, action) => {
+const reducer = (state, action) => {
     switch (action.type) {
         case SET_BUY_LOW:
             return { ...state, buyLow: action.buyLow }
