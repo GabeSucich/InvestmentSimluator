@@ -1,53 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import Axios from "axios"
 import ChartHandler from "../../components/ChartHandler"
-import {defaults} from "react-chartjs-2"
+import { Dropdown } from "semantic-ui-react"
 import API from "../../utils/API"
 import DataHandler from "../../components/DataHandler"
 
 
 export default function Gabe() {
 
-    defaults.global.animation = {
-
-        easing: "easeOutBounce"
-    }
-
-    const options = {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    autoSkip: true,
-                    maxTicksLimit: 20,
-                }
-            }]
+    const friendOptions = [
+        {
+          key: 'Jenny Hess',
+          text: 'Jenny Hess',
+          value: 'Jenny Hess',
+          image: { avatar: true, src: '/images/avatar/small/jenny.jpg' },
         },
-
-
-    }
-    const [data, setData] = useState([]);
-    useEffect(() => API.runMultipleSimulations([
-        ["AMZN", "2014-08-07", "2015-010-10",2000, "buyAndWait", []],
-       
-        // ["AAPL", "2000-08-25", "2020-02-14", 100, "monthlyInvestment", [100, actionDates]]
-    ])
-        .then(res => {
-            console.log(res)
-            setData([...data, ...res])
-        }), [])
-    
-
-    
-
-
-
-    
+        {
+          key: 'Elliot Fu',
+          text: 'Elliot Fu',
+          value: 'Elliot Fu',
+          image: { avatar: true, src: '/images/avatar/small/elliot.jpg' },
+        },
+        {
+          key: 'Stevie Feliciano',
+          text: 'Stevie Feliciano',
+          value: 'Stevie Feliciano',
+          image: { avatar: true, src: '/images/avatar/small/stevie.jpg' },
+        },
+        {
+          key: 'Christian',
+          text: 'Christian',
+          value: 'Christian',
+          image: { avatar: true, src: '/images/avatar/small/christian.jpg' },
+        },
+        {
+          key: 'Matt',
+          text: 'Matt',
+          value: 'Matt',
+          image: { avatar: true, src: '/images/avatar/small/matt.jpg' },
+        },
+        {
+          key: 'Justen Kitsune',
+          text: 'Justen Kitsune',
+          value: 'Justen Kitsune',
+          image: { avatar: true, src: '/images/avatar/small/justen.jpg' },
+        },
+      ]
 
 
     return (
-        <div>
-            {data.length > 0 ? <ChartHandler simulations={data} labels={["AMZN"]} borderColor={["#8A2BE2", "Red", "Green", "Blue"]} fill={[false, false, false, false]} pointRadius={[0,0, 0, 0]} options={options} /> : "Waiting for data"}
-        </div>
+        <Dropdown
+            text='Select Friend'
+            fluid
+            selection
+            options={friendOptions}
+        />
     )
 
 }

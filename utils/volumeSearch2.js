@@ -28,8 +28,8 @@ module.exports = function volumeSearch(stockHistory, criticalVolumeGradientPerce
     function updateRecords() {
 
         const data = {}
-        data.buyRatioChange = getBuyRatioChange(currentDate)
-        const {buyVolume, sellVolume} = volumeSplitter(stockHistory[currentDate])
+        data.buyRatioChange = getBuyRatioChange(currentDate) // Gets difference in fraction buys between current date and previous date
+        const {buyVolume, sellVolume} = volumeSplitter(stockHistory[currentDate]) // Gets our buy and sell volumes
         data.buyVolume = buyVolume
         data.sellVolume = sellVolume
         records = VolumeUtils.addDateToRecords(records, currentDate, data, recordLength)
@@ -48,20 +48,38 @@ module.exports = function volumeSearch(stockHistory, criticalVolumeGradientPerce
 
     }
 
+    var counter = 0
+    var counterRunning = false
+
     for (const [date, data] of Object.entries(stockHistory)) {
         
         currentDate = date
+
         if (prevDate) {
-           updateRecords() 
+           updateRecords() // Adding the current day to records, which is keeping track of our relevant data
+        }
+
+        if (counterRunning) {
+            counter +=1
+        }
+
+        if (counter === 1) {
+            sellDates.push(currentDate)
+            counter = 0
+            counterRunning = false
         }
         
-        if (records.length === recordLength) {
-            const buyVolumeGradient = VolumeUtils.buyVolumeGradient(records)
-            const buyFractionAverage = VolumeUtils.buyFractionAverage(records)
+        else if (records.length === recordLength) { //Makes sure we have a full set of records before looking for buy dates
+            
+            const buyFractionAverage = VolumeUtils.buyFractionAverage(records) // Finds average of buy-fraction CHANGE over past days
 
-            if (VolumeUtils.findGradientAsPercent(buyVolumeGradient, records)  > criticalVolumeGradientPercent && buyFractionAverage < criticalAverageSelloff) {
+            const buyVolumeGradient = VolumeUtils.buyVolumeGradient(records) // Finds slope of buy volume over past days
+            const buyVolumeGradientPercent = VolumeUtils.findGradientAsPercent(buyVolumeGradient, records) // Scales down buy volume gradient to normalize
+
+            if (buyVolumeGradientPercent  > criticalVolumeGradientPercent && buyFractionAverage < criticalAverageSelloff) {
 
                 buyDates.push(currentDate)
+                counterRunning = true
             }
         }
 

@@ -9,7 +9,7 @@ export default function TaxEffect() {
     return (
         <div>
             <TaxEffextProvider>
-                <AlignedContainer textAlign="justified">
+                <AlignedContainer textAlign="center">
                     <RegionButtons />
                     <TaxSimulationDisplay />
                 </AlignedContainer>

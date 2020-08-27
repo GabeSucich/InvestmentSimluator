@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useReducer} from "react"
 import Helper from "./Helper"
-import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA} from "./action"
+import {INVALID, SET_STOCK, SET_START_YEAR, SET_END_YEAR, SYMBOL_LOADING, SET_INVESTMENT, SET_HISTORY, CLEAR_DATA, SET_SIMULATION_DATA, LOAD_SIMULATION} from "./action"
 
 const SimpleInvestmentContext = createContext()
 const {Provider} = SimpleInvestmentContext
@@ -14,19 +14,21 @@ const reducer = (state, action) => {
             return {...state, symbolLoading: true}
             break
         case SET_START_YEAR:
-            return {...state, startYear: action.startYear, activeForm: 2}
+            const earliestDate = Helper.findFirstDateInYear(state.history, action.startYear)
+            const lowestPrice = eval(state.history[earliestDate].markPrice)
+            return {...state, startYear: action.startYear, activeForm: 2, smallestInvestment: Math.ceil(lowestPrice/10)*10}
             break
         case SET_END_YEAR:
-            const earliestDate = Helper.findFirstDateInYear(state.history, action.endYear)
-            const lowestPrice = eval(state.history[earliestDate].markPrice)
-            return {...state, endYear: action.endYear, activeForm: 3, smallestInvestment: Math.ceil(lowestPrice/10)*10}
+            return {...state, endYear: action.endYear, activeForm: 3}
             break
         case SET_INVESTMENT:
             
-            return {...state, investment: eval(action.investment).toFixed(), simulationStarted: true }
+            return {...state, investment: eval(action.investment).toFixed(), informationGathered: true }
         case SET_HISTORY:
             return {...state, history: action.history}
             break
+        case LOAD_SIMULATION:
+            return {...state, loadingSimulation: true}
         case SET_SIMULATION_DATA:
             return {...state, simulationData: action.data}
         case CLEAR_DATA: 
@@ -38,11 +40,12 @@ const reducer = (state, action) => {
                 investment: null,
                 smallestInvestment: null,
                 symbolLoading: false,
+                loadingSimulation: false,
                 startDateLoading: false,
                 endYearLoading: false,
                 investmentLoading: false,
                 history: null,
-                simulationStarted: false,
+                informationGathered: false,
                 simulationData: null
                 
             }
@@ -60,12 +63,13 @@ function SimpleInvestmentProvider({value=[], ...props}) {
         endYear: null,
         investment: null,
         smallestInvestment: null,
+        loadingSimulation: false,
         symbolLoading: false,
         startDateLoading: false,
         endYearLoading: false,
         investmentLoading: false,
         history: null,
-        simulationStarted: false,
+        informationGathered: false,
         simulationData: null
         
     })

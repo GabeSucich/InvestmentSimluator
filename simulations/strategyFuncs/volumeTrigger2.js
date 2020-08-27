@@ -1,7 +1,7 @@
 const Suggestion = require("./utils/Suggestion")
 const Utils = require("./utils/Utils")
 
-function volumeTrigger2(actionDates, sellPercent, holdPercent, symbol, portfolio, stockData, currentDate) {
+function volumeTrigger2(actionDates, sellPercent, holdPercent, recordLength, symbol, portfolio, stockData, currentDate) {
     var buyDates = actionDates.buyDates
     var sellDates = actionDates.sellDates
     //     // Always have the final four parameters of your function as shown above
@@ -14,15 +14,21 @@ function volumeTrigger2(actionDates, sellPercent, holdPercent, symbol, portfolio
 
     // First we'll have to buy a stock
 
-    if (!portfolio.initialBuy) {
-        portfolio.initialBuy = true
-        var stockPrice = eval(stockData[currentDate].markPrice)
-        var stockAmt = Utils.maxStockPurchases(stockPrice, portfolio.getCash * holdPercent / 100)
-        suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, quantity = stockAmt))
+    // if (!portfolio.initialBuy) {
+    //     console.log(buyDates, sellDates)
+    //     portfolio.initialBuy = true
+    //     var stockPrice = eval(stockData[currentDate].markPrice)
+    //     var stockAmt = Utils.maxStockPurchases(stockPrice, portfolio.getCash * holdPercent / 100)
+    //     suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, stockAmt))
 
-    }
+    // }
 
     if (buyDates.includes(currentDate)) {
+
+        console.log("Record length: " + recordLength)
+        console.log(`----------------- Buy on ${currentDate} ------------------`)
+        console.log("Mark price = " + stockData[currentDate].markPrice)
+
         portfolio.bought = true
         const stockPrice = eval(stockData[currentDate].markPrice)
         const stockAmt = Utils.maxStockPurchases(stockPrice, portfolio.getCash)
@@ -30,18 +36,24 @@ function volumeTrigger2(actionDates, sellPercent, holdPercent, symbol, portfolio
         suggestionsArr.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, quantity = stockAmt))
     }
 
+    if (sellDates.includes(currentDate)) {
 
-    for (const stock of portfolio.holdings) {
+        console.log(`----------------- Sell on ${currentDate} ------------------`)
+        console.log("Mark price = " + stockData[currentDate].markPrice)
 
-        if (portfolio.bought) {
-            portfolio.bought = false
-            if (stock.percentChange >= sellPercent) {
-                suggestionsArr.push(Suggestion.createSellSuggestion(stock, quantity = Math.floor(stock.quantity * (1 - eval(holdPercent) / 100))))
-            }
+        for (const stock of portfolio.holdings) {
+
+        
+            // if (stock.percentChange >= sellProfitPercent || (-1)*stock.percentChange > sellLossPercent) {
+                suggestionsArr.push(Suggestion.createSellSuggestion(stock))
+            // }
         }
 
 
     }
+    
+
+    
 
 
     // console.log(stockData);
