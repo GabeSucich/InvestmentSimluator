@@ -3,7 +3,7 @@ import { StandardForm } from "../../../../../SemanticUI/Forms/index"
 import { useActiveTradingContext } from '../../../utils/ActiveState'
 // import Helper from "../../../utils/Helper"
 // import API from "../../../../../utils/API"
-import { SET_BUY_LOW, SET_BUY_HIGH, SET_SELL_LOW, SET_SELL_HIGH, SYMBOL_LOADING, CLEAR_DATA, INVALID } from "../../../utils/activeAction"
+import { SET_BUYLOW, SET_BUYHIGH, SET_SELLLOW, SET_SELLHIGH, SYMBOLLOADING, CLEAR_DATA, INVALID } from "../../../utils/activeAction"
 import { Form, Button, Segment } from 'semantic-ui-react'
 // import "./style.css"
 
@@ -11,14 +11,19 @@ export default function RangeFormBH(props) {
 
     const [state, dispatch] = useActiveTradingContext()
     const [invalid, setInvalid] = useState(false)
-    const [investment, setInvestment] = useState()
+    const [buyHigh, setBuyhigh] = useState()
 
+   // Value gets passed. 
    const handleOnChange = (event, { value }) => {
-
+        setBuyhigh(value);
+        // console.log(value);
+     
    }
 
    const handleSubmit = () => {
-
+       
+    dispatch({ type: SET_BUYHIGH, buyHigh: buyHigh});
+    console.log("state buyHigh = " + state.buyHigh);
    }
 
 
@@ -39,7 +44,7 @@ export default function RangeFormBH(props) {
                         onChange={handleOnChange}
                        
                     />
-                    {investment >= state.smallestInvestment ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Invest!</Button> : null}
+                    {buyHigh ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Buy High!</Button> : null}
                     
                 </StandardForm>
             </Segment>

@@ -1,21 +1,21 @@
 import React, {createContext, useContext, useReducer} from "react"
-import { SET_BUY_LOW, SET_BUY_HIGH, SET_SELL_LOW, SET_SELL_HIGH, SYMBOL_LOADING, CLEAR_DATA, INVALID } from '../utils/activeAction'
+import { SET_BUYLOW, SET_BUYHIGH, SET_SELLLOW, SET_SELLHIGH, SYMBOL_LOADING, CLEAR_DATA, INVALID } from '../utils/activeAction'
 
 const ActiveTradingContext = createContext()
 const {Provider} = ActiveTradingContext
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case SET_BUY_LOW:
+        case SET_BUYLOW:
             return { ...state, buyLow: action.buyLow }
             break
-        case SET_BUY_HIGH:
+        case SET_BUYHIGH:
             return { ...state, buyHigh: action.buyHigh }
             break
-        case SET_SELL_LOW:
+        case SET_SELLLOW:
             return { ...state, sellLow: action.sellLow }
             break
-        case SET_SELL_HIGH:
+        case SET_SELLHIGH:
             return { ...state, sellHigh: action.sellHigh }
             break
         case SYMBOL_LOADING:
