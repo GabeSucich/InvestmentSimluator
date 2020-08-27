@@ -12,6 +12,7 @@ export default function SimulationDisplay(props) {
 
 
     const [state, dispatch] = useSimpleInvestmentContext()
+    // const [localState, localDispatch] = 
     const [loaded, setLoaded] = useState(false)
 
     if (state.informationGathered && !loaded) {

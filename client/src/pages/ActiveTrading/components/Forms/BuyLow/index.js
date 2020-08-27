@@ -20,7 +20,8 @@ export default function RangeFormBL(props) {
         // console.log('name = '+ name);
         console.log('value = '+ value);
         // this.setState({[name]: value});
-        setBuylow(event.target.value); 
+        setBuylow(value); 
+        dispatch({ type: SET_BUYLOW, buyLow: buyLow});
         window.setTimeout(checkBuyLow(), 3000);
     }
 
@@ -55,6 +56,7 @@ export default function RangeFormBL(props) {
                         label={`What percentage below a current high price would you like to buy?`}
                         name = 'setBuylow'
                         onChange={handleOnChange}
+                        value = {buyLow}
                        
                     />
                     {/* {buyLow ? <Button className="btn-margin" color="olive" onClick={handleSubmit}>Buy Low!</Button> : null} */}
