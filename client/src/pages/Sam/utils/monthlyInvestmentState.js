@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react"
-import { SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR } from "./actions"
+import { SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, SET_PARAMS, CLEAR } from "./actions"
 
 const MonthlyInvestmentContext = createContext()
 
@@ -32,6 +32,7 @@ function MonthlyInvestmentProvider({ value = [], ...props }) {
         annualIncome: 0,
         monthlyInvestment: 0,
         monthlyExpenses: [],
+        adjustedMonthlyInvestment: 0
     })
 
     return <Provider value={[state, dispatch]} {...props} />
