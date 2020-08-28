@@ -1,5 +1,6 @@
 // buys the given stock whenever you have enough cash and increments your cash by a given amount after every 20 market days
 const Suggestion = require("./utils/Suggestion")
+import Utils from "./utils/Utils"
 
 function monthlyInvestment(monthlyAmount, actionDates, symbol, portfolio, stockData, currentDate) {
 
@@ -10,14 +11,12 @@ function monthlyInvestment(monthlyAmount, actionDates, symbol, portfolio, stockD
         portfolio.increaseCash(eval(monthlyAmount))
     }
 
-    var cashCopy = portfolio.getCash
     // console.log(`Date: ${currentDate}, Portfolio: ${portfolio.totalValue}`)
     
-
-    while (eval(stockData[currentDate]["markPrice"]) < cashCopy) {
-        // console.log("Suggesting to buy another share")
-        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate))
-        cashCopy -= stockData[currentDate]["markPrice"]
+    const numberOfStocksToPurchase = Utils.maxStockPurchases(stockData[currentDate].markPrice, portfolio.getCash)
+    
+    if (numberOfStocksToPurchase) {
+        suggestions.push(Suggestion.createBuySuggestion(symbol, stockData, currentDate, Utils.maxStockPurchases(stockData[currentDate].markPrice, portfolio.getCash)))
     }
 
     return suggestions
