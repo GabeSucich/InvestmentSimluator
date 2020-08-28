@@ -9,10 +9,6 @@ const volumeTrigger = require("../utils/volumeSearch2")
 
 module.exports = function (app) {
 
-    app.get("/", (req, res) => {
-        res.sendFile(path.join(__dirname, "/public/index.html"))
-    })
-
     app.get('/api/stockdata/:symbol', (req, res) => {
         const symbol = req.params.symbol
         API.getStockData(symbol).then(response => {
