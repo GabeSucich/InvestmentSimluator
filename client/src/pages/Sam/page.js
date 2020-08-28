@@ -31,7 +31,6 @@ export default function MonthlyInvestmentPage() {
 
     const handleSubmit = event => {
         dispatch({ type: READY_UP })
-        // dispatch({ type: SET_PARAMS, annualIncome: annualIncome, monthlyInvestment: monthlyInvestment, monthlyExpenses: monthlyExpenses, adjustedMonthlyInvestment: monthlyInvestment - 100})
 
         const startDate = Helper.findFirstDateInYear(informationState.history, informationState.startYear)
         const endDate = Helper.findLastDateInYear(informationState.history)
