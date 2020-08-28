@@ -9,11 +9,11 @@ import { useUserContent } from '../../utils/UserState'
 export default function Navbar(props) {
 
     const [active, setActive] = useState()
-    const [userState, userDispatch] = useInformationContext()
+    const [informationState, informationDispatch] = useInformationContext()
 
     const handleClick = (e, { name }) => {
         setActive(name)
-        userDispatch({type: CLEAR_DATA})
+        informationDispatch({type: CLEAR_DATA})
     }
 
     return (
@@ -44,10 +44,12 @@ function InvestmentModal(props) {
 
     const [open, setOpen] = useState(false)
     const [active, setActive] = useState()
+    const [informationState, informationDispatch] = useInformationContext()
 
     const handleClick = (e, { name }) => {
         setActive(name)
         setOpen(false)
+        informationDispatch({type: CLEAR_DATA})
     }
 
     return (
