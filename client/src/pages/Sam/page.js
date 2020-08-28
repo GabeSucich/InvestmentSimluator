@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useMonthlyInvestmentContext } from "./utils/monthlyInvestmentState"
 import Helper from "./utils/Helper"
-import { SET_PARAMS, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR} from "./utils/actions"
+import { READY_UP, SET_PARAMS, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR} from "./utils/actions"
 import { SET_SIMULATION_DATA } from '../GatherInformation/utils/action'
 import API from '../../utils/API'
 import { Segment, Input, Button, Container } from 'semantic-ui-react'
@@ -9,7 +9,7 @@ import { useInformationContext } from '../GatherInformation/utils/InformationSta
 import  Loader  from '../../components/Loader/index'
 import ChartHandler from '../../components/ChartHandler'
 
-export default function monthlyInvestmentPage() {
+export default function MonthlyInvestmentPage() {
 
     const [informationState, informationDispatch] = useInformationContext();
     const [state, dispatch] = useMonthlyInvestmentContext();
@@ -18,22 +18,34 @@ export default function monthlyInvestmentPage() {
     const [monthlyExpenses, setMonthlyExpenses] = useState([]);
     const [adjustedMonthlyInvestment, setAdjustedMonthlyInvestment] = useState();
 
+    const validator = () => {
+            return true
+    }
+
     const handleSubmit = event => {
-        dispatch({ type: SET_PARAMS, annualIncome: annualIncome, monthlyInvestment: monthlyInvestment, monthlyExpenses: monthlyExpenses})
+        dispatch({ type: READY_UP })
+        console.log("submitted!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        // dispatch({ type: SET_PARAMS, annualIncome: annualIncome, monthlyInvestment: monthlyInvestment, monthlyExpenses: monthlyExpenses, adjustedMonthlyInvestment: monthlyInvestment - 100})
 
         const startDate = Helper.findFirstDateInYear(informationState.history, informationState.startYear)
         const endDate = Helper.findLastDateInYear(informationState.history)
+        console.log(state.monthlyInvestment)
         API.getActionDates(20, startDate, endDate, informationState.symbol)
         .then(res => {
             API.runMultipleSimulations([
-                [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.monthlyInvestment, res]]
+                [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.monthlyInvestment, res]],
+                [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.adjustedMonthlyInvestment, res]]
             ])
+            .then(res => {
+                informationDispatch({ type: SET_SIMULATION_DATA, data: res})
+                dispatch({ type: CLEAR })
+            })
         })
     }
 
     if (!informationState.informationGathered) {
         return null;
-    } else if (!state.monthlyInvestment) {
+    } else if (!state.ready) {
 
         return (
 
@@ -41,31 +53,31 @@ export default function monthlyInvestmentPage() {
                 <Segment fluid>
 
                     <p>
-                        This is the buy low
+                        What's your annual income?
                 <span>
-                            <Input size="mini" placeholder="buyLow" value={buyLow} onChange={(event, { value }) => setBuylow(value)} />
+                            <Input size="mini" placeholder="buyLow" value={annualIncome} onChange={(event, { value }) => setAnnualIncome(value)} />
                         </span>
                     </p>
 
                     <p>
-                        This is the buy high
+                        What's your monthly investment?
                 <span>
-                            <Input size="mini" placeholder="buyHigh" value={buyHigh} onChange={(event, { value }) => setBuyhigh(value)} />
+                            <Input size="mini" placeholder="buyHigh" value={monthlyInvestment} onChange={(event, { value }) => dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: value})} />
                         </span>
                     </p>
 
 
                     <p>
-                        This is sell high
+                        Total of your monthly expenses?
                 <span>
-                            <Input size="mini" placeholder="sellHigh" value={sellHigh} onChange={(event, { value }) => setSellhigh(value)} />
+                            <Input size="mini" placeholder="sellHigh" value={monthlyExpenses} />
                         </span>
                     </p>
 
                     <p>
-                        This is sell low
+                        Set adjusted?
                 <span>
-                            <Input size="mini" placeholder="sellLow" value={sellLow} onChange={(event, { value }) => setSelllow(value)} />
+                            <Input size="mini" placeholder="sellHigh" value={adjustedMonthlyInvestment} onChange={(event, { value }) => setAdjustedMonthlyInvestment(value)} />
                         </span>
                     </p>
 
@@ -79,4 +91,13 @@ export default function monthlyInvestmentPage() {
         )
 
     }
+
+    else {
+        return (
+            <Container fluid textAlign="center">
+            {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol]} />}
+            {!informationState.simulationData ? null : <Button primary onClick ={() => dispatch({type: CLEAR})}>Run New Simulation</Button>}
+            </Container>
+        )
+     }
 }

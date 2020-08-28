@@ -7,6 +7,7 @@ import InvestmentForm from "./components/Forms/InvestmentForm"
 import SimpleInvestment from "../SimpleInvestment"
 import ActiveTrading from "../ActiveTrading"
 import TaxEffect from "../TaxExample"
+import MonthlyInvestment from "../Sam"
 import "./style.css"
 
 export default function GatherInformation({ pathname }) {
@@ -36,6 +37,7 @@ export default function GatherInformation({ pathname }) {
                 {pathname === "/active" ? <ActiveTrading /> : null}
                 {pathname === "/basic" ? <SimpleInvestment/> : null}
                 {pathname === "/tax" ? <TaxEffect/> : null}
+                {pathname === "/monthly" ? <MonthlyInvestment/> : null}
                 {/* {props.pathname === "/basic" ? <SimpleInvestment /> : null}
                 {props.pathname === "/tax" ? <TaxEffect /> : null} */}
 

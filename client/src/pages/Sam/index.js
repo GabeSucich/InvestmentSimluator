@@ -10,18 +10,18 @@
 // import Loader from "../../components/Loader"
 import React from "react"
 import { MonthlyInvestmentProvider } from "./utils/monthlyInvestmentState"
-import monthlyInvestmentPage from "./page"
+import MonthlyInvestmentPage from "./page"
 
-function monthlyInvestment() {
+function MonthlyInvestment() {
 
     return (
         <MonthlyInvestmentProvider>
-            <monthlyInvestmentPage/>
+            <MonthlyInvestmentPage/>
         </MonthlyInvestmentProvider>
     )
 }
 
-export default monthlyInvestment
+export default MonthlyInvestment
 
 
 
