@@ -13,7 +13,11 @@ const reducer = (state, action) => {
             return {...state, monthlyInvestment: action.monthlyInvestment}
 
         case ADD_MONTHLY_EXPENSE:
-            return {...state, monthlyExpenses: [...state.monthlyExpenses, action.newExpense]}
+            var newAdjustedMonthlyInvestment = state.monthlyInvestment - action.newExpense;
+            for (const expense in state.monthlyExpenses) {
+                newAdjustedMonthlyInvestment -= expense
+            }
+            return {...state, monthlyExpenses: [...state.monthlyExpenses, action.newExpense], adjustedMonthlyInvestment: newAdjustedMonthlyInvestment}
 
         case SET_PARAMS:
             return {...state, annualIncome: action.annualIncome, monthlyInvestment: action.monthlyInvestment, monthlyExpenses: [...state.monthlyExpenses, action.monthlyExpenses], adjustedMonthlyInvestment: action.adjustedMonthlyInvestment}

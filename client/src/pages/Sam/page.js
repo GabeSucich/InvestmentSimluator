@@ -70,7 +70,7 @@ export default function MonthlyInvestmentPage() {
                     <p>
                         Total of your monthly expenses?
                 <span>
-                            <Input size="mini" placeholder="sellHigh" value={monthlyExpenses} />
+                            <Input size="mini" placeholder="sellHigh" value={monthlyExpenses} onChange={(event, { value }) => dispatch({ type: ADD_MONTHLY_EXPENSE, newExpense: value})}/>
                         </span>
                     </p>
 
