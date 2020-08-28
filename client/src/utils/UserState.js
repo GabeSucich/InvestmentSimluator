@@ -10,11 +10,11 @@ const reducer = (state, action) => {
 
         case LOGIN_USER:
 
-            return {...state, user: true}
+            return {...state, user: action.username, awaitingIntro: false}
 
         case CREATE_NEW_USER:
 
-            return {...state, awaitingIntro: true}
+            return {...state, user: action.username, awaitingIntro: true}
     }
 }
 
@@ -22,7 +22,7 @@ const UserProvider = ({value = [], ...props}) => {
 
     const [state, dispatch] = useReducer(reducer, {
         user: null,
-        awaitingIntro: null
+        awaitingIntro: false
     })
     return (
         <Provider value={[state, dispatch]} {...props}/>

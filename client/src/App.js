@@ -7,9 +7,9 @@ import 'semantic-ui-css/semantic.min.css'
 
 function App() {
 
-
   return (
     <Router>
+
       <UserProvider>
           <Switch>
             <Route exact path = "/basic">

@@ -3,16 +3,27 @@ import bcrypt from "bcryptjs"
 
 const API = {
 
-    getUser(username) {
+    loginUser(username, password) {
         return Axios({
             method: "GET",
             url: "/api/user/" + username
-        }).then(res => {
-            console.log(res)
+        }).then(response => {
+            const dbUser = response.data
+            if (!dbUser) {
+                return "NoUser"
+            }
+            else {
+                if (bcrypt.compareSync(password, dbUser.password)) {
+                    return dbUser.username
+                }
+                else {
+                    return "wrongPass"
+                }
+            }
         })
     },
 
-    creatUser(username, password) {
+    createUser(username, password) {
         var encryptedPass = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
         return Axios({
             method: "POST",
@@ -21,8 +32,14 @@ const API = {
                 username: username,
                 password: encryptedPass
             }
-        }).then(res => {
-            console.log(res)
+        }).then(response => {
+            const dbUser = response.data
+            if (!dbUser) {
+                return null
+            }
+            else {
+                return dbUser.username
+            }
         })
 
     },

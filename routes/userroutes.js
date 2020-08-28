@@ -15,9 +15,21 @@ module.exports = function(app) {
     app.post("/api/user", (req, res) => {
 
         const {username, password} = req.body
-        Users.createUser(username, password).then(dbUser => {
-            res.json(dbUser)
+
+        Users.findUser(username).then(dbUser => {
+            if (dbUser) {
+                res.json(null)
+            }
+            else {
+                Users.createUser(username, password).then(user => {
+                    res.json(user)
+                })
+            }
+            // Users.createUser(username, password).then(dbUser => {
+            // res.json(dbUser)
+        // })
         })
+        
 
     })
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Menu, Segment, Modal } from "semantic-ui-react"
+import {Link} from "react-router-dom"
+import { Menu, Segment, Modal, Image } from "semantic-ui-react"
 import "./style.css"
 
 export default function Navbar(props) {
@@ -13,11 +14,21 @@ export default function Navbar(props) {
     return (
         <Segment inverted fluid>
             <Menu fluid inverted>
-                <Menu.Item
-                    name="Introduction"
+                <Menu.Item>
+                    <h1>QUAN</h1>
+                </Menu.Item>
+        
+                   <Menu.Item
+
                     onClick={handleClick}
                     active={active === "Introduction"}
-                />
+                >
+                <Link to="/">
+                    Introduction
+                </Link>
+                </Menu.Item> 
+                
+                
                 <InvestmentModal />
             </Menu>
         </Segment>
@@ -31,6 +42,7 @@ function InvestmentModal(props) {
 
     const handleClick = (e, { name }) => {
         setActive(name)
+        setOpen(false)
     }
 
     return (
@@ -47,40 +59,52 @@ function InvestmentModal(props) {
                         <Menu.Item>
                             <Menu.Header className="enlarge">Beginner</Menu.Header>
                             <Menu.Menu>
-                                <Menu.Item
+                                <Link to="basic">
+                                    <Menu.Item
                                     className="larger"
                                     name="Simple Investing"
                                     active={active === "Introduction"}
                                     onClick={handleClick}
                                 />
-                                <Menu.Item
+                                </Link>
+                                <Link to="/tax">
+                                    <Menu.Item
                                     className="larger"
                                     name="Tax Effect on Returns"
                                     active={active === "Introduction"}
                                     onClick={handleClick}
                                 />
+                                </Link>
+                                
                             </Menu.Menu>
                         </Menu.Item>
                         <Menu.Item>
                             <Menu.Header className="enlarge">Intermediate</Menu.Header>
                             <Menu.Menu>
-                                <Menu.Item
+                                <Link to="/monthly">
+                                    <Menu.Item
                                     className="larger"
                                     name="Investing Monthly"
                                     active={active === "Introduction"}
                                     onClick={handleClick}
                                 />
+                                </Link>
+                                
                             </Menu.Menu>
                         </Menu.Item>
                         <Menu.Item>
                             <Menu.Header className="enlarge">Advanced</Menu.Header>
                             <Menu.Menu>
-                                <Menu.Item
+                                <Link to="/active">
+                                    <Menu.Item
                                     className="larger"
                                     name="Active Trading"
                                     active={active === "Introduction"}
                                     onClick={handleClick}
                                 />
+                                </Link>
+
+                                
                             </Menu.Menu>
 
                         </Menu.Item>

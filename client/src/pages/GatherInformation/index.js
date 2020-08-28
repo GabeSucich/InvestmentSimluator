@@ -1,5 +1,4 @@
 import React from 'react'
-import { InformationProvider } from "./utils/InformationState"
 import { Grid, Container } from "semantic-ui-react"
 import SymbolForm from "./components/Forms/SymbolForm"
 import StartDateDropdown from "./components/Dropdowns/StartDateDropdown"
@@ -13,7 +12,6 @@ import "./style.css"
 export default function GatherInformation({ pathname }) {
 
     return (
-        <InformationProvider>
             <Container className="large-container">
                 <Grid centered>
                     <Grid.Column mobile={8} tablet={8} computer={4} textAlign="center">
@@ -35,7 +33,6 @@ export default function GatherInformation({ pathname }) {
                 {pathname === "/monthly"} ? 
                 {pathname === "/active" ? <ActiveTrading /> : null} */}
 
-                
                 {pathname === "/active" ? <ActiveTrading /> : null}
                 {pathname === "/basic" ? <SimpleInvestment/> : null}
                 {pathname === "/tax" ? <TaxEffect/> : null}
@@ -59,7 +56,6 @@ export default function GatherInformation({ pathname }) {
 
 
             </Container>
-        </InformationProvider>
     )
 
 }
