@@ -9,6 +9,7 @@ import { useInformationContext } from '../GatherInformation/utils/InformationSta
 import Loader from '../../components/Loader/index'
 import ChartHandler from '../../components/ChartHandler'
 import './style.css'
+import AccordionExample from '../../components/AccordinanActive'
 
 
 export default function AllForm() {
@@ -69,6 +70,10 @@ export default function AllForm() {
 
             <Container fluid textAlign="center">
                 <Segment fluid>
+                    <AccordionExample />
+                </Segment>
+
+                <Segment fluid>
                     <p>
                         This is the buy low {"    "}
                         <span>
@@ -93,15 +98,15 @@ export default function AllForm() {
                             <Input size="mini" placeholder="sell high" value={sellHigh} onChange={(event, { value }) => setSellhigh(value)} />
                         </span>
                     </p>
-        
-                <br></br>
-                <br></br>
+
+                    <br></br>
+                    <br></br>
                 </Segment>
 
-                {validator() ? <Segment className="validBtn"><Button onClick={handleSubmit}>Run Simulation</Button></Segment>: null}
-               
+                {validator() ? <Segment className="validBtn"><Button onClick={handleSubmit}>Run Simulation</Button></Segment> : null}
 
-                
+
+
             </Container>
 
         )
