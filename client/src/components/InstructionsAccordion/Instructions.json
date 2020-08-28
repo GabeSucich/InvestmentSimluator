@@ -1,3 +1,7 @@
 {
-    "SimpleInvestment": "This module is meant to expose you to how your money might grow in the stock market. Below, you have the option to specify a stock, start year, end year, and initial investment. If you aren't familiar with any stocks right now, you can browse through some popular ones which are provided. At the end, hit the 'Invest Button!' which appears to see how your money would grow in this simulation!"
+    "SimpleInvestment": "This module is meant to expose you to how your money might grow in the stock market. Below, you have the option to specify a stock, start year, end year, and initial investment. If you aren't familiar with any stocks right now, you can browse through some popular ones which are provided. At the end, hit the 'Invest Button!' which appears to see how your money would grow in this simulation!",
+    "ActiveTrading": "This module is meant to show how your buy and sell parameters can affect your portfolio performance. It allows you to set highs and lows to buys and sells and will compare that strategies' performance against a standard Buy-and-Wait strategy. Be aware that transactions always follow a dyad pair of Buy and then Sell (repeat). Different parameters work better or worse depending on the stock and time frame. Good luck!"
 }
+
+ 
+
