@@ -8,6 +8,20 @@
 // import { SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR, LOADING } from "./utils/actions"
 // import { useMonthlyInvestmentContext } from "./utils/monthlyInvestmentState"
 // import Loader from "../../components/Loader"
+import React from "react"
+import { MonthlyInvestmentProvider } from "./utils/monthlyInvestmentState"
+import monthlyInvestmentPage from "./page"
+
+function monthlyInvestment() {
+
+    return (
+        <MonthlyInvestmentProvider>
+            <monthlyInvestmentPage/>
+        </MonthlyInvestmentProvider>
+    )
+}
+
+export default monthlyInvestment
 
 
 
