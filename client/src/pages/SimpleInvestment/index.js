@@ -4,7 +4,7 @@ import Helper from "../GatherInformation/utils/Helper"
 import API from "../../utils/API"
 import Loader from "../../components/Loader"
 import { CLEAR_DATA, SET_SIMULATION_DATA, LOAD_SIMULATION } from "../GatherInformation/utils/action"
-import { Button, Segment } from "semantic-ui-react"
+import { Button, Segment, Container } from "semantic-ui-react"
 import { useInformationContext } from "../GatherInformation/utils/InformationState"
 
 export default function SimulationDisplay(props) {
@@ -17,14 +17,14 @@ export default function SimulationDisplay(props) {
     if (state.informationGathered && !loaded) {
 
         setLoaded(true)
-        dispatch({type: LOAD_SIMULATION})
+        dispatch({ type: LOAD_SIMULATION })
 
     }
 
     useEffect(() => {
 
         setLoaded(false)
-        
+
     }, [])
 
     useEffect(() => {
@@ -60,9 +60,12 @@ export default function SimulationDisplay(props) {
     else if (!state.simulationData) {
 
         return (
+
             <Segment textAlign="center">
                 <Loader type="cylon" color="red" />
             </Segment>
+
+
         )
     }
 

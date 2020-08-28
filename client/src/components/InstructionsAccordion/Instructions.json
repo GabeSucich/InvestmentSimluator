@@ -1,0 +1,3 @@
+{
+    "SimpleInvestment": "This module is meant to expose you to how your money might grow in the stock market. Below, you have the option to specify a stock, start year, end year, and initial investment. If you aren't familiar with any stocks right now, you can browse through some popular ones which are provided. At the end, hit the 'Invest Button!' which appears to see how your money would grow in this simulation!"
+}
