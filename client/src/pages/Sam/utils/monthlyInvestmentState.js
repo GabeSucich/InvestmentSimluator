@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react"
-import { READY_UP, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, SET_PARAMS, CLEAR } from "./actions"
+import { READY_UP, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, UPDATE_ADJUSTED_MONTHLY_INVESTMENT, CLEAR } from "./actions"
 
 const MonthlyInvestmentContext = createContext()
 const { Provider } = MonthlyInvestmentContext
@@ -13,17 +13,17 @@ const reducer = (state, action) => {
             return {...state, monthlyInvestment: action.monthlyInvestment}
 
         case ADD_MONTHLY_EXPENSE:
-            var newAdjustedMonthlyInvestment = state.monthlyInvestment - action.newExpense;
-            for (const expense in state.monthlyExpenses) {
-                newAdjustedMonthlyInvestment -= expense
-            }
-            return {...state, monthlyExpenses: [...state.monthlyExpenses, action.newExpense], adjustedMonthlyInvestment: newAdjustedMonthlyInvestment}
-
-        case SET_PARAMS:
-            return {...state, annualIncome: action.annualIncome, monthlyInvestment: action.monthlyInvestment, monthlyExpenses: [...state.monthlyExpenses, action.monthlyExpenses], adjustedMonthlyInvestment: action.adjustedMonthlyInvestment}
+            return {...state, monthlyExpenses: [...state.monthlyExpenses, action.newExpense]}
 
         case READY_UP:
             return {...state, ready: true}
+
+        case UPDATE_ADJUSTED_MONTHLY_INVESTMENT:
+            var newAdjustedMonthlyInvestment = state.monthlyInvestment
+            for (const expense of state.monthlyExpenses) {
+                newAdjustedMonthlyInvestment -= expense
+            }
+            return {...state, adjustedMonthlyInvestment: newAdjustedMonthlyInvestment}
 
         case CLEAR:
             return {
