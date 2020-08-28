@@ -1,0 +1,21 @@
+.intro-image {
+
+    width : 90% !important;
+    margin-top: 2% !important;
+    margin-bottom: 1% !important;
+    margin-left: 5%;
+}
+
+.logo-image {
+    width: 60% !important;
+    margin-top: 2% !important;
+    margin-bottom: 1% !important;
+    margin-left: 20% !important
+}
+
+.description {
+
+    font-size: x-large !important;
+    line-height: 1.5 !important;
+    
+}

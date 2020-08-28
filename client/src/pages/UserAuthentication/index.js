@@ -17,7 +17,7 @@ export default function UserAuthentication(props) {
 
     return (
         <Grid centered>
-            <Grid.Column mobile={16} tablet={10} computer={8}>
+            <Grid.Column mobile={12} tablet={8} computer={6}>
                 {page === "login" ?
                     <Login changePage={goToSignUp} /> : <SignUp changePage={goToLogin} />
                 }

@@ -2,3 +2,12 @@
     margin-top: 1.5% !important
 
 }
+
+.bold {
+    font-weight: bold !important;
+}
+
+.body-text {
+    font-size: large !important;
+    line-height: 1.5;
+}
