@@ -27,7 +27,7 @@ export default class ActionAccordion extends Component {
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 0}>
           <p>
-        This will be when the price of a stock dips down and you want to purchase. 
+        This will be when the price of a stock dips down and you want to purchase. Percent below high price. 
           </p>
         </Accordion.Content>
 
@@ -42,7 +42,7 @@ export default class ActionAccordion extends Component {
         <Accordion.Content active={activeIndex === 1}>
           <p>
             This is when you are looking to buy a stock and it begins to do very well, and you want to jump on the 
-            positive trend without it running away without you. 
+            positive trend without it running away without you. Percent above current price (after sell).
           </p>
         </Accordion.Content>
 
@@ -56,7 +56,7 @@ export default class ActionAccordion extends Component {
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 2}>
           <p>
-            This is when your stock begins to dip and you want to sell before it falls too far.
+            This is when the stock begins to dip and you want to sell before it falls too far. Percent below recent high price.
           </p>
         </Accordion.Content>
 
@@ -68,9 +68,9 @@ export default class ActionAccordion extends Component {
           <Icon name='dropdown' />
           Step 4 - Sell High
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 2}>
+        <Accordion.Content active={activeIndex === 3}>
           <p>
-            This is when your stock has done well, and you want to sell before it drops in price. 
+            This is when your stock has done well, and you want to sell before it drops in price. Percent above purchase price. 
           </p>
         </Accordion.Content>
       </Accordion>

@@ -75,25 +75,25 @@ export default function AllForm() {
 
                 <Segment fluid>
                     <p>
-                        This is the buy low {"    "}
+                        Buy Low: {"    "}
                         <span>
                             <Input size="mini" placeholder="buy low" value={buyLow} onChange={(event, { value }) => setBuylow(value)} />
                         </span>
                     </p>
                     <p>
-                        This is the buy high {"    "}
+                        Buy High {"    "}
                         <span>
                             <Input size="mini" placeholder="buy high" value={buyHigh} onChange={(event, { value }) => setBuyhigh(value)} />
                         </span>
                     </p>
                     <p>
-                        This is sell low {"    "}
+                        Sell Low: {"    "}
                         <span>
                             <Input size="mini" placeholder="sell low" value={sellLow} onChange={(event, { value }) => setSelllow(value)} />
                         </span>
                     </p>
                     <p>
-                        This is sell high {"    "}
+                        Sell High: {"    "}
                         <span>
                             <Input size="mini" placeholder="sell high" value={sellHigh} onChange={(event, { value }) => setSellhigh(value)} />
                         </span>
