@@ -13,8 +13,8 @@ export default function Introduction() {
                 <h1>Welcome to QUAN</h1>
             </Segment>
 
-            <Grid divided columns={3} stackable>
-                <Grid.Column>
+            <Grid divided>
+                <Grid.Column mobile={16} tablet={16} computer={5}>
                     <Segment inverted fluid textAlign="center">
                         <h3>What is QUAN?</h3>
                     </Segment>
@@ -27,7 +27,7 @@ export default function Introduction() {
                         trading. We hope to allow investors to feel more confident when dealing with the stock market, no matter their level of previous experience.
                     </Segment>
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column mobile={16} tablet={16} computer={5}>
                     <Segment inverted fluid textAlign="center">
                         <h3>How does QUAN Work?</h3>
                     </Segment>
@@ -39,7 +39,7 @@ export default function Introduction() {
                         we hope to enlighten users about what could happen in the future by illuminating what did happen in the past
                     </Segment>
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column mobile={16} tablet={16} computer={5}>
                     <Segment inverted fluid textAlign="center">
                         <h3>Why make QUAN?</h3>
                     </Segment>
