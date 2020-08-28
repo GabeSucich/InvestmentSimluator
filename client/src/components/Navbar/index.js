@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import {Link} from "react-router-dom"
 import { Menu, Segment, Modal, Image } from "semantic-ui-react"
+import {useInformationContext} from "../../pages/GatherInformation/utils/InformationState"
+import {CLEAR_DATA} from "../../pages/GatherInformation/utils/action"
 import "./style.css"
+import { useUserContent } from '../../utils/UserState'
 
 export default function Navbar(props) {
 
     const [active, setActive] = useState()
+    const [userState, userDispatch] = useInformationContext()
 
     const handleClick = (e, { name }) => {
         setActive(name)
+        userDispatch({type: CLEAR_DATA})
     }
 
     return (
