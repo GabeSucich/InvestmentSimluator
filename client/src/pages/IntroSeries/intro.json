@@ -1,3 +1,30 @@
 [
-    {}
+    {
+        "image": "QUANlogo.png",
+        "description": "Welcome to QUAN, where investors of any level can bolster their knowledge. Click through this short tutorial to see how to explore investing."
+    },
+    {   "image" :"info0.png",
+        "description": "QUAN is built using modules of scaffolded advancement for a wide range of knowledge levels. You'll have a chance to explore all of these modules, but for now, observe that these modules can be navigated via the sidebar. We'll walk through how a module will work with the simplest example next."
+    },
+    {   "image" :"info1.png",
+        "description": "For each module, you will be presented with this screen initially. This is where you can customized your investing paramaters. QUAN runs simulations on historical stock data to help you make decisions about the future by delivering knowledge of the past. In order for this to be totally flexible and customizeable for users, we require some information about the investment that you would like to see."
+    },
+    {   "image" :"info2.png",
+        "description": "You will enter a stock to invest in, start and end years for your investment, and an initial amount to deposit. If you are totally unfamiliar with the stock market, don't worry! QUAN provides some popular, established stocks that you can choose from. If you exhaust all of QUAN's options, a little bit of research will yield tons of other stocks to try!"
+    },
+    {   "image" :"info3.png",
+        "description": "Some modules are more complicated than others, but for the entirety of the module, the instructions tab will appear at the top of the page. At any time, you can reference the instructions for the current module. Now, let's hit the 'Invest' button and watch the magic..."
+    },
+    {   "image" :"info4.png",
+        "description": "Our first simulation! You can observe how your customized investment performed over time! The blue 'Invest Again' button at the bottom of the screen will direct you back to the previous screen to customize a new simulation."
+    },
+    {   "image" :"info5.png",
+        "description": "The more advanced simulations will not always bring you back to the initial investment customization page. Some of them have their own parameters to further customize, and they will keep the same general information listed in this tutorial between simulations. If ever you would like to reset all of your investment information in these modules, just click on that module again in the sidebar! Navigating to any module will by default reset all information in QUAN."
+    },
+    {
+        "image": "QUANlogo.png",
+        "description": "You're all set! Enter QUAN to begin exploring your investment possibilites."
+    }
+
+
 ]

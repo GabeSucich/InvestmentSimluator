@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button, Label } from "semantic-ui-react"
+import { Button, Label, Icon } from "semantic-ui-react"
 
 export function AnimatedButton(props) {
 
-    const {animation, hiddencontent, visiblecontent, ...otherAttributes} = props
+    const { animation, hiddencontent, visiblecontent, ...otherAttributes } = props
 
 
     if (!(animation === "fade" || animation === "vertical")) {
@@ -25,7 +25,35 @@ export function AnimatedButton(props) {
     }
 }
 
-export function LabeledButton({main, label, labelPosition, ...otherAttributes}) {
+export function AnimatedIconButton(props) {
+
+    const { animation, hiddencontent, visiblecontent, ...otherAttributes } = props
+
+
+    if (!(animation === "fade" || animation === "vertical")) {
+        return (
+            <Button animated {...otherAttributes}>
+                <Button.Content hidden>{hiddencontent}</Button.Content>
+                <Button.Content visible>
+                    <Icon name={visiblecontent} />
+                </Button.Content>
+            </Button>
+        )
+    }
+
+    else {
+        return (
+            <Button animated={animation} {...otherAttributes}>
+                <Button.Content hidden>{hiddencontent}</Button.Content>
+                <Button.Content visible>
+                    <Icon name={visiblecontent} />
+                </Button.Content>
+            </Button>
+        )
+    }
+}
+
+export function LabeledButton({ main, label, labelPosition, ...otherAttributes }) {
 
 
     return (
