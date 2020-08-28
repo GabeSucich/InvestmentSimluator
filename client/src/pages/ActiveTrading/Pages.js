@@ -22,6 +22,7 @@ export default function AllForm() {
     const [buyHigh, setBuyhigh] = useState();
     const [sellLow, setSelllow] = useState();
     const [sellHigh, setSellhigh] = useState();
+    var inputReady = true;
 
     const validator = () => {
         if ((Helper.verifyDrop(sellLow)) && (Helper.verifyDrop(buyLow)) && (Helper.verifyIncrease(buyHigh)) && (Helper.verifyIncrease(sellHigh))) {
@@ -29,12 +30,16 @@ export default function AllForm() {
         } return false
     }
 
+
+
     const handleSubmit = event => {
 
-        if (!buyLow && !buyHigh && !sellLow && !sellHigh){
-            alert('Inputs must be filled in before simulation runs again.')
+        if (!buyLow && !buyHigh && !sellLow && !sellHigh) {
+            inputReady = false;
+            console.log('inputReady = ' + inputReady);
+            // alert('Inputs must be filled in before simulation runs again.')
         }
-    
+
         dispatch({ type: SET_PARAMS, buyLow: buyLow, buyHigh: buyHigh, sellLow: sellLow, sellHigh: sellHigh })
         // API call 
 
@@ -77,31 +82,38 @@ export default function AllForm() {
                 <Segment fluid>
                     <AccordionExample />
                 </Segment>
-
+                {inputReady === false ? <p>All inputs must be filled in before the next simulation is run</p> : null}
                 <Segment fluid>
                     <p>
-                        Buy Low: {"    "}
-                        <span>
-                            <Input size="mini" placeholder="buy low" value={buyLow} onChange={(event, { value }) => setBuylow(value)} />
-                        </span>
+                        All inputs must be numbers.*
                     </p>
                     <p>
-                        Buy High {"    "}
+                    I want to buy - if the price of the stock drops below {"    "}
                         <span>
-                            <Input size="mini" placeholder="buy high" value={buyHigh} onChange={(event, { value }) => setBuyhigh(value)} />
+                            <Input size="mini" placeholder="ex: 4" value={buyLow} onChange={(event, { value }) => setBuylow(value)} />
                         </span>
+                        {"    "} percent.
                     </p>
                     <p>
-                        Sell Low: {"    "}
+                    I want to buy - if the price of the stock exceeds {"    "}
                         <span>
-                            <Input size="mini" placeholder="sell low" value={sellLow} onChange={(event, { value }) => setSelllow(value)} />
+                            <Input size="mini" placeholder="ex: 4" value={buyHigh} onChange={(event, { value }) => setBuyhigh(value)} />
                         </span>
+                        {"    "} percent. 
                     </p>
                     <p>
-                        Sell High: {"    "}
+                    I want to sell - if the price of the stock drops below {"    "}
                         <span>
-                            <Input size="mini" placeholder="sell high" value={sellHigh} onChange={(event, { value }) => setSellhigh(value)} />
+                            <Input size="mini" placeholder="ex: 10" value={sellLow} onChange={(event, { value }) => setSelllow(value)} />
                         </span>
+                        {"    "} percent.
+                    </p>
+                    <p>
+                    I want to sell - if the price of the stock exceeds {"    "}
+                        <span>
+                            <Input size="mini" placeholder="ex: 70" value={sellHigh} onChange={(event, { value }) => setSellhigh(value)} />
+                        </span>
+                        {"    "} percent.
                     </p>
 
                     <br></br>
