@@ -30,6 +30,11 @@ export default function AllForm() {
     }
 
     const handleSubmit = event => {
+
+        if (!buyLow && !buyHigh && !sellLow && !sellHigh){
+            alert('Inputs must be filled in before simulation runs again.')
+        }
+    
         dispatch({ type: SET_PARAMS, buyLow: buyLow, buyHigh: buyHigh, sellLow: sellLow, sellHigh: sellHigh })
         // API call 
 
