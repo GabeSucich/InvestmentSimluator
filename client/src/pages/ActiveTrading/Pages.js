@@ -10,11 +10,13 @@ import Loader from '../../components/Loader/index'
 import ChartHandler from '../../components/ChartHandler'
 import './style.css'
 import AccordionExample from '../../components/AccordinanActive'
-
+import ActBar from './components/ActBar'
+import ChartOptions from "../../utils/ChartOptions"
 
 export default function AllForm() {
 
-    console.log(useActiveTradingContext());
+    const BarOptions = ChartOptions.StandardBarOption
+    var labelsGraph;
 
     const [informationState, informationDispatch] = useInformationContext();
     const [state, dispatch] = useActiveTradingContext();
@@ -62,6 +64,7 @@ export default function AllForm() {
                         setBuylow("")
                         setSellhigh("")
                         setSelllow("")
+                        labelsGraph=[informationState.symbol + " Active Strat", "Buy And Wait"];
                     })
             })
         //
@@ -132,7 +135,13 @@ export default function AllForm() {
     else {
         return (
             <Container fluid textAlign="center">
-                {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} />}
+                {/* {state.data ? <TaxBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null} */}
+                {/* {!informationState.simulationData ? <ActBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null}; */}
+
+                {!informationState.simulationData ? <Loader /> : <ActBar simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} options={BarOptions}  backgroundColor={["Red", "Green"]}/>}
+                {!informationState.simulationData ? null : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} borderColor={["Red", "Green"]}/>}
+
+    
                 <br></br>
                 <br></br>
                 {!informationState.simulationData ? null : <Button primary onClick={() => dispatch({ type: CLEAR_DATA })}>Run New Simulation</Button>}
