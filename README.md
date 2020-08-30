@@ -1,6 +1,6 @@
 
 # Quan
-## <i>Investment Laid Bear</i>
+## <i>Investing Laid Bear</i>
 
 ### [Deployed](https://fast-mesa-56626.herokuapp.com/) Link || Git Hub [Repository]( https://github.com/GabeSucich/InvestmentSimluator)
 
@@ -13,7 +13,7 @@
     <img src="https://media.giphy.com/media/PioTC8Q4BlwWTJQCPj/giphy.gif" width="440" />
 </p>
 
-## Usage
+## Strategies
 
 For detailed information regarding the investment strategies of the app, please read the markdown provided on <b>Strategies.md</b> which is listed above.
 
