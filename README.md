@@ -35,10 +35,8 @@ For detailed information regarding the investment strategies of the app, please 
 
 For this project, our team decided to create an app that would provide a variety of investment strategies to users that may or may not already know about stock market investing.
 
-<b>Quan</b> provides Basic, Intermediate, and Advanced strategies that cover Saving/Investment analysis, Buy-and-Wait basics, state tax income tax comparisons, and active-trading buy and sell simulations. 
+<b>Quan</b> provides Basic, Intermediate, and Advanced strategies that cover saving & investment analysis, buy-and-wait basics, state tax income tax comparisons, and active-trading buy and sell simulations. 
 
-## Coronavirus Context (?) 
-...
 ## User_Stories
 
 <p align="center">
