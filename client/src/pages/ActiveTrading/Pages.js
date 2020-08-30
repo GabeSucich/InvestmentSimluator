@@ -13,6 +13,8 @@ import AccordionExample from '../../components/AccordinanActive'
 import ActBar from './components/ActBar'
 import ChartOptions from "../../utils/ChartOptions"
 
+import randomColors from "../../utils/colorRandomize"
+const randomizedColors = randomColors()
 
 export default function AllForm() {
 
@@ -136,8 +138,8 @@ export default function AllForm() {
             <Container fluid textAlign="center">
                 {/* {state.data ? <TaxBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null} */}
                 {/* {!informationState.simulationData ? <ActBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null}; */}
-                {!informationState.simulationData ? <ActBar simulations={informationState.data} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} options={BarOptions} /> : null};
-                {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} />}
+                {!informationState.simulationData ? <Loader /> : <ActBar simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} options={BarOptions} backgroundColor={(_, index) => randomizedColors[index]}  />}
+                {!informationState.simulationData ? null : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} />}
                 <br></br>
                 <br></br>
                 {!informationState.simulationData ? null : <Button primary onClick={() => dispatch({ type: CLEAR_DATA })}>Run New Simulation</Button>}

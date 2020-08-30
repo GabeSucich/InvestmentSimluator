@@ -7,6 +7,7 @@ const randomizedColors = randomColors()
 
 export default function ChartHandler(props) {
     const { simulations } = props; // simulations is an array of objects, each object has a key of the simulation pointing to that simulation's data
+    console.log('simulations ChartHandle = ' + simulations[0]);
     const { labels } = props; // the names of the series to be charted
     if (!props.options) {
         var options = ChartOption.StandardLineOptions
