@@ -15,7 +15,7 @@
 
 ## Usage
 
-For detailed information regarding the investment strategies of the app, please read the markdown provided on <b>Strategies.md</B> which is listed above.
+For detailed information regarding the investment strategies of the app, please read the markdown provided on <b>Strategies.md</b> which is listed above.
 
 ## Table of Contents 
 * [User Stories](#User_Stories)
@@ -47,21 +47,21 @@ For this project, our team decided to create an app that would provide a variety
 
 
 <p align="center">
- <b>Multiple Strategies</b>
+ <b>Multiple Strategies - see <b>Strategies.md</b> for details.</b>
  </p>
 
 <p align="center">
-    <img src="https://media.giphy.com/media/IecI9ZHXpzb8kMXKQg/giphy.gif" width="400" />
+    <img src="https://media.giphy.com/media/kGieQpzVK2owpr2eSi/giphy.gif" width="400" />
 </p>
 
 
 ## Models
 
 <p align="center">
-    <img src="images/ss1.png" width="530" />
+    <img src="images/ss2.png" width="270" />
 </p>
 
-All data collected was stored in the same databse, however, there are separate tables for each of the following: User, Goals, Subgoals, and Tasks. From top down, all tables were associated with one to many relationships (see diagram above).
+Through the third party API - [Alpha Vatage](https://www.alphavantage.co/documentation/) - we were able to acquire stock data from the past fifteen years; and were able to mold that data into our StockHistory model. The second model - User - was to collect the login information for everyone that visits the site. 
 
 ## Future_Developments
 
@@ -79,6 +79,7 @@ ______________
 
 ## Take_Aways
 
+...
 
 ## Technologies_Used
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -90,6 +91,16 @@ ______________
 - Trello / Slack
 
 ## Contributors
+
+<h2 align="center">
+Gabe Sucich
+ </h2>
+
+<p align="center">
+    <img src="https://avatars3.githubusercontent.com/u/65562303?s=400&u=a709467b24cf69462f0f4fd6ec295b973a553954&v=4" width="270" />
+</p>
+
+[GitHub](https://github.com/GabeSucich) | [LinkedIn](https://www.linkedin.com/in/gabriel-sucich-6a28a71a8/) | [Portfolio](https://gabesucich.github.io/Portfolio2/)
 
 <h2 align="center">
 Joel Mathen
@@ -116,7 +127,7 @@ Colin Whitcomb
  </h2>
 
 <p align="center">
-    <img src="images/ss4.jpg" width="270" />
+    <img src="images/ss7.jpg" width="270" />
 </p>
 
-[GitHub](https://github.com/Colin-Whitcomb) | [LinkedIn](https://www.linkedin.com/in/colin-whitcomb-b808301a6/) | [Portfolio](https://colin-whitcomb.github.io/Portfolio/)
+[GitHub](https://github.com/Colin-Whitcomb) | [LinkedIn](https://www.linkedin.com/in/colin-whitcomb-b808301a6/) | [Portfolio](https://colin-whitcomb.github.io/React_Portfolio/)
