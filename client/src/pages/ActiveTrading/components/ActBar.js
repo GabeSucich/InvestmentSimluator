@@ -4,6 +4,10 @@ import { StandardTable } from "../../../SemanticUI/Tables"
 import { Grid } from 'semantic-ui-react';
 import { set } from 'mongoose';
 
+import randomColors from "../../../utils/colorRandomize"
+const randomizedColors = randomColors()
+
+
 export default function ActBar(props) {
 
     const [loaded, setLoaded] = useState(false)
@@ -31,6 +35,11 @@ export default function ActBar(props) {
             return [label, "$" + finalValue]
         })
 
+        if (simulations[0].finalValue > simulations[1].finalValue){
+            var backgroundColor = ['green', 'red']
+        } else {
+            backgroundColor = ['red', 'green']
+        }
         body.sort((a, b) => eval(b[1].slice(1)) - eval(a[1].slice(1)))
 
         setTableBody(body)
