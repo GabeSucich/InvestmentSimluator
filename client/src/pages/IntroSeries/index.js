@@ -32,7 +32,7 @@ export default function IntroSeries(props) {
     return (
         <Container textAlign="center">
             <Grid centered>
-                <Grid.Column mobile={16} tablet={16} computer={16}>
+                <Grid.Column mobile={16} tablet={16} computer={16} className="top-image">
                     <Grid.Row centered className={currentPage === 0 || currentPage === 7 ? "logo-image" : "intro-image"}>
                         <Image fluid src={getSRC(Intro[currentPage].image)} />
                     </Grid.Row>

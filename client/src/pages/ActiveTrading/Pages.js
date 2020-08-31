@@ -12,6 +12,9 @@ import './style.css'
 import AccordionExample from '../../components/AccordinanActive'
 import ActBar from './components/ActBar'
 import ChartOptions from "../../utils/ChartOptions"
+import colorRandomize from "../../utils/colorRandomize"
+
+const Colors = colorRandomize()
 
 export default function AllForm() {
 
@@ -65,6 +68,8 @@ export default function AllForm() {
                         setSellhigh("")
                         setSelllow("")
                         labelsGraph=[informationState.symbol + " Active Strat", "Buy And Wait"];
+
+                        
                     })
             })
         //
@@ -138,8 +143,8 @@ export default function AllForm() {
                 {/* {state.data ? <TaxBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null} */}
                 {/* {!informationState.simulationData ? <ActBar backgroundColor={labels.map((_, index) => randomizedColors[index])} simulations={state.data} taxRates={taxRates} labels={labels} options={BarOptions} /> : null}; */}
 
-                {!informationState.simulationData ? <Loader /> : <ActBar simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} options={BarOptions}  backgroundColor={["Red", "Green"]}/>}
-                {!informationState.simulationData ? null : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} borderColor={["Red", "Green"]}/>}
+                {!informationState.simulationData ? <Loader /> : <ActBar simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} options={BarOptions}  backgroundColor={Colors.slice(0,2)}/>}
+                {!informationState.simulationData ? null : <ChartHandler simulations={informationState.simulationData} labels={[informationState.symbol + " Active Strat", "Buy And Wait"]} borderColor={Colors.slice(0,2)}/>}
 
     
                 <br></br>
