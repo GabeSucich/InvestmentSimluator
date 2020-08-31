@@ -15,8 +15,8 @@ require("./routes/userroutes")(app)
 app.use(function(req, res) {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   })
-  
-mongoose.connect(process.MONGODB_URI || "mongodb://localhost/stockhistorydb", { useNewUrlParser: true })
+
+mongoose.connect(process.MONGODB_URI || "mongodb://localhost/stockhistorydb", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
 
 
