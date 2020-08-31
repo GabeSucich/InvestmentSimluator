@@ -17,7 +17,10 @@ export default function MonthlyInvestmentPage() {
     const [annualIncome, setAnnualIncome] = useState();
     const [annualIncomeSpecified, setAnnualIncomeSpecified] = useState();
     const [monthlyInvestment, setMonthlyInvestment] = useState();
+    const [choseCustomMonthlyInvestment, setChoseCustomMonthlyInvestment] = useState();
+    const [monthlyInvestmentSpecified, setMonthlyInvestmentSpecified] = useState();
     const [monthlyExpenses, setMonthlyExpenses] = useState();
+    const [monthlyExpensesName, setMonthlyExpensesName] = useState();
     const [adjustedMonthlyInvestment, setAdjustedMonthlyInvestment] = useState();
 
     const validator = () => {
@@ -37,6 +40,23 @@ export default function MonthlyInvestmentPage() {
     const handleAnnualIncomeSubmit = event => {
         dispatch({ type: SET_ANNUAL_INCOME, annualIncome: annualIncome })
         setAnnualIncomeSpecified(true)
+    }
+
+    const handleRecommendedMonthlyInvestment = event => {
+        dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: annualIncome / 120 })
+        setMonthlyInvestmentSpecified(true)
+    }
+
+    const handleCustomMonthlyInvestment = event => {
+        setChoseCustomMonthlyInvestment(true)
+    }
+
+    const handleMonthlyInvestmentSubmit = event => {
+        setMonthlyInvestmentSpecified(true);
+    }
+
+    const handleExpenseSubmit = event => {
+        
     }
 
     const handleSubmit = event => {
@@ -77,7 +97,7 @@ export default function MonthlyInvestmentPage() {
                     </span>
                 </p>
 
-                {annualIncomeSpecified ? <p>Based on your annual income, we recommend investing ${annualIncome / 120} into your account each month</p> : null}
+                {annualIncomeSpecified ? <p>Based on your annual income, we recommend investing ${annualIncome / 120} monthly into your portfolio</p> : null}
 
                 {annualIncomeSpecified ? <p>
                     Do you want to run your simulation with this monthly investment? Or would you like to choose a custom one.
@@ -87,32 +107,26 @@ export default function MonthlyInvestmentPage() {
                     </span>
                 </p> : null}
 
-                <Segment fluid>
 
-                    <p>
-                        What's your monthly investment?
+                {choseCustomMonthlyInvestment ? <p>
+                        Specify your desired monthly investment
                 <span>
-                            <Input size="mini" placeholder="Monthly Investment" value={monthlyInvestment} onChange={(event, { value }) => dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: value })} />
+                            <Input size="mini" placeholder="Monthly Investment" value={monthlyInvestment} onChange={(event, { value }) => setMonthlyInvestment(value)} />
+                            <Button onClick={handleMonthlyInvestmentSubmit}>Set Monthly Investment</Button>
                         </span>
-                    </p>
+                    </p> : null}
 
 
+                    {monthlyInvestmentSpecified ? <p>Let's start tallying your unnecessary monthly expenses</p> : null}
                     <p>
-                        Total of your monthly expenses?
+                        Let's start tallying your unnecessary monthly expenses
                 <span>
-                            <Input size="mini" placeholder="Monthly Expenses" value={monthlyExpenses} onChange={(event, { value }) => setMonthlyExpenses(value)} />
+                            <Input size="mini" placeholder="Name of expense (e.g. Netflix subscription, food delivery, etc...)" value={monthlyExpensesName} onChange={(event, { value }) => setMonthlyExpensesName(value)} />
+                            <Input size="mini" placeholder="Monthly Cost" value={monthlyExpenses} onChange={(event, { value }) => setMonthlyExpenses(value)} />
                             <Button onClick={handleExpenseSubmit}>Add Monthly Expense</Button>
                         </span>
                     </p>
 
-                    {/* <p>
-                        Set adjusted?
-                <span>
-                            <Input size="mini" placeholder="sellHigh" value={adjustedMonthlyInvestment} onChange={(event, { value }) => dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: value})} />
-                        </span>
-                    </p> */}
-
-                </Segment>
 
                 {validator() ? <Button onClick={handleSubmit}>Run Simulation</Button> : null}
 
