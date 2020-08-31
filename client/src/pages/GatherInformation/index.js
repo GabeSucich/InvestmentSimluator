@@ -7,7 +7,7 @@ import InvestmentForm from "./components/Forms/InvestmentForm"
 import SimpleInvestment from "../SimpleInvestment"
 import ActiveTrading from "../ActiveTrading"
 import TaxEffect from "../TaxEffect"
-import MonthlyInvestment from "../Sam"
+import MonthlyInvestment from "../MonthlyInvestment"
 import "./style.css"
 
 export default function GatherInformation({ pathname }) {
