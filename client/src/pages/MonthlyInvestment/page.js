@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useMonthlyInvestmentContext } from "./utils/monthlyInvestmentState"
 import Helper from "./utils/Helper"
 import { UPDATE_ADJUSTED_MONTHLY_INVESTMENT, READY_UP, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR } from "./utils/actions"
+import { GREATEST_COST_NAME, GREATEST_COST_PERCENTAGE} from "./utils/actions"
 import { SET_SIMULATION_DATA } from '../GatherInformation/utils/action'
 import API from '../../utils/API'
 import { Segment, Input, Button, Container } from 'semantic-ui-react'
@@ -9,6 +10,7 @@ import { useInformationContext } from '../GatherInformation/utils/InformationSta
 import Loader from '../../components/Loader/index'
 import ChartHandler from '../../components/ChartHandler'
 import ChartOptions from "../../utils/ChartOptions"
+import CostAnalysis from "./utils/CostAnalysis"
 
 export default function MonthlyInvestmentPage() {
 
@@ -24,7 +26,6 @@ export default function MonthlyInvestmentPage() {
     const [addAnotherExpense, setAddAnotherExpense] = useState();
     const [expenseJustAdded, setExpenseJustAdded] = useState();
     const [allInformationGathered, setAllInformationGathered] = useState();
-    const [adjustedMonthlyInvestment, setAdjustedMonthlyInvestment] = useState();
 
     const clearAll = event => {
         dispatch({ type: CLEAR })
@@ -84,6 +85,8 @@ export default function MonthlyInvestmentPage() {
     }
 
     const handleSubmit = event => {
+        dispatch({ type: GREATEST_COST_NAME})
+        dispatch({ type: GREATEST_COST_PERCENTAGE})
         dispatch({ type: READY_UP })
 
         const startDate = Helper.findFirstDateInYear(informationState.history, informationState.startYear)
@@ -174,6 +177,11 @@ export default function MonthlyInvestmentPage() {
         return (
             <Container fluid textAlign="center">
                 {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={["Without expenses", "With expenses"]} options={ChartOptions.SamMonthlyOptions} />}
+                <br></br>
+                <br></br>
+                {!informationState.simulationData ? null : <CostAnalysis simulations={informationState.simulationData} greatestExpenseName={state.greatestExpenseName} greatestExpensePercentage={state.greatestExpensePercentage} />}
+                <br></br>
+                <br></br>
                 {!informationState.simulationData ? null : <Button primary onClick={clearAll}>Run New Simulation</Button>}
             </Container>
         )
