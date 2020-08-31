@@ -6,7 +6,7 @@ import EndDateDropdown from "./components/Dropdowns/EndDateDropdown"
 import InvestmentForm from "./components/Forms/InvestmentForm"
 import SimpleInvestment from "../SimpleInvestment"
 import ActiveTrading from "../ActiveTrading"
-import TaxEffect from "../TaxExample"
+import TaxEffect from "../TaxEffect"
 import MonthlyInvestment from "../Sam"
 import "./style.css"
 
