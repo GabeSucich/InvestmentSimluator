@@ -125,10 +125,11 @@ export default function MonthlyInvestmentPage() {
 
                 {annualIncomeSpecified ? <p>
                     Do you want to run your simulation with this monthly investment? Or would you like to choose a custom one.
-                <span>
-                        <Button onClick={handleRecommendedMonthlyInvestment}>Use Recommended Monthly Investment</Button>
-                        <Button onClick={handleCustomMonthlyInvestment}>Set Custom Monthly Investment</Button>
-                    </span>
+                </p> : null}
+
+                {annualIncomeSpecified ? <p>
+                    <Button onClick={handleRecommendedMonthlyInvestment}>Use Recommended Monthly Investment</Button>
+                    <Button onClick={handleCustomMonthlyInvestment}>Set Custom Monthly Investment</Button>
                 </p> : null}
 
 
