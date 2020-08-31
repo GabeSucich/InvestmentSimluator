@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useMonthlyInvestmentContext } from "./utils/monthlyInvestmentState"
 import Helper from "./utils/Helper"
-import { UPDATE_ADJUSTED_MONTHLY_INVESTMENT, READY_UP, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR} from "./utils/actions"
+import { UPDATE_ADJUSTED_MONTHLY_INVESTMENT, READY_UP, SET_ANNUAL_INCOME, SET_MONTHLY_INVESTMENT, ADD_MONTHLY_EXPENSE, CLEAR } from "./utils/actions"
 import { SET_SIMULATION_DATA } from '../GatherInformation/utils/action'
 import API from '../../utils/API'
 import { Segment, Input, Button, Container } from 'semantic-ui-react'
 import { useInformationContext } from '../GatherInformation/utils/InformationState'
-import  Loader  from '../../components/Loader/index'
+import Loader from '../../components/Loader/index'
 import ChartHandler from '../../components/ChartHandler'
 import ChartOptions from "../../utils/ChartOptions"
 
@@ -15,18 +15,28 @@ export default function MonthlyInvestmentPage() {
     const [informationState, informationDispatch] = useInformationContext();
     const [state, dispatch] = useMonthlyInvestmentContext();
     const [annualIncome, setAnnualIncome] = useState();
+    const [annualIncomeSpecified, setAnnualIncomeSpecified] = useState();
     const [monthlyInvestment, setMonthlyInvestment] = useState();
     const [monthlyExpenses, setMonthlyExpenses] = useState();
     const [adjustedMonthlyInvestment, setAdjustedMonthlyInvestment] = useState();
 
     const validator = () => {
-            return true
+        return true
+    }
+
+    const test = () => {
+        return true
     }
 
     const handleExpenseSubmit = event => {
-        dispatch({ type: ADD_MONTHLY_EXPENSE, newExpense: monthlyExpenses})
+        dispatch({ type: ADD_MONTHLY_EXPENSE, newExpense: monthlyExpenses })
         dispatch({ type: UPDATE_ADJUSTED_MONTHLY_INVESTMENT })
         setMonthlyExpenses("")
+    }
+
+    const handleAnnualIncomeSubmit = event => {
+        dispatch({ type: SET_ANNUAL_INCOME, annualIncome: annualIncome })
+        setAnnualIncomeSpecified(true)
     }
 
     const handleSubmit = event => {
@@ -38,17 +48,17 @@ export default function MonthlyInvestmentPage() {
         console.log(state.adjustedMonthlyInvestment)
         console.log(state.monthlyExpenses)
         API.getActionDates(20, startDate, endDate, informationState.symbol)
-        .then(res => {
-            console.log(informationState.investment)
-            API.runMultipleSimulations([
-                [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.monthlyInvestment, res]],
-                [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.adjustedMonthlyInvestment, res]]
-            ])
             .then(res => {
-                informationDispatch({ type: SET_SIMULATION_DATA, data: res})
-                // dispatch({ type: CLEAR })
+                console.log(informationState.investment)
+                API.runMultipleSimulations([
+                    [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.monthlyInvestment, res]],
+                    [informationState.symbol, startDate, endDate, informationState.investment, "monthlyInvestment", [state.adjustedMonthlyInvestment, res]]
+                ])
+                    .then(res => {
+                        informationDispatch({ type: SET_SIMULATION_DATA, data: res })
+                        // dispatch({ type: CLEAR })
+                    })
             })
-        })
     }
 
     if (!informationState.informationGathered) {
@@ -58,19 +68,31 @@ export default function MonthlyInvestmentPage() {
         return (
 
             <Container fluid textAlign="center">
-                <Segment fluid>
 
-                    <p>
-                        What's your annual income?
+                <p>
+                    What was your annual income over the specified time frame?
                 <span>
-                            <Input size="mini" placeholder="Annual Income" value={annualIncome} onChange={(event, { value }) => dispatch({ type: SET_ANNUAL_INCOME, annualIncome: value})} />
-                        </span>
-                    </p>
+                        <Input size="mini" placeholder="Annual Income" value={annualIncome} onChange={(event, { value }) => setAnnualIncome(value)} />
+                        <Button onClick={handleAnnualIncomeSubmit}>Set Annual Income</Button>
+                    </span>
+                </p>
+
+                {annualIncomeSpecified ? <p>Based on your annual income, we recommend investing ${annualIncome / 120} into your account each month</p> : null}
+
+                {annualIncomeSpecified ? <p>
+                    Do you want to run your simulation with this monthly investment? Or would you like to choose a custom one.
+                <span>
+                        <Button onClick={handleRecommendedMonthlyInvestment}>Use Recommended Monthly Investment</Button>
+                        <Button onClick={handleCustomMonthlyInvestment}>Set Custom Monthly Investment</Button>
+                    </span>
+                </p> : null}
+
+                <Segment fluid>
 
                     <p>
                         What's your monthly investment?
                 <span>
-                            <Input size="mini" placeholder="Monthly Investment" value={monthlyInvestment} onChange={(event, { value }) => dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: value})} />
+                            <Input size="mini" placeholder="Monthly Investment" value={monthlyInvestment} onChange={(event, { value }) => dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: value })} />
                         </span>
                     </p>
 
@@ -78,7 +100,7 @@ export default function MonthlyInvestmentPage() {
                     <p>
                         Total of your monthly expenses?
                 <span>
-                            <Input size="mini" placeholder="Monthly Expenses" value={monthlyExpenses} onChange={(event, { value }) => setMonthlyExpenses(value)}/>
+                            <Input size="mini" placeholder="Monthly Expenses" value={monthlyExpenses} onChange={(event, { value }) => setMonthlyExpenses(value)} />
                             <Button onClick={handleExpenseSubmit}>Add Monthly Expense</Button>
                         </span>
                     </p>
@@ -104,9 +126,9 @@ export default function MonthlyInvestmentPage() {
     else {
         return (
             <Container fluid textAlign="center">
-            {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={["Without expenses", "With expenses"]} options={ChartOptions.SamMonthlyOptions}/>}
-            {!informationState.simulationData ? null : <Button primary onClick ={() => dispatch({type: CLEAR})}>Run New Simulation</Button>}
+                {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={["Without expenses", "With expenses"]} options={ChartOptions.SamMonthlyOptions} />}
+                {!informationState.simulationData ? null : <Button primary onClick={() => dispatch({ type: CLEAR })}>Run New Simulation</Button>}
             </Container>
         )
-     }
+    }
 }
