@@ -4,8 +4,6 @@ const API = require("../utils/API")
 const DateUtils = require("../utils/dateUtils")
 const Historicals = require("../controllers/stockcontroller")
 const activeTrading = require("../utils/activeTradingDates")
-// const volumeTrigger = require("../utils/volumeSearch")
-const volumeTrigger = require("../utils/volumeSearch2")
 
 module.exports = function (app) {
 
