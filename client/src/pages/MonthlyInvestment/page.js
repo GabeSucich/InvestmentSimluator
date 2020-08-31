@@ -121,7 +121,7 @@ export default function MonthlyInvestmentPage() {
                     </span>
                 </p>
 
-                {annualIncomeSpecified ? <p>Based on your annual income, we recommend investing ${annualIncome / 120} monthly into your portfolio</p> : null}
+                {annualIncomeSpecified ? <p>Based on your annual income, we recommend investing ${(annualIncome / 120).toFixed(0)} monthly into your portfolio</p> : null}
 
                 {annualIncomeSpecified ? <p>
                     Do you want to run your simulation with this monthly investment? Or would you like to choose a custom one.
