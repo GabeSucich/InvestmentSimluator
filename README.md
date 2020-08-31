@@ -77,7 +77,12 @@ ______________
 
 ## Take_Aways
 
-...
+Use OOP to your advantage. It not only made our app functionally more efficient, but it also made the development process run smoothly between all team members. Below is a diagram of our OOP structure: 
+
+<p align="center">
+    <img src="images/ss8.png" width="440" />
+</p>
+
 
 ## Technologies_Used
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -125,7 +130,7 @@ Colin Whitcomb
  </h2>
 
 <p align="center">
-    <img src="images/ss7.jpg" width="270" />
+    <img src="images/ss13.png" width="270" />
 </p>
 
 [GitHub](https://github.com/Colin-Whitcomb) | [LinkedIn](https://www.linkedin.com/in/colin-whitcomb-b808301a6/) | [Portfolio](https://colin-whitcomb.github.io/React_Portfolio/)
