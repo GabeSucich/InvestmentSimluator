@@ -13,7 +13,7 @@ export default function Introduction() {
                 <h1>Welcome to QUAN</h1>
             </Segment>
 
-            <Grid divided>
+            <Grid divided centered>
                 <Grid.Column mobile={16} tablet={16} computer={5}>
                     <Segment inverted fluid textAlign="center">
                         <h3>What is QUAN?</h3>

@@ -62,7 +62,7 @@ export default function SimulationDisplay(props) {
         return (
 
             <Segment textAlign="center">
-                <Loader type="cylon" color="red" />
+                <Loader/>
             </Segment>
 
 
