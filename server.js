@@ -9,20 +9,20 @@ const app = express()
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.use(express.static("public"))
-
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
   }
 
+mongoose.connect(process.MONGODB_URI || "mongodb://localhost/stockhistorydb", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+
 require("./routes/mainroutes")(app)
 require("./routes/userroutes")(app)
 
-app.get("/", function (req, res) {
+app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   })
 
-mongoose.connect(process.MONGODB_URI || "mongodb://localhost/stockhistorydb", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+
 
 
 

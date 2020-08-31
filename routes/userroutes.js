@@ -25,9 +25,6 @@ module.exports = function(app) {
                     res.json(user)
                 })
             }
-            // Users.createUser(username, password).then(dbUser => {
-            // res.json(dbUser)
-        // })
         })
         
 
