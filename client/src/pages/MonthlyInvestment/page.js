@@ -21,21 +21,10 @@ export default function MonthlyInvestmentPage() {
     const [monthlyInvestmentSpecified, setMonthlyInvestmentSpecified] = useState();
     const [monthlyExpenses, setMonthlyExpenses] = useState();
     const [monthlyExpensesName, setMonthlyExpensesName] = useState();
+    const [addAnotherExpense, setAddAnotherExpense] = useState();
+    const [expenseJustAdded, setExpenseJustAdded] = useState();
+    const [allInformationGathered, setAllInformationGathered] = useState();
     const [adjustedMonthlyInvestment, setAdjustedMonthlyInvestment] = useState();
-
-    const validator = () => {
-        return true
-    }
-
-    const test = () => {
-        return true
-    }
-
-    const handleExpenseSubmit = event => {
-        dispatch({ type: ADD_MONTHLY_EXPENSE, newExpense: monthlyExpenses })
-        dispatch({ type: UPDATE_ADJUSTED_MONTHLY_INVESTMENT })
-        setMonthlyExpenses("")
-    }
 
     const handleAnnualIncomeSubmit = event => {
         dispatch({ type: SET_ANNUAL_INCOME, annualIncome: annualIncome })
@@ -45,6 +34,7 @@ export default function MonthlyInvestmentPage() {
     const handleRecommendedMonthlyInvestment = event => {
         dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: annualIncome / 120 })
         setMonthlyInvestmentSpecified(true)
+        setAddAnotherExpense(true)
     }
 
     const handleCustomMonthlyInvestment = event => {
@@ -52,11 +42,31 @@ export default function MonthlyInvestmentPage() {
     }
 
     const handleMonthlyInvestmentSubmit = event => {
-        setMonthlyInvestmentSpecified(true);
+        dispatch({ type: SET_MONTHLY_INVESTMENT, monthlyInvestment: monthlyInvestment })
+        setMonthlyInvestmentSpecified(true)
+        setAddAnotherExpense(true)
     }
 
     const handleExpenseSubmit = event => {
-        
+        const newExpense = {
+            name: monthlyExpensesName,
+            cost: monthlyExpenses
+        }
+        dispatch({ type: ADD_MONTHLY_EXPENSE, newExpense: newExpense })
+        dispatch({ type: UPDATE_ADJUSTED_MONTHLY_INVESTMENT })
+        setMonthlyExpensesName("")
+        setMonthlyExpenses("")
+        setAddAnotherExpense(false)
+        setExpenseJustAdded(true)
+    }
+
+    const handleAddAnotherMonthlyExpense = event => {
+        setAddAnotherExpense(true)
+        setExpenseJustAdded(false)
+    }
+
+    const handleComplete = event => {
+        setAllInformationGathered(true)
     }
 
     const handleSubmit = event => {
@@ -109,26 +119,34 @@ export default function MonthlyInvestmentPage() {
 
 
                 {choseCustomMonthlyInvestment ? <p>
-                        Specify your desired monthly investment
+                    Specify your desired monthly investment
                 <span>
-                            <Input size="mini" placeholder="Monthly Investment" value={monthlyInvestment} onChange={(event, { value }) => setMonthlyInvestment(value)} />
-                            <Button onClick={handleMonthlyInvestmentSubmit}>Set Monthly Investment</Button>
-                        </span>
-                    </p> : null}
+                        <Input size="mini" placeholder="Monthly Investment" value={monthlyInvestment} onChange={(event, { value }) => setMonthlyInvestment(value)} />
+                        <Button onClick={handleMonthlyInvestmentSubmit}>Set Monthly Investment</Button>
+                    </span>
+                </p> : null}
 
 
-                    {monthlyInvestmentSpecified ? <p>Let's start tallying your unnecessary monthly expenses</p> : null}
-                    <p>
-                        Let's start tallying your unnecessary monthly expenses
+                {monthlyInvestmentSpecified ? <p>Let's start tallying your unnecessary monthly expenses</p> : null}
+
+                {monthlyInvestmentSpecified && addAnotherExpense ? <p>
+                    Add a new monthly expense
                 <span>
-                            <Input size="mini" placeholder="Name of expense (e.g. Netflix subscription, food delivery, etc...)" value={monthlyExpensesName} onChange={(event, { value }) => setMonthlyExpensesName(value)} />
-                            <Input size="mini" placeholder="Monthly Cost" value={monthlyExpenses} onChange={(event, { value }) => setMonthlyExpenses(value)} />
-                            <Button onClick={handleExpenseSubmit}>Add Monthly Expense</Button>
-                        </span>
-                    </p>
+                        <Input size="mini" placeholder="Name of expense (e.g. Netflix subscription, food delivery, etc...)" value={monthlyExpensesName} onChange={(event, { value }) => setMonthlyExpensesName(value)} />
+                        <Input size="mini" placeholder="Monthly Cost" value={monthlyExpenses} onChange={(event, { value }) => setMonthlyExpenses(value)} />
+                        <Button onClick={handleExpenseSubmit}>Add Monthly Expense</Button>
+                    </span>
+                </p> : null}
 
+                {expenseJustAdded ? <p>
+                    Do you want to add another monthly expense?
+                <span>
+                        <Button onClick={handleAddAnotherMonthlyExpense}>Add another</Button>
+                        <Button onClick={handleComplete}>No, I'm done</Button>
+                    </span>
+                </p> : null}
 
-                {validator() ? <Button onClick={handleSubmit}>Run Simulation</Button> : null}
+                {allInformationGathered ? <Button onClick={handleSubmit}>Run Simulation</Button> : null}
 
 
             </Container>

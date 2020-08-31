@@ -21,7 +21,7 @@ const reducer = (state, action) => {
         case UPDATE_ADJUSTED_MONTHLY_INVESTMENT:
             var newAdjustedMonthlyInvestment = state.monthlyInvestment
             for (const expense of state.monthlyExpenses) {
-                newAdjustedMonthlyInvestment -= expense
+                newAdjustedMonthlyInvestment -= expense.cost
             }
             return {...state, adjustedMonthlyInvestment: newAdjustedMonthlyInvestment}
 
