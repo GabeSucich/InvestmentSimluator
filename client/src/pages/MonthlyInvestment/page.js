@@ -26,6 +26,20 @@ export default function MonthlyInvestmentPage() {
     const [allInformationGathered, setAllInformationGathered] = useState();
     const [adjustedMonthlyInvestment, setAdjustedMonthlyInvestment] = useState();
 
+    const clearAll = event => {
+        dispatch({ type: CLEAR })
+        setAnnualIncome("")
+        setAnnualIncomeSpecified(false)
+        setMonthlyInvestment("")
+        setChoseCustomMonthlyInvestment(false)
+        setMonthlyInvestmentSpecified(false)
+        setMonthlyExpenses("")
+        setMonthlyExpensesName("")
+        setAddAnotherExpense(false)
+        setExpenseJustAdded(false)
+        setAllInformationGathered(false)
+    }
+
     const handleAnnualIncomeSubmit = event => {
         dispatch({ type: SET_ANNUAL_INCOME, annualIncome: annualIncome })
         setAnnualIncomeSpecified(true)
@@ -159,7 +173,7 @@ export default function MonthlyInvestmentPage() {
         return (
             <Container fluid textAlign="center">
                 {!informationState.simulationData ? <Loader /> : <ChartHandler simulations={informationState.simulationData} labels={["Without expenses", "With expenses"]} options={ChartOptions.SamMonthlyOptions} />}
-                {!informationState.simulationData ? null : <Button primary onClick={() => dispatch({ type: CLEAR })}>Run New Simulation</Button>}
+                {!informationState.simulationData ? null : <Button primary onClick={clearAll}>Run New Simulation</Button>}
             </Container>
         )
     }
