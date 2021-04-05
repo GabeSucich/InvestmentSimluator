@@ -2,7 +2,7 @@
 # Quan
 ## <i>Investing Laid Bear</i>
 
-### [Deployed](https://fast-mesa-56626.herokuapp.com/) Link || Git Hub [Repository]( https://github.com/GabeSucich/InvestmentSimluator)
+### [Deployed](https://investmentsimulator-gs.herokuapp.com/) Link || Git Hub [Repository]( https://github.com/GabeSucich/InvestmentSimluator)
 
 <p align="center">
  <b>Quan</b>  - Final Product Preview
