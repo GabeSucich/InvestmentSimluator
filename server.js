@@ -19,7 +19,7 @@ require("./routes/mainroutes")(app)
 require("./routes/userroutes")(app)
 
 app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
   })
 
 app.listen(PORT, err => {
